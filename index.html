@@ -15,6 +15,15 @@
 
 
 
+		<div class="row">
+		  <div class="col-xs-10 col-sx-offset-1 main-container">
+		    <div class="col-xs-12" id="viewHolder" ng-view></div>
+		  </div>
+		</div>
+
+
+
+
 
 	</div>
 
@@ -36,12 +45,20 @@
 
 
 	<!-- SCRIPTS -->
+		<!-- externally produced modules/libraries -->
+		<script src="dist/jquery.min.js"></script>
+			<!-- angular-related -->
+			<script src="dist/angular.min.js"></script>
+			<script src="lib/node_modules/angular-route/angular-route.min.js"></script>
+			<!-- firebase-related -->
+			<script src="lib/node_modules/firebase/firebase.js"></script>
 
 		<!-- custom scripts -->
 		<script type="text/javascript" src="app/app.js"></script>
 
 
 		<!-- controllers -->
+			<script src="app/controllers/LoginCtrl.js"></script>
 
 		<!-- providers -->
 			<!-- factories -->
@@ -50,12 +67,5 @@
 			<script src="app/values/FBCreds.js"></script>
 
 
-		<!-- externally produced modules/libraries -->
-		<script src="dist/jquery.min.js"></script>
-			<!-- angular-related -->
-			<script src="dist/angular.min.js"></script>
-			<script src="lib/node_modules/angular-route/angular-route.min.js"></script>
-			<!-- firebase-related -->
-			<script src="lib/node_modules/firebase/firebase.js"></script>
 </body>
 </html>

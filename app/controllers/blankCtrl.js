@@ -1,5 +1,5 @@
-"use strict";
+// "use strict";
 
-app.controller("blankCtrl", ($scope)=>{
+// app.controller("blankCtrl", ($scope)=>{
 	
-});
+// });

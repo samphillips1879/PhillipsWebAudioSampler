@@ -17,21 +17,19 @@ let isAuth = (AuthFactory)=> new Promise((resolve,reject)=>{
 
 
 
-
-// app.config(($routeProvider)=>{
-//     $routeProvider
-//     .when('/items/list', {
-//         templateUrl: 'partials/item-list.html',
-//         controller: 'ItemListCtrl',
-//         resolve: {isAuth}
-//     })
-//     .when('/items/:itemId', {
-//         templateUrl: 'partials/item-details.html',
-//         controller: 'ItemViewCtrl',
-//         resolve: {isAuth}
-//     })
-//     .otherwise('/items/list');
-// });
+app.config(($routeProvider)=>{
+    $routeProvider
+    .when('/login', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
+    })
+    // .when('/items/:itemId', {
+    //     templateUrl: 'partials/item-details.html',
+    //     controller: 'ItemViewCtrl',
+    //     resolve: {isAuth}
+    // })
+    .otherwise('/login');
+});
 
 
 
