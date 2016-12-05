@@ -23,11 +23,31 @@ app.config(($routeProvider)=>{
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'
     })
-    // .when('/items/:itemId', {
-    //     templateUrl: 'partials/item-details.html',
-    //     controller: 'ItemViewCtrl',
-    //     resolve: {isAuth}
-    // })
+    .when('/logout', {
+    	templateUrl: 'partials/logout.html',
+    	controller: 'LogoutCtrl',
+    	resolve: {isAuth}
+    })
+    .when('/play', {
+    	templateUrl: 'partials/play.html',
+    	controller: 'PlayCtrl',
+    	resolve: {isAuth}
+    })
+    .when('/samples/create', {
+    	templateUrl: 'partials/createSamples.html',
+    	controller: 'CreateSamplesCtrl',
+    	resolve: {isAuth}
+    })
+    .when('/samples/assign', {
+    	templateUrl: 'partials/assignSamples.html',
+    	controller: 'AssignSamplesCtrl',
+    	resolve: {isAuth}
+    })
+    .when('/patches', {
+    	templateUrl: 'partials/patches.html',
+    	controller: 'PatchesCtrl',
+    	resolve: {isAuth}
+    })
     .otherwise('/login');
 });
 
