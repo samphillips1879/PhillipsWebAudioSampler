@@ -14,6 +14,7 @@ app.factory("AuthFactory", ()=>{
 
 
     AuthFactory.createUser = (userObj)=>{
+        console.log("trying to create user");
         return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password);
     };
 
@@ -22,6 +23,7 @@ app.factory("AuthFactory", ()=>{
     };
 
     AuthFactory.logoutUser = ()=>{
+        currentUser = null;
         return firebase.auth().signOut();
     };
 
