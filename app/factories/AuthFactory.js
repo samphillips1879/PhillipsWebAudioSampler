@@ -28,9 +28,11 @@ app.factory("AuthFactory", ()=>{
     };
 
     AuthFactory.isAuthenticated = ()=>{
+        // console.log("running isAuthenticated");
         return new Promise((resolve,reject)=>{
             firebase.auth().onAuthStateChanged((user)=>{
                 if(user){
+                    // console.log("user from if in isAuth", user);
                     currentUser = user.uid;
                     // console.log("currentUser", currentUser);
                     resolve(true);
