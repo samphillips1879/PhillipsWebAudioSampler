@@ -24,7 +24,7 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 		channel.gain.gain.value = channel.gainValue;
 		// console.log(`channel ${channel.channelNum}`, channel);
 		
-		// connect those paths, yo
+		// connect them paths, yo
 		channel.gain.connect(AUD_CTX.destination);
 
 	});
