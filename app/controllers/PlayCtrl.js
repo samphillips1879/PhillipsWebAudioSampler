@@ -22,7 +22,7 @@ app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
 		//create those nodes, homeskillet
 		channel.gain = AUD_CTX.createGain();
 		channel.gain.gain.value = channel.gainValue;
-		console.log(`channel ${channelNumber}`, channel);
+		console.log(`channel ${channel.channelNum}`, channel);
 		
 		// connect those paths, yo
 		channel.gain.connect(AUD_CTX.destination);
