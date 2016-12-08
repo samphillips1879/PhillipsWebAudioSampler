@@ -4,7 +4,15 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 	// $scope.youtube = null;
 
-	$scope.inputURL = `<iframe width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?rel=0" frameborder="0" allowfullscreen></iframe>`;
-	$scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
+	$scope.inputURL = ``;
 	console.log("$scope.iframeYoutube", $scope.iframeYoutube);
+
+
+	$scope.grabYoutubeVideo = ()=>{
+		$scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
+		$scope.inputURL = ``;
+
+
+		// connect mediaElementSourceNode to the video element, of which there should only be one
+	};
 });
