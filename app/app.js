@@ -1,7 +1,7 @@
 "use strict";
 
 //establishing angular app
-let app = angular.module("WebSamplerApp", ["ngRoute"]);
+let app = angular.module("WebSamplerApp", ["ngRoute", "ngSanitize"]);
 
 
 let isAuth = (AuthFactory)=> new Promise((resolve,reject)=>{

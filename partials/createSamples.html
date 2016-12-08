@@ -10,14 +10,14 @@
 
 
 <!-- donald trump china video -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?rel=0" frameborder="0" allowfullscreen></iframe>
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?rel=0" frameborder="0" allowfullscreen></iframe> -->
 
 
 <div id="creationInputs">
-	<input type="text" ng-model="iframe">
+	<input type="text" ng-model="inputURL">
 </div>
 
 
-<div id="vidHolder">
-	{{iframe}}
+<div id="vidHolder" ng-bind-html="iframeYoutube">
+
 </div>
