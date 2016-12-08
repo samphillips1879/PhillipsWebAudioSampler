@@ -1,5 +1,6 @@
 "use strict";
-app.value('PatchSamples', {
+
+app.value("PatchSamples", {
 	sample0: null,
 	sample1: null,
 	sample2: null,
