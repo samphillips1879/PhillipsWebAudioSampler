@@ -37,6 +37,7 @@ app.factory("AuthFactory", ()=>{
                     // console.log("currentUser", currentUser);
                     resolve(true);
                 }else{
+                    currentUser = null;
                     resolve(false);
                 }
             });
