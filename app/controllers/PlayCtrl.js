@@ -1,8 +1,8 @@
 "use strict";
-app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
+app.controller("PlayCtrl", function($scope, PatchFactory){
 	$scope.greeting = "Play Controller Connected";
 
-	console.log("PatchSamples", PatchSamples);
+	// console.log("PatchSamples", PatchSamples);
 
 //creating the audio context
 	const AUD_CTX = new window.AudioContext();
@@ -12,9 +12,9 @@ app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
 
 //patch initialization
 	$scope.patch = PatchFactory.getCurrentPatch();
-	console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
+	// console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
 	let patch = $scope.patch; //this is to normalize the following logic, so that what follows can be stored outside of anything involving $scope
-	console.log("patch", patch);
+	// console.log("patch", patch);
 
 	//connecting paths
 	patch.channels.forEach((channel, channelNumber)=>{
