@@ -6,7 +6,7 @@ app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
 
 //creating the audio context
 	const AUD_CTX = new window.AudioContext();
-	//including webkit version, jshint didn't like it
+	//including webkit version, because jshint didn't like it but I want to save it to try and get to work later
 	// const AUD_CTX = new (window.AudioContext || window.webkitAudioContext)();
 
 
@@ -22,34 +22,17 @@ app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
 		//create those nodes, homeskillet
 		channel.gain = AUD_CTX.createGain();
 		channel.gain.gain.value = channel.gainValue;
-		console.log(`channel ${channel.channelNum}`, channel);
+		// console.log(`channel ${channel.channelNum}`, channel);
 		
 		// connect those paths, yo
 		channel.gain.connect(AUD_CTX.destination);
 
 	});
 
-//samChannel 0
-
-// start here
-	// patch.chan_0 = {};
-	// let chan_0 = patch.chan_0; 
-
-	// //nodes
-	// chan_0.osc0 = null;
-	// chan_0.gain0 = AUD_CTX.createGain();
 
 
-	// //path(excluding audio source)
-	// chan_0.gain0.connect(AUD_CTX.destination);
 
-
-	// //node values
-	// chan_0.gain0.gain.value = 1;
-//end here
-
-
-	//currently, audio doesn't stop if you navigate to a new controller. Want to change that, because otherwise, when you come back to this controller, the audio is still playing from the last time you visited it, but it is no longer connected to user inputs. It's like it's going on in the background
+	
 	$scope.playOsc = (channelNumber)=>{
 		if(patch.channels[channelNumber].sourceOsc){
 			patch.channels[channelNumber].sourceOsc.stop();
@@ -87,46 +70,6 @@ app.controller("PlayCtrl", function($scope, PatchSamples, PatchFactory){
 
 
 
-
-
-
-
-
-	// $scope.patch.chan_0 = {};
-	// let patch = 
-	// let chan_0 = $scope.patch.chan_0; 
-
-	// //nodes
-	// chan_0.osc0 = null;
-	// chan_0.gain0 = AUD_CTX.createGain();
-
-
-	// //path(excluding audio source)
-	// chan_0.gain0.connect(AUD_CTX.destination);
-
-
-	// //node values
-	// chan_0.gain0.gain.value = 1;
-
-
-	// //currently, audio doesn't stop if you navigate to a new controller. Want to change that, because otherwise, when you come back to this controller, the audio is still playing from the last time you visited it, but it is no longer connected to user inputs. It's like it's going on in the background
-	// $scope.playOsc0 = ()=>{
-	// 	if(chan_0.osc0){
-	// 		chan_0.osc0.stop();
-	// 	}
-	// 	chan_0.osc0 = AUD_CTX.createOscillator();
-	// 	chan_0.osc0.connect(chan_0.gain0);
-	// 	chan_0.osc0.start();
-	// };
-	// $scope.stopOsc0 = ()=>{
-	// 	chan_0.osc0.stop();
-	// 	chan_0.osc0 = null;
-	// };
-
-	
-
-
-	// //to bring in a new patch, set an event that, once triggered, sets $scope.patch to whatever patch is saved in PatchFactory
 
 
 
