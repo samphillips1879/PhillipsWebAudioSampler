@@ -8,23 +8,44 @@ app.factory("PatchFactory", ()=>{
 	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
 	let currentPatch = {
 
-		channels: {
 
-			channel0: 
-				{
-					channelNum: 0,
-					sourceOsc: null,
-					gain: null,
-					gainValue: 1
-				},
-			channel1: 
-				{
-					channelNum: 1,
-					sourceOsc: null,
-					gain: null,
-					gainValue: 0.5
-				}
-		}
+		//object form, patch.channels.forEach didn't like it
+		// channels: {
+
+		// 	channel0: 
+		// 		{
+		// 			channelNum: 0,
+		// 			sourceOsc: null,
+		// 			gain: null,
+		// 			gainValue: 1
+		// 		},
+		// 	channel1: 
+		// 		{
+		// 			channelNum: 1,
+		// 			sourceOsc: null,
+		// 			gain: null,
+		// 			gainValue: 0.5
+		// 		}
+		// }
+
+
+
+
+		channels: [
+
+			{
+				channelNum: 0,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 1,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 0.5
+			}
+		]
 
 
 		// chan_0: {
