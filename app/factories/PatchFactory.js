@@ -43,7 +43,43 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 1,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 0.5
+				gainValue: 1
+			},
+			{
+				channelNum: 2,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 3,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 4,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 5,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 6,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
+			},
+			{
+				channelNum: 7,
+				sourceOsc: null,
+				gain: null,
+				gainValue: 1
 			}
 		]
 
