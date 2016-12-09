@@ -9,10 +9,25 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 
 	$scope.grabYoutubeVideo = ()=>{
-		$scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
-		$scope.inputURL = ``;
+		// $scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
+		// $scope.inputURL = ``;
 
 
+
+
+
+
+
+
+		// mb.ytplayer stuff
+		$(function(){
+		     jQuery("#P1").YTPlayer();
+		   });
+
+
+		// ()=>{
+		// 	$("#P1")
+		// }
 
 
 
@@ -33,28 +48,28 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 
 
-		setTimeout(function(){ 
+		// setTimeout(function(){ 
 
 
-			let iframes = $("iframe");
-			console.log("iframes", iframes);
+		// 	let iframes = $("iframe");
+		// 	console.log("iframes", iframes);
 
-			// let iframe = $("iframe")[0];
-			// console.log("iframe", iframe);
-
-
-
-			// let buttons = $("button");
-			// console.log("buttons", buttons);
-
-			// let playBtn = $(".ytp-button");
-			// console.log("playBtn", playBtn);
+		// 	// let iframe = $("iframe")[0];
+		// 	// console.log("iframe", iframe);
 
 
 
-			let video = $("video");
-			console.log("video", video);
-		}, 3000);
+		// 	// let buttons = $("button");
+		// 	// console.log("buttons", buttons);
+
+		// 	// let playBtn = $(".ytp-button");
+		// 	// console.log("playBtn", playBtn);
+
+
+
+		// 	let video = $("video");
+		// 	console.log("video", video);
+		// }, 3000);
 
 
 

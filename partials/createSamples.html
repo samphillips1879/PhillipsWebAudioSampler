@@ -8,7 +8,7 @@
 
 
 
-<h4>sample iframe (embed) urls for development stage</h4>
+<!-- <h4>sample iframe (embed) urls for development stage</h4>
 <h6>wrap the text in iframe tags before trying to grab video</h6>
 <p>
 	<span>donald trump china video</span><br>
@@ -18,13 +18,45 @@
 <p>
 	<span>wilhelm scream</span><br>
 	width="560" height="315" src="https://www.youtube.com/embed/xn6hhrX34Pw?rel=0" frameborder="0" allowfullscreen
-</p>
+</p> -->
 
 <div id="creationInputs">
 	<input type="text" ng-model="inputURL" placeholder="paste the embed url for your chosen video here" size="43">
 	<button type="button" class="btn btn-primary" ng-click="grabYoutubeVideo()">grab video</button>
 
 </div>
+
+
+
+
+
+
+
+
+
+<!-- To initialize a YTPlayer as simple player: -->
+
+<div id="P1" class="player" 
+     data-property="{videoURL:'http://youtu.be/l_tHTmd5pgk',containment:'self',startAt:50,mute:false,autoPlay:false,loop:false,opacity:.8}">
+
+
+     this is the P1 div
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div id="vidHolder" ng-bind-html="iframeYoutube">
@@ -34,6 +66,22 @@
 
 <div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
