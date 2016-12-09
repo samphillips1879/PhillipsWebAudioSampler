@@ -9,10 +9,25 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 
 	$scope.grabYoutubeVideo = ()=>{
-		$scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
-		$scope.inputURL = ``;
+		// $scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
+		// $scope.inputURL = ``;
 
 
+
+
+
+
+
+
+		// mb.ytplayer stuff
+		$(function(){
+		     jQuery("#P1").YTPlayer();
+		   });
+
+
+		// ()=>{
+		// 	$("#P1")
+		// }
 
 
 
