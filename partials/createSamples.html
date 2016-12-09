@@ -1,2 +1,28 @@
 <h2>{{greeting}}</h2>
 <div ng-include="'partials/navbar.html'"></div>
+
+
+
+
+
+
+
+
+
+<!-- donald trump china video -->
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?rel=0" frameborder="0" allowfullscreen></iframe> -->
+
+<!-- wilhelm scream -->
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/xn6hhrX34Pw?rel=0" frameborder="0" allowfullscreen></iframe> -->
+
+
+<div id="creationInputs">
+	<input type="text" ng-model="inputURL">
+	<button type="button" class="btn btn-primary" ng-click="grabYoutubeVideo()">grab video from youtube embed url</button>
+
+</div>
+
+
+<div id="vidHolder" ng-bind-html="iframeYoutube">
+
+</div>
