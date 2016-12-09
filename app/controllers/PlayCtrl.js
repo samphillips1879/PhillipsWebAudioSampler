@@ -4,10 +4,16 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 
 	// console.log("PatchSamples", PatchSamples);
 
+
+
+
+// ************************
+//section moved to app.js 
 //creating the audio context
-	const AUD_CTX = new window.AudioContext();
+	// const AUD_CTX = new window.AudioContext();
 	//including webkit version, because jshint didn't like it but I want to save it to try and get to work later
 	// const AUD_CTX = new (window.AudioContext || window.webkitAudioContext)();
+// ************************
 
 
 //patch initialization

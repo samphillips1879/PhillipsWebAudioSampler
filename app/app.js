@@ -62,3 +62,10 @@ app.run(($location, FBCreds)=>{
     firebase.initializeApp(authConfig);
 });
 
+//creating the audio context
+	const AUD_CTX = new window.AudioContext();
+	//including webkit version, because jshint didn't like it but I want to save it to try and get to work later
+	// const AUD_CTX = new (window.AudioContext || window.webkitAudioContext)();
+// ************************
+
+
