@@ -46,11 +46,13 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		    the_url = event.target.result;
 		    // console.log("the_url", the_url);
 		    console.log("the_url processed");
-		    Database.uploadVideoToDatabase(the_url);
+		    
+		    // Database.uploadVideoToDatabase(the_url);
 		    console.log("tried to send to db");
 
 		  };
-	    reader.readAsDataURL(file);
+		Database.uploadVideoToDatabase(file, "Title input manually through code");
+	    // reader.readAsDataURL(file);
 		}
 
 

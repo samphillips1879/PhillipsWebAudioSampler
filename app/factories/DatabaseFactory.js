@@ -55,13 +55,19 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     // });
 
 
-    DatabaseFactory.uploadVideoToDatabase = (videoFile)=>{
+    DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
 
-        console.log("videoFile", videoFile);
-
+        let user = AuthFactory.getUser();
+        // console.log("videoFile", videoFile);
         var storage = firebase.storage();
-        var storageRef = storage.ref();
+        // saves video to firebase storage userVideos folder with a name equivalent to the current user
+        var storageRef = storage.ref(`userVideos/${user}`);
         console.log("storageRef", storageRef);
+        
+        storageRef.put(videoFile)
+        .then((thing)=>{
+            console.log("thing", thing);
+        });
 
 
 
