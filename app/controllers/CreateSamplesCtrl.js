@@ -2,10 +2,196 @@
 app.controller("CreateSamplesCtrl", function($scope, $sce){
 	$scope.greeting = "Create Samples Controller Connected";
 
+
+	let the_url;
+
+
+
+
+
+
+
+	// detect a change in file input
+	$("#userFileInput").change(function() {
+	    // will log a FileList object
+	    console.log("this.files", this.files);
+	    // grab the first file in the FileList object and pass it to the function
+	    renderFile(this.files[0]);
+	});
+
+
+
+	// render the video in view
+	function renderFile(file) {
+
+	  // generate a new FileReader object
+	  var reader = new FileReader();
+
+	  // inject a video with the src url
+	  reader.onload = function(event) {
+	  	// console.log("loaded", event);
+	  	console.log("loaded event", event);
+
+	    the_url = event.target.result;
+	    // console.log("the_url", the_url);
+	    console.log("the_url processed");
+
+	    $("#userVideo").attr("src", `${the_url}`);
+	    console.log("set userVideo source");
+	    console.log("userVideo", $("#userVideo"));
+	    // $("#userVideo").load();
+	    console.log("userVideo.load()");
+
+	    // $('#userVideoHolder').html(`<video src='${the_url}'></video>`);
+	  };
+	 
+	  // when the file is read it triggers the onload event above.
+	  reader.readAsDataURL(file);
+	}
+
+
+
+	// function renderVideo(file){
+ //        var reader = new FileReader();
+ //        reader.onload = function(event){
+ //        	console.log("loaded event", event);
+ //        	// console.log("event.target.result", event.target.result);
+ //            the_url = event.target.result;
+ //            console.log("the_url", the_url);
+
+
+
+ //            $("#userVideo").attr("src", `${the_url}`);
+ //            $("#userVideo").load();
+
+
+
+
+
+
+
+
+ //      // of course using a template library like handlebars.js is a better solution than just inserting a string
+ //      // $('#userVideo').attr("<video width='400' controls><source id='vid-source' src='"+the_url+"' type='video/mp4'></video>")
+ //       // $('#name-vid').html(file.name)]
+ //       //      $('#size-vid').html(humanFileSize(file.size, "MB"))
+ //       //      $('#type-vid').html(file.type)
+
+ //        };
+    
+ //    //when the file is read it triggers the onload event above.
+ //        reader.readAsDataURL(file);
+ //    }
+
+
+ //    $( "#the-video-file-field" ).change(function() {
+ //            console.log("video file has been chosen");
+ //            //grab the first image in the fileList
+ //            //in this example we are only loading one file.
+ //            console.log(this.files[0].size);
+ //            renderVideo(this.files[0]);
+
+ //        });
+	 
+
+
+
+
+
+
+
+	// // handle input changes
+	// $("#the-file-input").change(function() {
+	//     console.log(this.files)
+	    
+	//     // grab the first image in the FileList object and pass it to the function
+	//     renderImage(this.files[0])
+	// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// $scope.youtube = null;
 
-	$scope.inputURL = ``;
-	console.log("$scope.iframeYoutube", $scope.iframeYoutube);
+	// $scope.inputURL = ``;
+	// console.log("$scope.iframeYoutube", $scope.iframeYoutube);
 
 
 	$scope.grabYoutubeVideo = ()=>{
@@ -20,9 +206,9 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 
 		// mb.ytplayer stuff
-		$(function(){
-		     jQuery("#P1").YTPlayer();
-		   });
+		// $(function(){
+		//      jQuery("#P1").YTPlayer();
+		//    });
 
 
 		// ()=>{
