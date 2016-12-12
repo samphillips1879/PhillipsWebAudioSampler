@@ -24,7 +24,7 @@
 	<h5><i>Please select the video you wish to sample (for now, please upload small files. Like, less than 20mb if possible)</i></h5>
 	<input id="userFileInput" type="file">
 	<!-- <input id="userVideoTitle" type="text"> -->
-
+	<button ng-click="beginEditingVideo()" class="btn-default">click here to begin clipping samples from your video</button>
 
 	
 
@@ -39,7 +39,7 @@
 
 
 <div id="userVideoHolder">
-	<video id="userVideo" controls="controls" src="videos/boytoy2000_4936849088184320.mp4"></video>
+	<video crossOrigin="anonymous" id="userVideo" controls="controls" src="videos/boytoy2000_4936849088184320.mp4"></video>
 	
 
 	<!-- crossOrigin="anonymous" -->

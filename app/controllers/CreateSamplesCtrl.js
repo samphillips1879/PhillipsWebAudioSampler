@@ -12,48 +12,61 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 	//VIDEO FILE INPUT and upload HANDLING*********************
-		// detect a change in file input
-		$("#userFileInput").change(function() {
-		    // will log a FileList object
-		    console.log("this.files", this.files);
-		    // grab the first file in the FileList object and pass it to the function
-		    renderFile(this.files[0]);
+	// detect a change in file input
+	$("#userFileInput").change(function() {
+	    // will log a FileList object
+	    console.log("this.files", this.files);
+	    // grab the first file in the FileList object and pass it to the function
+	    renderFile(this.files[0]);
 
 
 
-		    // Database.uploadVideoToDatabase(this.files[0]);
-		});
-
-
-
-
+	    // Database.uploadVideoToDatabase(this.files[0]);
+	});
 
 
 
 
 
-		// render the video in view
-		function renderFile(file) {
 
-		  // generate a new FileReader object
-		  var reader = new FileReader();
 
-		  // inject a video with the src url
-		  reader.onload = function(event) {
-		  	// console.log("loaded", event);
-		  	console.log("loaded event", event);
 
-		    the_url = event.target.result;
-		    // console.log("the_url", the_url);
-		    console.log("the_url processed");
-		    
-		    // Database.uploadVideoToDatabase(the_url);
-		    console.log("tried to send to db");
 
-		  };
-		Database.uploadVideoToDatabase(file, "Title input manually through code");
-	    // reader.readAsDataURL(file);
-		}
+	// render the video in view
+	function renderFile(file) {
+
+	  // generate a new FileReader object
+	  var reader = new FileReader();
+
+	  // inject a video with the src url
+	  reader.onload = function(event) {
+	  	// console.log("loaded", event);
+	  	console.log("loaded event", event);
+
+	    the_url = event.target.result;
+	    // console.log("the_url", the_url);
+	    console.log("the_url processed");
+	    
+	    // Database.uploadVideoToDatabase(the_url);
+	    console.log("tried to send to db");
+
+	  };
+	Database.uploadVideoToDatabase(file, "Title input manually through code");
+    // reader.readAsDataURL(file);
+	}
+
+
+
+
+
+
+
+
+	$scope.beginEditingVideo = ()=>{
+		console.log("begin editing video triggered");
+		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+		source.connect(AUD_CTX.destination);
+	};
 
 
 
@@ -138,7 +151,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		// 	// console.log("$('#userVideo')", $('#userVideo')[0]);
 		// 	// $("userVideo")[0].crossOrigin = "anonymous";
 		// 	// $("userVideo")[0].
-		// 	let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+			// let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
 		// 	console.log("source", source);
 		// 	source.connect(AUD_CTX.destination);
 
