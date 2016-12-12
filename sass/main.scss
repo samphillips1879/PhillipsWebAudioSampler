@@ -1,3 +1,13 @@
 .chanDiv{
 	margin: 5%;
 }
+
+
+#progress_bar.loading {
+    opacity: 1.0;
+  }
+#progress_bar .percent {
+background-color: #99ccff;
+height: auto;
+width: 0;
+}

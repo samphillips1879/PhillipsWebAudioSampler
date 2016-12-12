@@ -57,13 +57,14 @@ app.config(($routeProvider)=>{
 app.run(($location, FBCreds)=>{
     let authConfig = {
         apiKey: FBCreds.key,
-        authDomain: FBCreds.authDomain
+        authDomain: FBCreds.authDomain,
+        storageBucket: FBCreds.storageBucket
     };
     firebase.initializeApp(authConfig);
 });
 
 //creating the audio context
-	const AUD_CTX = new window.AudioContext();
+const AUD_CTX = new window.AudioContext();
 	//including webkit version, because jshint didn't like it but I want to save it to try and get to work later
 	// const AUD_CTX = new (window.AudioContext || window.webkitAudioContext)();
 // ************************

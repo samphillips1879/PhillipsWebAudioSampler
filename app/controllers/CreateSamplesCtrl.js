@@ -1,23 +1,34 @@
 "use strict";
-app.controller("CreateSamplesCtrl", function($scope, $sce){
+app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.greeting = "Create Samples Controller Connected";
 
 
 	let the_url;
 
 
+	// var storageRef = firebase.storage.ref("folderName/file.jpg");
 
 
 
 
-
+	//VIDEO FILE INPUT and upload HANDLING*********************
 	// detect a change in file input
 	$("#userFileInput").change(function() {
 	    // will log a FileList object
 	    console.log("this.files", this.files);
 	    // grab the first file in the FileList object and pass it to the function
 	    renderFile(this.files[0]);
+
+
+
+	    // Database.uploadVideoToDatabase(this.files[0]);
 	});
+
+
+
+
+
+
 
 
 
@@ -35,19 +46,377 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 	    the_url = event.target.result;
 	    // console.log("the_url", the_url);
 	    console.log("the_url processed");
+	    
+	    // Database.uploadVideoToDatabase(the_url);
+	    console.log("tried to send to db");
 
-	    $("#userVideo").attr("src", `${the_url}`);
-	    console.log("set userVideo source");
-	    console.log("userVideo", $("#userVideo"));
-	    // $("#userVideo").load();
-	    console.log("userVideo.load()");
-
-	    // $('#userVideoHolder').html(`<video src='${the_url}'></video>`);
 	  };
-	 
-	  // when the file is read it triggers the onload event above.
-	  reader.readAsDataURL(file);
+	Database.uploadVideoToDatabase(file, "Title input manually through code");
+    // reader.readAsDataURL(file);
 	}
+
+
+
+
+
+
+
+
+	$scope.beginEditingVideo = ()=>{
+		console.log("begin editing video triggered");
+		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+		source.connect(AUD_CTX.destination);
+	};
+
+
+
+
+});
+    
+	// progress stuff
+		// var reader;
+		//   var progress = document.querySelector('.percent');
+
+		//   function abortRead() {
+		//     reader.abort();
+		//   }
+
+		//   function errorHandler(evt) {
+		//     switch(evt.target.error.code) {
+		//       case evt.target.error.NOT_FOUND_ERR:
+		//         alert('File Not Found!');
+		//         break;
+		//       case evt.target.error.NOT_READABLE_ERR:
+		//         alert('File is not readable');
+		//         break;
+		//       case evt.target.error.ABORT_ERR:
+		//         break; // noop
+		//       default:
+		//         alert('An error occurred reading this file.');
+		//     };
+		//   }
+
+		//   function updateProgress(evt) {
+		//     // evt is an ProgressEvent.
+		//     if (evt.lengthComputable) {
+		//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+		//       // Increase the progress bar length.
+		//       if (percentLoaded < 100) {
+		//         progress.style.width = percentLoaded + '%';
+		//         progress.textContent = percentLoaded + '%';
+		//       }
+		//     }
+		//   }
+
+		//   function handleFileSelect(evt) {
+		//     // Reset progress indicator on new file selection.
+		//     progress.style.width = '0%';
+		//     progress.textContent = '0%';
+
+		//     reader = new FileReader();
+		//     reader.onerror = errorHandler;
+		//     reader.onprogress = updateProgress;
+		//     reader.onabort = function(e) {
+		//       alert('File read cancelled');
+		//     };
+		//     reader.onloadstart = function(e) {
+		//       document.getElementById('progress_bar').className = 'loading';
+		//     };
+		//     reader.onload = function(e) {
+		//       // Ensure that the progress bar displays 100% at the end.
+		//       progress.style.width = '100%';
+		//       progress.textContent = '100%';
+		//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
+		//     }
+
+		//     // Read in the image file as a binary string.
+		//     reader.readAsBinaryString(evt.target.files[0]);
+		//   }
+
+		//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+		  // when the file is read it triggers the onload event above.
+		//   reader.readAsDataURL(file);
+		// }
+	//******************************************
+
+
+
+
+
+	//attaching video to web audio api stuff*****************
+
+		// $scope.createSourceFromVideo = ()=>{
+
+		// 	// FileAPI.support.cors = true;
+		// 	// console.log("$('#userVideo')", $('#userVideo')[0]);
+		// 	// $("userVideo")[0].crossOrigin = "anonymous";
+		// 	// $("userVideo")[0].
+			// let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+		// 	console.log("source", source);
+		// 	source.connect(AUD_CTX.destination);
+
+		// };
+
+
+
+
+
+
+
+	// ***************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //VIDEO FILE INPUT HANDLING*********************
+// 	// detect a change in file input
+// 	$("#userFileInput").change(function() {
+// 	    // will log a FileList object
+// 	    console.log("this.files", this.files);
+// 	    // grab the first file in the FileList object and pass it to the function
+// 	    renderFile(this.files[0]);
+// 	});
+
+// 	// render the video in view
+// 	function renderFile(file) {
+
+// 	  // generate a new FileReader object
+// 	  var reader = new FileReader();
+
+// 	  // inject a video with the src url
+// 	  reader.onload = function(event) {
+// 	  	// console.log("loaded", event);
+// 	  	console.log("loaded event", event);
+
+// 	    the_url = event.target.result;
+// 	    // console.log("the_url", the_url);
+// 	    console.log("the_url processed");
+
+// 	    console.log("$(userVideo)[0]", $("#userVideo")[0]);
+
+
+// 	    $("#userVideo").attr("src", `${the_url}`);
+// 	    console.log("set userVideo source");
+// 	    console.log("userVideo", $("#userVideo"));
+// 	    // $("#userVideo").crossOrigin = "anonymous";
+// 	    console.log('$("#userVideo")', $("#userVideo"));
+// 	    // console.log("set cross origin");
+
+
+
+// 	    setTimeout(function(arg1) {
+// 		    $("#userVideo")[0].load();
+// 		    console.log("tried to load video");
+// 	      }, 5000);
+
+
+
+
+
+// 	    //create an audio source using the video
+// 	    $scope.createSourceFromVideo();
+
+
+
+// 	  };
+// // progress stuff
+// 	// var reader;
+// 	//   var progress = document.querySelector('.percent');
+
+// 	//   function abortRead() {
+// 	//     reader.abort();
+// 	//   }
+
+// 	//   function errorHandler(evt) {
+// 	//     switch(evt.target.error.code) {
+// 	//       case evt.target.error.NOT_FOUND_ERR:
+// 	//         alert('File Not Found!');
+// 	//         break;
+// 	//       case evt.target.error.NOT_READABLE_ERR:
+// 	//         alert('File is not readable');
+// 	//         break;
+// 	//       case evt.target.error.ABORT_ERR:
+// 	//         break; // noop
+// 	//       default:
+// 	//         alert('An error occurred reading this file.');
+// 	//     };
+// 	//   }
+
+// 	//   function updateProgress(evt) {
+// 	//     // evt is an ProgressEvent.
+// 	//     if (evt.lengthComputable) {
+// 	//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+// 	//       // Increase the progress bar length.
+// 	//       if (percentLoaded < 100) {
+// 	//         progress.style.width = percentLoaded + '%';
+// 	//         progress.textContent = percentLoaded + '%';
+// 	//       }
+// 	//     }
+// 	//   }
+
+// 	//   function handleFileSelect(evt) {
+// 	//     // Reset progress indicator on new file selection.
+// 	//     progress.style.width = '0%';
+// 	//     progress.textContent = '0%';
+
+// 	//     reader = new FileReader();
+// 	//     reader.onerror = errorHandler;
+// 	//     reader.onprogress = updateProgress;
+// 	//     reader.onabort = function(e) {
+// 	//       alert('File read cancelled');
+// 	//     };
+// 	//     reader.onloadstart = function(e) {
+// 	//       document.getElementById('progress_bar').className = 'loading';
+// 	//     };
+// 	//     reader.onload = function(e) {
+// 	//       // Ensure that the progress bar displays 100% at the end.
+// 	//       progress.style.width = '100%';
+// 	//       progress.textContent = '100%';
+// 	//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
+// 	//     }
+
+// 	//     // Read in the image file as a binary string.
+// 	//     reader.readAsBinaryString(evt.target.files[0]);
+// 	//   }
+
+// 	//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+// 	  // when the file is read it triggers the onload event above.
+// 	  reader.readAsDataURL(file);
+// 	}
+// //******************************************
+
+
+
+
+
+// //attaching video to web audio api stuff*****************
+
+// 	$scope.createSourceFromVideo = ()=>{
+
+// 		// FileAPI.support.cors = true;
+// 		// console.log("$('#userVideo')", $('#userVideo')[0]);
+// 		// $("userVideo")[0].crossOrigin = "anonymous";
+// 		// $("userVideo")[0].
+// 		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+// 		console.log("source", source);
+// 		source.connect(AUD_CTX.destination);
+
+// 	};
+
+
+
+
+
+
+
+// // ***************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,211 +478,4 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 	// });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// $scope.youtube = null;
-
-	// $scope.inputURL = ``;
-	// console.log("$scope.iframeYoutube", $scope.iframeYoutube);
-
-
-	$scope.grabYoutubeVideo = ()=>{
-		// $scope.iframeYoutube = $sce.trustAsHtml(`${$scope.inputURL}`);
-		// $scope.inputURL = ``;
-
-
-
-
-
-
-
-
-		// mb.ytplayer stuff
-		// $(function(){
-		//      jQuery("#P1").YTPlayer();
-		//    });
-
-
-		// ()=>{
-		// 	$("#P1")
-		// }
-
-
-
-
-
-
-		// let iframe = $("iframe")[0];
-		// console.log("iframe", iframe);
-		// console.log("iframe.src", iframe.src);
-		// console.log("iframe.contentDocument", iframe.contentDocument);
-		// console.log("iframe.contentWindow", iframe.contentWindow);
-
-
-
-
-
-
-
-
-
-		// setTimeout(function(){ 
-
-
-		// 	let iframes = $("iframe");
-		// 	console.log("iframes", iframes);
-
-		// 	// let iframe = $("iframe")[0];
-		// 	// console.log("iframe", iframe);
-
-
-
-		// 	// let buttons = $("button");
-		// 	// console.log("buttons", buttons);
-
-		// 	// let playBtn = $(".ytp-button");
-		// 	// console.log("playBtn", playBtn);
-
-
-
-		// 	let video = $("video");
-		// 	console.log("video", video);
-		// }, 3000);
-
-
-
-		// <button class="ytp-large-play-button ytp-button" aria-label="Watch Donald Trump Says &quot;China&quot;"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><path class="ytp-large-play-button-bg" d="m .66,37.62 c 0,0 .66,4.70 2.70,6.77 2.58,2.71 5.98,2.63 7.49,2.91 5.43,.52 23.10,.68 23.12,.68 .00,-1.3e-5 14.29,-0.02 23.81,-0.71 1.32,-0.15 4.22,-0.17 6.81,-2.89 2.03,-2.07 2.70,-6.77 2.70,-6.77 0,0 .67,-5.52 .67,-11.04 l 0,-5.17 c 0,-5.52 -0.67,-11.04 -0.67,-11.04 0,0 -0.66,-4.70 -2.70,-6.77 C 62.03,.86 59.13,.84 57.80,.69 48.28,0 34.00,0 34.00,0 33.97,0 19.69,0 10.18,.69 8.85,.84 5.95,.86 3.36,3.58 1.32,5.65 .66,10.35 .66,10.35 c 0,0 -0.55,4.50 -0.66,9.45 l 0,8.36 c .10,4.94 .66,9.45 .66,9.45 z" fill="#1f1f1e" fill-opacity="0.81"></path><path d="m 26.96,13.67 18.37,9.62 -18.37,9.55 -0.00,-19.17 z" fill="#fff"></path><path d="M 45.02,23.46 45.32,23.28 26.96,13.67 43.32,24.34 45.02,23.46 z" fill="#ccc"></path></svg></button>
-
-
-
-		// console.log("bodies", $("embed"));
-		// console.log("iframes", $("iframe"));
-
-
-		// var w = $("iframe")[0];
-		// // var w = $("iframe")[0];
-		// console.log("w", w);
-		// let x = w.childNodes;
-		// console.log("x", x);
-
-		// console.log(document.getElementsByTagName("html"));
-
-
-
-		// var x = w.eq(0);
-		// console.log("x", x);
-		// var y = x.contentWindow;
-		// // var y = (x.contentWindow || x.contentDocument);
-		// console.log("y", y);
-		// if (y.document)y = y.document;
-		// y.body.style.backgroundColor = "red";
-
-
-
-		//createMediaElementSource(video)
-		// let video = $("video");
-		// console.log("video", video);
-	};
-
-
-
-
-
-
-
-
-
-	// $(document).on("click", "#vidHolder", (event)=>{
-	// 	console.log("iframe click event", event);
-	// });
-
-
-	// $('iframe').click(()=>{
-	// 	console.log("clicked an iframe");
-	// });
-
-
-
-	// $('iframe[src="other.html"]').contents().find("#btnInside").click();
-
-
-
-
-});
+// });

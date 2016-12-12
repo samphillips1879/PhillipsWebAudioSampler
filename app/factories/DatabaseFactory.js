@@ -5,6 +5,10 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     let DatabaseFactory = {};
 
 
+
+    let fbStorage = firebase.storage();
+
+
     DatabaseFactory.getUserSamples = ()=>{
     	let samples = [];
         let currentUser = AuthFactory.getUser();
@@ -41,18 +45,68 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-    // DatabaseFactory.getSingleItem = (itemId)=>{
-    // 	// console.log("getting a single item");
-    // 	return new Promise((resolve, reject)=>{
-    // 		$http.get(`${FBCreds.URL}/items/${itemId}.json`)
-    // 		.success((itemObject)=>{
-    // 			resolve(itemObject);
-    // 		})
-    // 		.error((error)=>{
-    // 			reject(error);
-    // 		});
-    // 	});
+
+
+    // DatabaseFactory.storageRef = firebase.storage.ref("videos/file0.mp4");
+    // // var fileUpload = document.getElementById("fileUpload");
+    // fileUpload.on(‘change’, function(evt) {
+    //   var firstFile = evt.target.file[0]; // get the first file uploaded
+    //   var uploadTask = storageRef.put(firstFile);
+    // });
+
+
+    // DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
+
+    //     let user = AuthFactory.getUser();
+    //     // console.log("videoFile", videoFile);
+    //     var storage = firebase.storage();
+    //     // saves video to firebase storage userVideos folder with a name equivalent to the current user
+    //     var storageRef = storage.ref(`userVideos/${user}`);
+    //     console.log("storageRef", storageRef);
+    //     return new Promise((resolve,reject)=>{
+    //         storageRef.put(videoFile)
+    //     })
+    //     .success((successReturnedObject)=>{
+    //         resolve(successReturnedObject);
+    //     });
+    //     .error((error)=>{
+    //         reject(error);
+    //     });
     // };
+
+     DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
+        let user = AuthFactory.getUser();
+        // console.log("videoFile", videoFile);
+        var storage = firebase.storage();
+        // saves video to firebase storage userVideos folder with a name equivalent to the current user
+        var storageRef = storage.ref(`userVideos/${user}`);
+        console.log("storageRef", storageRef);
+        storageRef.put(videoFile)
+        .then((thing)=>{
+            // console.log("thing", thing);
+            storageRef.getDownloadURL().then(function(url) {
+                $("#userVideo")[0].src = url;
+                console.log("url", url);
+                console.log("set video src equal to", url);
+            }).catch(function(error) {
+              // Handle any errors
+            });
+        });
+    };
+
+
+    DatabaseFactory.downloadUserVideo = (videoUrl)=>{
+        console.log("trying to download", videoUrl);
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+                url: `${videoUrl}`
+            }).done((video)=>{
+                console.log("video", video);
+            }).fail((error)=>{
+                console.log("error", error);
+            });
+        });
+    };
 
     DatabaseFactory.postNewSample = (newItem)=>{
     	return new Promise((resolve,reject)=>{
