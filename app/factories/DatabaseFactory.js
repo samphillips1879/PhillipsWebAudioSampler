@@ -5,6 +5,10 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     let DatabaseFactory = {};
 
 
+
+    let fbStorage = firebase.storage();
+
+
     DatabaseFactory.getUserSamples = ()=>{
     	let samples = [];
         let currentUser = AuthFactory.getUser();
@@ -39,6 +43,55 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                 reject(error);
             });         
         });
+    };
+
+
+
+    // DatabaseFactory.storageRef = firebase.storage.ref("videos/file0.mp4");
+    // // var fileUpload = document.getElementById("fileUpload");
+    // fileUpload.on(‘change’, function(evt) {
+    //   var firstFile = evt.target.file[0]; // get the first file uploaded
+    //   var uploadTask = storageRef.put(firstFile);
+    // });
+
+
+    DatabaseFactory.uploadVideoToDatabase = (videoFile)=>{
+
+        console.log("videoFile", videoFile);
+
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
+        console.log("storageRef", storageRef);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // console.log("videoFile", videoFile);
+        // console.log("firebase.storage()", firebase.storage());
+        // firebase.storage().ref("videos").put(videoFile);
+
+
+
+        // return new Promise((resolve, reject)=>{
+        //     $http.post(`${FBCreds.URL}/videos`)
+        //     .success((fromFirebase)=>{
+        //         console.log("fromFirebase", fromFirebase);
+        //         resolve(fromFirebase);
+        //     })
+        //     .error((error)=>{
+        //         reject(error);
+        //     });
+        // });
     };
 
     // DatabaseFactory.getSingleItem = (itemId)=>{

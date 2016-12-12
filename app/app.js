@@ -57,7 +57,8 @@ app.config(($routeProvider)=>{
 app.run(($location, FBCreds)=>{
     let authConfig = {
         apiKey: FBCreds.key,
-        authDomain: FBCreds.authDomain
+        authDomain: FBCreds.authDomain,
+        storageBucket: FBCreds.storageBucket
     };
     firebase.initializeApp(authConfig);
 });

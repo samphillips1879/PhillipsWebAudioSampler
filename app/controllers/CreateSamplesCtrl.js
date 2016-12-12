@@ -1,135 +1,28 @@
 "use strict";
-app.controller("CreateSamplesCtrl", function($scope, $sce){
+app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.greeting = "Create Samples Controller Connected";
 
 
 	let the_url;
 
 
-
-
-
-//VIDEO FILE INPUT HANDLING*********************
-	// detect a change in file input
-	$("#userFileInput").change(function() {
-	    // will log a FileList object
-	    console.log("this.files", this.files);
-	    // grab the first file in the FileList object and pass it to the function
-	    renderFile(this.files[0]);
-	});
-
-	// render the video in view
-	function renderFile(file) {
-
-	  // generate a new FileReader object
-	  var reader = new FileReader();
-
-	  // inject a video with the src url
-	  reader.onload = function(event) {
-	  	// console.log("loaded", event);
-	  	console.log("loaded event", event);
-
-	    the_url = event.target.result;
-	    // console.log("the_url", the_url);
-	    console.log("the_url processed");
-
-	    $("#userVideo").attr("src", `${the_url}`);
-	    console.log("set userVideo source");
-	    console.log("userVideo", $("#userVideo"));
-	    // $("#userVideo").crossOrigin = "anonymous";
-	    console.log('$("#userVideo")', $("#userVideo"));
-	    console.log("set cross origin");
+	// var storageRef = firebase.storage.ref("folderName/file.jpg");
 
 
 
 
-	    //create an audio source using the video
-	    $scope.createSourceFromVideo();
+	//VIDEO FILE INPUT and upload HANDLING*********************
+		// detect a change in file input
+		$("#userFileInput").change(function() {
+		    // will log a FileList object
+		    console.log("this.files", this.files);
+		    // grab the first file in the FileList object and pass it to the function
+		    renderFile(this.files[0]);
 
 
 
-	  };
-// progress stuff
-	// var reader;
-	//   var progress = document.querySelector('.percent');
-
-	//   function abortRead() {
-	//     reader.abort();
-	//   }
-
-	//   function errorHandler(evt) {
-	//     switch(evt.target.error.code) {
-	//       case evt.target.error.NOT_FOUND_ERR:
-	//         alert('File Not Found!');
-	//         break;
-	//       case evt.target.error.NOT_READABLE_ERR:
-	//         alert('File is not readable');
-	//         break;
-	//       case evt.target.error.ABORT_ERR:
-	//         break; // noop
-	//       default:
-	//         alert('An error occurred reading this file.');
-	//     };
-	//   }
-
-	//   function updateProgress(evt) {
-	//     // evt is an ProgressEvent.
-	//     if (evt.lengthComputable) {
-	//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-	//       // Increase the progress bar length.
-	//       if (percentLoaded < 100) {
-	//         progress.style.width = percentLoaded + '%';
-	//         progress.textContent = percentLoaded + '%';
-	//       }
-	//     }
-	//   }
-
-	//   function handleFileSelect(evt) {
-	//     // Reset progress indicator on new file selection.
-	//     progress.style.width = '0%';
-	//     progress.textContent = '0%';
-
-	//     reader = new FileReader();
-	//     reader.onerror = errorHandler;
-	//     reader.onprogress = updateProgress;
-	//     reader.onabort = function(e) {
-	//       alert('File read cancelled');
-	//     };
-	//     reader.onloadstart = function(e) {
-	//       document.getElementById('progress_bar').className = 'loading';
-	//     };
-	//     reader.onload = function(e) {
-	//       // Ensure that the progress bar displays 100% at the end.
-	//       progress.style.width = '100%';
-	//       progress.textContent = '100%';
-	//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
-	//     }
-
-	//     // Read in the image file as a binary string.
-	//     reader.readAsBinaryString(evt.target.files[0]);
-	//   }
-
-	//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-	  // when the file is read it triggers the onload event above.
-	  reader.readAsDataURL(file);
-	}
-//******************************************
-
-
-
-
-
-//attaching video to web audio api stuff*****************
-
-	$scope.createSourceFromVideo = ()=>{
-
-		// FileAPI.support.cors = true;
-		// console.log("$('#userVideo')", $('#userVideo')[0]);
-		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-		console.log("source", source);
-		source.connect(AUD_CTX.destination);
-
-	};
+		    // Database.uploadVideoToDatabase(this.files[0]);
+		});
 
 
 
@@ -137,7 +30,331 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 
 
 
-// ***************************************************
+
+
+		// render the video in view
+		function renderFile(file) {
+
+		  // generate a new FileReader object
+		  var reader = new FileReader();
+
+		  // inject a video with the src url
+		  reader.onload = function(event) {
+		  	// console.log("loaded", event);
+		  	console.log("loaded event", event);
+
+		    the_url = event.target.result;
+		    // console.log("the_url", the_url);
+		    console.log("the_url processed");
+		    Database.uploadVideoToDatabase(the_url);
+		    console.log("tried to send to db");
+
+		  };
+	    reader.readAsDataURL(file);
+		}
+
+
+
+
+});
+    
+	// progress stuff
+		// var reader;
+		//   var progress = document.querySelector('.percent');
+
+		//   function abortRead() {
+		//     reader.abort();
+		//   }
+
+		//   function errorHandler(evt) {
+		//     switch(evt.target.error.code) {
+		//       case evt.target.error.NOT_FOUND_ERR:
+		//         alert('File Not Found!');
+		//         break;
+		//       case evt.target.error.NOT_READABLE_ERR:
+		//         alert('File is not readable');
+		//         break;
+		//       case evt.target.error.ABORT_ERR:
+		//         break; // noop
+		//       default:
+		//         alert('An error occurred reading this file.');
+		//     };
+		//   }
+
+		//   function updateProgress(evt) {
+		//     // evt is an ProgressEvent.
+		//     if (evt.lengthComputable) {
+		//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+		//       // Increase the progress bar length.
+		//       if (percentLoaded < 100) {
+		//         progress.style.width = percentLoaded + '%';
+		//         progress.textContent = percentLoaded + '%';
+		//       }
+		//     }
+		//   }
+
+		//   function handleFileSelect(evt) {
+		//     // Reset progress indicator on new file selection.
+		//     progress.style.width = '0%';
+		//     progress.textContent = '0%';
+
+		//     reader = new FileReader();
+		//     reader.onerror = errorHandler;
+		//     reader.onprogress = updateProgress;
+		//     reader.onabort = function(e) {
+		//       alert('File read cancelled');
+		//     };
+		//     reader.onloadstart = function(e) {
+		//       document.getElementById('progress_bar').className = 'loading';
+		//     };
+		//     reader.onload = function(e) {
+		//       // Ensure that the progress bar displays 100% at the end.
+		//       progress.style.width = '100%';
+		//       progress.textContent = '100%';
+		//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
+		//     }
+
+		//     // Read in the image file as a binary string.
+		//     reader.readAsBinaryString(evt.target.files[0]);
+		//   }
+
+		//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+		  // when the file is read it triggers the onload event above.
+		//   reader.readAsDataURL(file);
+		// }
+	//******************************************
+
+
+
+
+
+	//attaching video to web audio api stuff*****************
+
+		// $scope.createSourceFromVideo = ()=>{
+
+		// 	// FileAPI.support.cors = true;
+		// 	// console.log("$('#userVideo')", $('#userVideo')[0]);
+		// 	// $("userVideo")[0].crossOrigin = "anonymous";
+		// 	// $("userVideo")[0].
+		// 	let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+		// 	console.log("source", source);
+		// 	source.connect(AUD_CTX.destination);
+
+		// };
+
+
+
+
+
+
+
+	// ***************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //VIDEO FILE INPUT HANDLING*********************
+// 	// detect a change in file input
+// 	$("#userFileInput").change(function() {
+// 	    // will log a FileList object
+// 	    console.log("this.files", this.files);
+// 	    // grab the first file in the FileList object and pass it to the function
+// 	    renderFile(this.files[0]);
+// 	});
+
+// 	// render the video in view
+// 	function renderFile(file) {
+
+// 	  // generate a new FileReader object
+// 	  var reader = new FileReader();
+
+// 	  // inject a video with the src url
+// 	  reader.onload = function(event) {
+// 	  	// console.log("loaded", event);
+// 	  	console.log("loaded event", event);
+
+// 	    the_url = event.target.result;
+// 	    // console.log("the_url", the_url);
+// 	    console.log("the_url processed");
+
+// 	    console.log("$(userVideo)[0]", $("#userVideo")[0]);
+
+
+// 	    $("#userVideo").attr("src", `${the_url}`);
+// 	    console.log("set userVideo source");
+// 	    console.log("userVideo", $("#userVideo"));
+// 	    // $("#userVideo").crossOrigin = "anonymous";
+// 	    console.log('$("#userVideo")', $("#userVideo"));
+// 	    // console.log("set cross origin");
+
+
+
+// 	    setTimeout(function(arg1) {
+// 		    $("#userVideo")[0].load();
+// 		    console.log("tried to load video");
+// 	      }, 5000);
+
+
+
+
+
+// 	    //create an audio source using the video
+// 	    $scope.createSourceFromVideo();
+
+
+
+// 	  };
+// // progress stuff
+// 	// var reader;
+// 	//   var progress = document.querySelector('.percent');
+
+// 	//   function abortRead() {
+// 	//     reader.abort();
+// 	//   }
+
+// 	//   function errorHandler(evt) {
+// 	//     switch(evt.target.error.code) {
+// 	//       case evt.target.error.NOT_FOUND_ERR:
+// 	//         alert('File Not Found!');
+// 	//         break;
+// 	//       case evt.target.error.NOT_READABLE_ERR:
+// 	//         alert('File is not readable');
+// 	//         break;
+// 	//       case evt.target.error.ABORT_ERR:
+// 	//         break; // noop
+// 	//       default:
+// 	//         alert('An error occurred reading this file.');
+// 	//     };
+// 	//   }
+
+// 	//   function updateProgress(evt) {
+// 	//     // evt is an ProgressEvent.
+// 	//     if (evt.lengthComputable) {
+// 	//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+// 	//       // Increase the progress bar length.
+// 	//       if (percentLoaded < 100) {
+// 	//         progress.style.width = percentLoaded + '%';
+// 	//         progress.textContent = percentLoaded + '%';
+// 	//       }
+// 	//     }
+// 	//   }
+
+// 	//   function handleFileSelect(evt) {
+// 	//     // Reset progress indicator on new file selection.
+// 	//     progress.style.width = '0%';
+// 	//     progress.textContent = '0%';
+
+// 	//     reader = new FileReader();
+// 	//     reader.onerror = errorHandler;
+// 	//     reader.onprogress = updateProgress;
+// 	//     reader.onabort = function(e) {
+// 	//       alert('File read cancelled');
+// 	//     };
+// 	//     reader.onloadstart = function(e) {
+// 	//       document.getElementById('progress_bar').className = 'loading';
+// 	//     };
+// 	//     reader.onload = function(e) {
+// 	//       // Ensure that the progress bar displays 100% at the end.
+// 	//       progress.style.width = '100%';
+// 	//       progress.textContent = '100%';
+// 	//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
+// 	//     }
+
+// 	//     // Read in the image file as a binary string.
+// 	//     reader.readAsBinaryString(evt.target.files[0]);
+// 	//   }
+
+// 	//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+// 	  // when the file is read it triggers the onload event above.
+// 	  reader.readAsDataURL(file);
+// 	}
+// //******************************************
+
+
+
+
+
+// //attaching video to web audio api stuff*****************
+
+// 	$scope.createSourceFromVideo = ()=>{
+
+// 		// FileAPI.support.cors = true;
+// 		// console.log("$('#userVideo')", $('#userVideo')[0]);
+// 		// $("userVideo")[0].crossOrigin = "anonymous";
+// 		// $("userVideo")[0].
+// 		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+// 		console.log("source", source);
+// 		source.connect(AUD_CTX.destination);
+
+// 	};
+
+
+
+
+
+
+
+// // ***************************************************
 
 
 
@@ -246,4 +463,4 @@ app.controller("CreateSamplesCtrl", function($scope, $sce){
 	// });
 
 
-});
+// });
