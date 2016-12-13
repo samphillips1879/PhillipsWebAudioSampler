@@ -5,8 +5,8 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 	let the_url;
 	// let videoEl = $('#userVideo')[0];
-	let source;
-	let sourceAnalyser;
+	let source = null;
+	let sourceAnalyser = null;
 
 
 
@@ -95,22 +95,30 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
 		console.log("source", source);
+		source.connect(AUD_CTX.destination);
 		// sourceAnalyser = AUD_CTX.createAnalyser();
 		// source.connect(sourceAnalyser);
 		// sourceAnalyser.connect(AUD_CTX.destination);
-		console.log("source established");
+		console.log("source established, path initialized: source -> destination");
 		// videoEl.play();
 		// console.log("video started");
 	};
 
 	$scope.beginSampleCapture = ()=>{
-		console.log("setting up path");
+		console.log("setting up path, inserting analyser");
 		// source = AUD_CTX.createMediaElementSource(videoEl);
 		sourceAnalyser = AUD_CTX.createAnalyser();
 		source.connect(sourceAnalyser);
 		sourceAnalyser.connect(AUD_CTX.destination);
 		console.log("path complete: source -> analyser -> destination");	
 		console.log("sample capture started");
+
+
+		do {
+		   console.log("sourceAnalyser exists");
+		} while (sourceAnalyser);
+
+
 	};
 
 	$scope.endSampleCapture = ()=>{
