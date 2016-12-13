@@ -80,9 +80,25 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.endSampleCapture = ()=>{
 		console.log("sample capture ending");
 
-
+//recorderJs
 ///////
 		rec.stop();
+
+		// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
+
+		function getBufferCallback( buffers ) {
+		    var newSource = AUD_CTX.createBufferSource();
+		    var newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
+		    newBuffer.getChannelData(0).set(buffers[0]);
+		    newBuffer.getChannelData(1).set(buffers[1]);
+		    newSource.buffer = newBuffer;
+
+		    newSource.connect( AUD_CTX.destination );
+		    newSource.start(0);
+		}
+
+
+		rec.getBuffer(getBufferCallback);
 ///////
 
 
