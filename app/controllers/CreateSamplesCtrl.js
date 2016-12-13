@@ -114,9 +114,6 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		console.log("sample capture started");
 
 
-		do {
-		   console.log("sourceAnalyser exists");
-		} while (sourceAnalyser);
 
 
 	};
@@ -125,6 +122,16 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		console.log("sample capture ended");
 		$('#userVideo')[0].pause();
 		// source = null;
+
+
+
+		let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+		sourceAnalyser.getFloatFrequencyData(sample);
+		console.log("sample", sample);
+
+
+
+
 		sourceAnalyser = null;
 	};
 
