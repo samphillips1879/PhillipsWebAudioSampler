@@ -109,9 +109,22 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		// source = AUD_CTX.createMediaElementSource(videoEl);
 		sourceAnalyser = AUD_CTX.createAnalyser();
 		source.connect(sourceAnalyser);
+		console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
 		sourceAnalyser.connect(AUD_CTX.destination);
 		console.log("path complete: source -> analyser -> destination");	
 		console.log("sample capture started");
+
+
+
+
+
+		let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+		sourceAnalyser.getFloatFrequencyData(sample);
+		console.log("sample", sample);
+
+
+
+
 
 
 
@@ -125,9 +138,9 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 
-		let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
-		sourceAnalyser.getFloatFrequencyData(sample);
-		console.log("sample", sample);
+		// let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+		// sourceAnalyser.getFloatFrequencyData(sample);
+		// console.log("sample", sample);
 
 
 
