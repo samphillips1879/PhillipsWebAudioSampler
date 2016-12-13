@@ -7,6 +7,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// let videoEl = $('#userVideo')[0];
 	let source = null;
 	let sourceAnalyser = null;
+	let sample = null;
+	let samplesArray = [];
+	let conSampleRate = AUD_CTX.sampleRate;
+
 
 
 
@@ -40,22 +44,22 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	function renderFile(file) {
 
 	  // generate a new FileReader object
-	  var reader = new FileReader();
+	  // var reader = new FileReader();
 
-	  // inject a video with the src url
-	  reader.onload = function(event) {
-	  	// console.log("loaded", event);
-	  	console.log("loaded event", event);
+	  // // inject a video with the src url
+	  // reader.onload = function(event) {
+	  // 	// console.log("loaded", event);
+	  // 	console.log("loaded event", event);
 
-	    the_url = event.target.result;
-	    // console.log("the_url", the_url);
-	    console.log("the_url processed");
+	  //   the_url = event.target.result;
+	  //   // console.log("the_url", the_url);
+	  //   console.log("the_url processed");
 	    
-	    // Database.uploadVideoToDatabase(the_url);
-	    console.log("tried to send to db");
+	  //   // Database.uploadVideoToDatabase(the_url);
+	  //   console.log("tried to send to db");
 
-	  };
-	Database.uploadVideoToDatabase(file, "Title input manually through code");
+	  // };
+		Database.uploadVideoToDatabase(file, "Title input manually through code");
     // reader.readAsDataURL(file);
 	}
 
@@ -88,6 +92,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	    setupForSampleCapture();
 	});
 
+	// $('video').on("ended", ()=>{
+	// 		$scope.endSampleCapture();
+	// });
+
 
 	let setupForSampleCapture = ()=>{
 		console.log("setupForSampleCapture triggered");
@@ -104,23 +112,153 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		// console.log("video started");
 	};
 
+
+
+
+
+	var timeout, clicker = $('#sampleCaptureBtn');
+
+	$('#sampleCaptureBtn').mousedown(function () {
+	    $scope.beginSampleCapture(); 
+	    timeout = setInterval(function () {
+	        //do same thing here again
+	        $scope.endSampleCapture();
+	        $scope.beginSampleCapture(); 
+
+	    }, 1000 / conSampleRate);
+
+	    return false;
+	});
+	$('#sampleCaptureBtn').mouseup(function () {
+		$scope.endSampleCapture();
+	    clearInterval(timeout);
+	    return false;
+	});
+	// $('#sampleCaptureBtn').mouseout(function () {
+	// 	$scope.endSampleCapture();
+	//     clearInterval(timeout);
+	//     return false;
+	// });   
+
+
+
+
+//closed
+// 	$scope.beginSampleCapture = ()=>{
+// 		sample = null;
+// 		console.log("setting up path, inserting analyser");
+// 		// source = AUD_CTX.createMediaElementSource(videoEl);
+// 		sourceAnalyser = AUD_CTX.createAnalyser();
+// 		source.connect(sourceAnalyser);
+
+
+
+// // come back to this section when it is time to change the length of the sample captured
+// 		// console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
+// 		// console.log("changing fft size");
+// 		// sourceAnalyser.fftSize = 32768;
+// 		// console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
+
+// //this chunk should probably be done on the endSampleCapture() function. I believe that it essentially gives all the single samples it can, going from the end backwards, until it reaches the frequencyBinCount
+
+// 		// let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+// 		// sourceAnalyser.getFloatFrequencyData(sample);
+// 		// console.log("sample", sample);
+
+
+
+
+
+
+
+
+// 		// sourceAnalyser.connect(AUD_CTX.destination);
+// 		console.log("path complete: source -> analyser -> destination");	
+// 		console.log("sample capture started");
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 		// console.log("AUD_CTX.sampleRate", AUD_CTX.sampleRate);
+// 		// console.log("conSampleRate", conSampleRate);
+
+
+// 		// SAMPLING LOGIC
+
+		// var timeout, clicker = $('#sampleCaptureBtn');
+
+		// $('#Clicker').mousedown(function () {
+		//     //do something here
+		//     timeout = setInterval(function () {
+		//         //do same thing here again
+		//     }, 1000 / conSampleRate);
+
+		//     return false;
+		// });
+		// $('#Clicker').mouseup(function () {
+		//     clearInterval(timeout);
+		//     return false;
+		// });
+		// $('#Clicker').mouseout(function () {
+		//     clearInterval(timeout);
+		//     return false;
+		// });
+
+
+
+
+
+
+
+// 		//this is the default length of the analyser's.... buffer?
+// 		// sourceAnalyser.fftSize = 2048;
+
+
+
+// 		// sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+// 		// sourceAnalyser.getFloatFrequencyData(sample);
+// 		// console.log("sample", sample);
+// 		// samplesArray = samplesArray.concat(sample);
+// 		// console.log("samplesArray", samplesArray);
+
+
+
+
+
+
+
+// 		// sourceAnalyser = null;
+
+
+// 	};
+
+
 	$scope.beginSampleCapture = ()=>{
-		console.log("setting up path, inserting analyser");
-		// source = AUD_CTX.createMediaElementSource(videoEl);
-		sourceAnalyser = AUD_CTX.createAnalyser();
-		source.connect(sourceAnalyser);
-		console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
-		sourceAnalyser.connect(AUD_CTX.destination);
-		console.log("path complete: source -> analyser -> destination");	
-		console.log("sample capture started");
+			console.log("setting up path, inserting analyser");
+			// source = AUD_CTX.createMediaElementSource(videoEl);
+			sourceAnalyser = AUD_CTX.createAnalyser();
+			source.connect(sourceAnalyser);
+			console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
+			sourceAnalyser.connect(AUD_CTX.destination);
+			console.log("path complete: source -> analyser -> destination");	
+			console.log("sample capture started");
 
 
 
 
 
-		let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
-		sourceAnalyser.getFloatFrequencyData(sample);
-		console.log("sample", sample);
+			// let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+			// sourceAnalyser.getFloatFrequencyData(sample);
+			// console.log("sample", sample);
 
 
 
@@ -129,445 +267,108 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 
-	};
+		};
+
 
 	$scope.endSampleCapture = ()=>{
 		console.log("sample capture ended");
 		$('#userVideo')[0].pause();
+		sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+		sourceAnalyser.getFloatFrequencyData(sample);
+		console.log("sample", sample);
+		samplesArray = samplesArray.concat(sample);
+		console.log("samplesArray", samplesArray);
+
+		sourceAnalyser = null;
+
+
 		// source = null;
+		// //this is the default length of the analyser's.... buffer?
+		// // sourceAnalyser.fftSize = 2048;
+		// let channels = 1;
+		// let frameCount = samplesArray.length;
+		// let sampleAudioBuffer = AUD_CTX.createBuffer(channels, frameCount, AUD_CTX.sampleRate);
+		// for (var channel = 0; channel < channels; channel++) {
+		//     // This gives us the actual array that contains the data
+		//     var nowBuffering = sampleAudioBuffer.getChannelData(channel);
+		//     for (var i = 0; i < frameCount; i++) {
+		//       // Math.random() is in [0; 1.0]
+		//       // audio needs to be in [-1.0; 1.0]
+		//       // nowBuffering[i] = Math.random() * 2 - 1;
+		//       nowBuffering[i] = sample[i];
+		//     }
+		//     console.log("nowBuffering", nowBuffering);
+		// }
+		// console.log("sampleAudioBuffer", sampleAudioBuffer);
+
+		// let samplesSource = AUD_CTX.createBufferSource();
+		// samplesSource.buffer = sampleAudioBuffer;
+
+		// samplesSource.connect(AUD_CTX.destination);
+
+		// samplesSource.onended = ()=>{
+		// 	console.log("buffer finished playing");
+		// };
+		// samplesSource.start();
+		// console.log("started samplesSource");
 
 
 
-		// let sample = new Float32Array(sourceAnalyser.frequencyBinCount);
+
+
+
+		// $scope.createAudioBuffer();
+		sourceAnalyser = null;
+		// sample = new Float32Array(sourceAnalyser.frequencyBinCount);
 		// sourceAnalyser.getFloatFrequencyData(sample);
 		// console.log("sample", sample);
 
 
 
 
-		sourceAnalyser = null;
+
+		// //converting "sample" to an audioBuffer to see how long it actually is and what not
+
+		// // Create an empty two second stereo buffer at the
+		// // sample rate of the AudioContext
+		// let channels = 1;
+		// let frameCount = sourceAnalyser.fftSize;
+
+		// let sampleAudioBuffer = AUD_CTX.createBuffer(channels, frameCount, AUD_CTX.sampleRate);
+
+		// for (var channel = 0; channel < channels; channel++) {
+		//     // This gives us the actual array that contains the data
+		//     var nowBuffering = sampleAudioBuffer.getChannelData(channel);
+		//     for (var i = 0; i < frameCount; i++) {
+		//       // Math.random() is in [0; 1.0]
+		//       // audio needs to be in [-1.0; 1.0]
+		//       // nowBuffering[i] = Math.random() * 2 - 1;
+		//       nowBuffering[i] = sample[i];
+		//     }
+		//     console.log("nowBuffering", nowBuffering);
+		//   }
+		//   console.log("sampleAudioBuffer", sampleAudioBuffer);
+
+
+
+
+
+
+
+
+
+		
 	};
 
 
 
-	// $scope.beginEditingVideo = ()=>{
-	// 	console.log("begin editing video triggered");
-
-	// 	let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-	// 	let sourceAnalyser = AUD_CTX.createAnalyser();
-	// 	source.connect(sourceAnalyser);
-	// 	sourceAnalyser.connect(AUD_CTX.destination);
-	// 	console.log("source connected");
-	// };
+	
 
 
 
 
 });
-    
-	// progress stuff
-		// var reader;
-		//   var progress = document.querySelector('.percent');
 
-		//   function abortRead() {
-		//     reader.abort();
-		//   }
 
-		//   function errorHandler(evt) {
-		//     switch(evt.target.error.code) {
-		//       case evt.target.error.NOT_FOUND_ERR:
-		//         alert('File Not Found!');
-		//         break;
-		//       case evt.target.error.NOT_READABLE_ERR:
-		//         alert('File is not readable');
-		//         break;
-		//       case evt.target.error.ABORT_ERR:
-		//         break; // noop
-		//       default:
-		//         alert('An error occurred reading this file.');
-		//     };
-		//   }
 
-		//   function updateProgress(evt) {
-		//     // evt is an ProgressEvent.
-		//     if (evt.lengthComputable) {
-		//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-		//       // Increase the progress bar length.
-		//       if (percentLoaded < 100) {
-		//         progress.style.width = percentLoaded + '%';
-		//         progress.textContent = percentLoaded + '%';
-		//       }
-		//     }
-		//   }
 
-		//   function handleFileSelect(evt) {
-		//     // Reset progress indicator on new file selection.
-		//     progress.style.width = '0%';
-		//     progress.textContent = '0%';
-
-		//     reader = new FileReader();
-		//     reader.onerror = errorHandler;
-		//     reader.onprogress = updateProgress;
-		//     reader.onabort = function(e) {
-		//       alert('File read cancelled');
-		//     };
-		//     reader.onloadstart = function(e) {
-		//       document.getElementById('progress_bar').className = 'loading';
-		//     };
-		//     reader.onload = function(e) {
-		//       // Ensure that the progress bar displays 100% at the end.
-		//       progress.style.width = '100%';
-		//       progress.textContent = '100%';
-		//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
-		//     }
-
-		//     // Read in the image file as a binary string.
-		//     reader.readAsBinaryString(evt.target.files[0]);
-		//   }
-
-		//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-		  // when the file is read it triggers the onload event above.
-		//   reader.readAsDataURL(file);
-		// }
-	//******************************************
-
-
-
-
-
-	//attaching video to web audio api stuff*****************
-
-		// $scope.createSourceFromVideo = ()=>{
-
-		// 	// FileAPI.support.cors = true;
-		// 	// console.log("$('#userVideo')", $('#userVideo')[0]);
-		// 	// $("userVideo")[0].crossOrigin = "anonymous";
-		// 	// $("userVideo")[0].
-			// let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-		// 	console.log("source", source);
-		// 	source.connect(AUD_CTX.destination);
-
-		// };
-
-
-
-
-
-
-
-	// ***************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //VIDEO FILE INPUT HANDLING*********************
-// 	// detect a change in file input
-// 	$("#userFileInput").change(function() {
-// 	    // will log a FileList object
-// 	    console.log("this.files", this.files);
-// 	    // grab the first file in the FileList object and pass it to the function
-// 	    renderFile(this.files[0]);
-// 	});
-
-// 	// render the video in view
-// 	function renderFile(file) {
-
-// 	  // generate a new FileReader object
-// 	  var reader = new FileReader();
-
-// 	  // inject a video with the src url
-// 	  reader.onload = function(event) {
-// 	  	// console.log("loaded", event);
-// 	  	console.log("loaded event", event);
-
-// 	    the_url = event.target.result;
-// 	    // console.log("the_url", the_url);
-// 	    console.log("the_url processed");
-
-// 	    console.log("$(userVideo)[0]", $("#userVideo")[0]);
-
-
-// 	    $("#userVideo").attr("src", `${the_url}`);
-// 	    console.log("set userVideo source");
-// 	    console.log("userVideo", $("#userVideo"));
-// 	    // $("#userVideo").crossOrigin = "anonymous";
-// 	    console.log('$("#userVideo")', $("#userVideo"));
-// 	    // console.log("set cross origin");
-
-
-
-// 	    setTimeout(function(arg1) {
-// 		    $("#userVideo")[0].load();
-// 		    console.log("tried to load video");
-// 	      }, 5000);
-
-
-
-
-
-// 	    //create an audio source using the video
-// 	    $scope.createSourceFromVideo();
-
-
-
-// 	  };
-// // progress stuff
-// 	// var reader;
-// 	//   var progress = document.querySelector('.percent');
-
-// 	//   function abortRead() {
-// 	//     reader.abort();
-// 	//   }
-
-// 	//   function errorHandler(evt) {
-// 	//     switch(evt.target.error.code) {
-// 	//       case evt.target.error.NOT_FOUND_ERR:
-// 	//         alert('File Not Found!');
-// 	//         break;
-// 	//       case evt.target.error.NOT_READABLE_ERR:
-// 	//         alert('File is not readable');
-// 	//         break;
-// 	//       case evt.target.error.ABORT_ERR:
-// 	//         break; // noop
-// 	//       default:
-// 	//         alert('An error occurred reading this file.');
-// 	//     };
-// 	//   }
-
-// 	//   function updateProgress(evt) {
-// 	//     // evt is an ProgressEvent.
-// 	//     if (evt.lengthComputable) {
-// 	//       var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-// 	//       // Increase the progress bar length.
-// 	//       if (percentLoaded < 100) {
-// 	//         progress.style.width = percentLoaded + '%';
-// 	//         progress.textContent = percentLoaded + '%';
-// 	//       }
-// 	//     }
-// 	//   }
-
-// 	//   function handleFileSelect(evt) {
-// 	//     // Reset progress indicator on new file selection.
-// 	//     progress.style.width = '0%';
-// 	//     progress.textContent = '0%';
-
-// 	//     reader = new FileReader();
-// 	//     reader.onerror = errorHandler;
-// 	//     reader.onprogress = updateProgress;
-// 	//     reader.onabort = function(e) {
-// 	//       alert('File read cancelled');
-// 	//     };
-// 	//     reader.onloadstart = function(e) {
-// 	//       document.getElementById('progress_bar').className = 'loading';
-// 	//     };
-// 	//     reader.onload = function(e) {
-// 	//       // Ensure that the progress bar displays 100% at the end.
-// 	//       progress.style.width = '100%';
-// 	//       progress.textContent = '100%';
-// 	//       setTimeout("document.getElementById('progress_bar').className='';", 2000);
-// 	//     }
-
-// 	//     // Read in the image file as a binary string.
-// 	//     reader.readAsBinaryString(evt.target.files[0]);
-// 	//   }
-
-// 	//   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-// 	  // when the file is read it triggers the onload event above.
-// 	  reader.readAsDataURL(file);
-// 	}
-// //******************************************
-
-
-
-
-
-// //attaching video to web audio api stuff*****************
-
-// 	$scope.createSourceFromVideo = ()=>{
-
-// 		// FileAPI.support.cors = true;
-// 		// console.log("$('#userVideo')", $('#userVideo')[0]);
-// 		// $("userVideo")[0].crossOrigin = "anonymous";
-// 		// $("userVideo")[0].
-// 		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-// 		console.log("source", source);
-// 		source.connect(AUD_CTX.destination);
-
-// 	};
-
-
-
-
-
-
-
-// // ***************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// function renderVideo(file){
- //        var reader = new FileReader();
- //        reader.onload = function(event){
- //        	console.log("loaded event", event);
- //        	// console.log("event.target.result", event.target.result);
- //            the_url = event.target.result;
- //            console.log("the_url", the_url);
-
-
-
- //            $("#userVideo").attr("src", `${the_url}`);
- //            $("#userVideo").load();
-
-
-
-
-
-
-
-
- //      // of course using a template library like handlebars.js is a better solution than just inserting a string
- //      // $('#userVideo').attr("<video width='400' controls><source id='vid-source' src='"+the_url+"' type='video/mp4'></video>")
- //       // $('#name-vid').html(file.name)]
- //       //      $('#size-vid').html(humanFileSize(file.size, "MB"))
- //       //      $('#type-vid').html(file.type)
-
- //        };
-    
- //    //when the file is read it triggers the onload event above.
- //        reader.readAsDataURL(file);
- //    }
-
-
- //    $( "#the-video-file-field" ).change(function() {
- //            console.log("video file has been chosen");
- //            //grab the first image in the fileList
- //            //in this example we are only loading one file.
- //            console.log(this.files[0].size);
- //            renderVideo(this.files[0]);
-
- //        });
-	 
-
-
-
-
-
-
-
-	// // handle input changes
-	// $("#the-file-input").change(function() {
-	//     console.log(this.files)
-	    
-	//     // grab the first image in the FileList object and pass it to the function
-	//     renderImage(this.files[0])
-	// });
-
-
-// });
