@@ -4,6 +4,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 	let the_url;
+	// let videoEl = $('#userVideo')[0];
+	let source;
+	let sourceAnalyser;
+
 
 
 	// var storageRef = firebase.storage.ref("folderName/file.jpg");
@@ -62,11 +66,71 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 
-	$scope.beginEditingVideo = ()=>{
-		console.log("begin editing video triggered");
-		let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-		source.connect(AUD_CTX.destination);
+	// $scope.setupForSampleCapture = ()=>{
+	// 	console.log("setupForSampleCapture triggered");
+	// 	// let videoEl = $('#userVideo')[0];
+
+	// 	source = AUD_CTX.createMediaElementSource(videoEl);
+	// 	sourceAnalyser = AUD_CTX.createAnalyser();
+	// 	source.connect(sourceAnalyser);
+	// 	sourceAnalyser.connect(AUD_CTX.destination);
+	// 	console.log("source connected");
+	// 	videoEl.play();
+	// 	console.log("video started");
+	// };
+
+
+	
+
+
+	$('video').on('loadeddata', function (e) {
+	    console.log("video loaded");
+	    setupForSampleCapture();
+	});
+
+
+	let setupForSampleCapture = ()=>{
+		console.log("setupForSampleCapture triggered");
+		// let videoEl = $('#userVideo')[0];
+
+		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+		console.log("source", source);
+		// sourceAnalyser = AUD_CTX.createAnalyser();
+		// source.connect(sourceAnalyser);
+		// sourceAnalyser.connect(AUD_CTX.destination);
+		console.log("source established");
+		// videoEl.play();
+		// console.log("video started");
 	};
+
+	$scope.beginSampleCapture = ()=>{
+		console.log("setting up path");
+		// source = AUD_CTX.createMediaElementSource(videoEl);
+		sourceAnalyser = AUD_CTX.createAnalyser();
+		source.connect(sourceAnalyser);
+		sourceAnalyser.connect(AUD_CTX.destination);
+		console.log("path complete: source -> analyser -> destination");	
+		console.log("sample capture started");
+	};
+
+	$scope.endSampleCapture = ()=>{
+		console.log("sample capture ended");
+		$('#userVideo')[0].pause();
+		// source = null;
+		sourceAnalyser = null;
+	};
+
+
+
+	// $scope.beginEditingVideo = ()=>{
+	// 	console.log("begin editing video triggered");
+
+	// 	let source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
+	// 	let sourceAnalyser = AUD_CTX.createAnalyser();
+	// 	source.connect(sourceAnalyser);
+	// 	sourceAnalyser.connect(AUD_CTX.destination);
+	// 	console.log("source connected");
+	// };
 
 
 

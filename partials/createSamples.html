@@ -24,7 +24,12 @@
 	<h5><i>Please select the video you wish to sample (for now, please upload small files. Like, less than 20mb if possible)</i></h5>
 	<input id="userFileInput" type="file">
 	<!-- <input id="userVideoTitle" type="text"> -->
-	<button ng-click="beginEditingVideo()" class="btn-default">click here to begin clipping samples from your video</button>
+	<!-- <button ng-click="setupForSampleCapture()" class="btn-default">after your video loads, click here to start playback</button> -->
+
+
+	<button ng-click="beginSampleCapture()" class="btn-default">During playback, click here to begin capturing an audio sample from your video</button>
+
+	<button ng-click="endSampleCapture()" class="btn-default">Click here to set the end of your audio sample</button>
 
 	
 
@@ -39,13 +44,21 @@
 
 
 <div id="userVideoHolder">
-	<video crossOrigin="anonymous" id="userVideo" controls="controls" src="videos/boytoy2000_4936849088184320.mp4"></video>
+	<video crossOrigin="anonymous" id="userVideo" controls="controls"></video>
 	
 
 	<!-- crossOrigin="anonymous" -->
 	
 </div>
 
+
+<!-- <div id="userVideoHolder">
+	<video crossOrigin="anonymous" id="userVideo" controls="controls" src="videos/boytoy2000_4936849088184320.mp4"></video>
+	
+
+	crossOrigin="anonymous"
+	
+ </div> -->
 
 
 
