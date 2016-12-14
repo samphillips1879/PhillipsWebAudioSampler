@@ -5,31 +5,37 @@ app.controller('AssignSamplesCtrl', function($scope, Database){
 
 
 	let arrayBuffer = null;
+	let sampleBuffer = null;
 
 
 	$scope.getSampleWav = ()=>{
 		Database.downloadSampleWav("testTitle");
+		// $scope.decodeSample(); 
 	};
 
 
 
 
-	$scope.decodeAndPlaySample = ()=>{
+//want this to be triggered through a ".then()" attached to Database.downloadSampleWav, but for now I'll tie it to a button in the dom because that function does not yet return a promise
+	$scope.decodeSample = ()=>{
 		let blob = Database.retrieveBlob();
-		console.log("blob", blob);
+		console.log("blob about to be decoded", blob);
 		let reader = new FileReader();
 		reader.readAsArrayBuffer(blob);
 		reader.onload = (e)=>{
-			console.log("e.target.result", e.target.result);
+			// console.log("e.target.result", e.target.result);
 			arrayBuffer = e.target.result;
 			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
-				console.log("decodedData", decodedData);
-				let decodedDataSourceNode = AUD_CTX.createBufferSource();
-				decodedDataSourceNode.buffer = decodedData;
-				decodedDataSourceNode.connect(AUD_CTX.destination);
-			    decodedDataSourceNode.start(0);
+				sampleBuffer = decodedData;
 			});
 		};
+	};
+
+	$scope.playSample = ()=>{
+		let sampleSourceNode = AUD_CTX.createBufferSource();
+		sampleSourceNode.buffer = sampleBuffer;
+		sampleSourceNode.connect(AUD_CTX.destination);
+	    sampleSourceNode.start(0);
 	};
 
 
