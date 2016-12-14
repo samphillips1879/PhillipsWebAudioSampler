@@ -55,6 +55,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	//start recording sample
 	$scope.beginSampleCapture = ()=>{	
 			console.log("sample capture starting");
+			rec.clear();
 			rec.record();
 		};
 
