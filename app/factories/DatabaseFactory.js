@@ -4,6 +4,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 	// console.log("URL", FBCreds.URL);
     let DatabaseFactory = {};
     let fbStorage = firebase.storage();
+    let blob = null;
 
 
     DatabaseFactory.getUserSamples = ()=>{
@@ -102,8 +103,11 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-    DatabaseFactory.getSampleWav = (sampleTitle)=>{
+    DatabaseFactory.downloadSampleWav = (sampleTitle)=>{
+        //this section also is gonna need some proper separation of responsibilities, but right now I gotta reach mvp, so we're just gonna let it be ugly
         let user = AuthFactory.getUser();
+
+
         // return new Promise((resolve,reject)=>{
         //     $http.get(`https://firebasestorage.googleapis.com/v0/b/phillipswebaudiosampler.appspot.com/o/audioBuffers%2FeYgXHDh1CbbBS3loQ9sommDMCyM2%2FtestTitle?alt=media&token=5ef0e41e-7928-4e60-8f73-e33af6626851`)
         //     .success((itemObject)=>{
@@ -121,15 +125,11 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         let storage = firebase.storage();
         console.log("made storage variable");
         console.log("making storageRef variable");
-    //manual
-        // let storageRef = storage.ref(`audioBuffers/eYgXHDh1CbbBS3loQ9sommDMCyM2/testTitle`);
+    
     //dynamic    
         let storageRef = storage.ref(`audioBuffers/${user}/${sampleTitle}`);
-        // let storageRef = storage.ref(`audioBuffers/eYgXHDh1CbbBS3loQ9sommDMCyM2%2F/testTitle`);
         console.log("made storageRef variable");
-
         console.log("trying to get downloadURL");
-
         storageRef.getDownloadURL().then(function(url) {
           // `url` is the download URL for 'images/stars.jpg'
           console.log("tried to get downloadURL", url);
@@ -137,8 +137,8 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
           var xhr = new XMLHttpRequest();
           xhr.responseType = 'blob';
           xhr.onload = function(event) {
-            var blob = xhr.response;
-            console.log("xhr.response", xhr.response);
+            blob = xhr.response;
+            console.log("blob", blob);
           };
           xhr.open('GET', url);
           xhr.send();
@@ -154,6 +154,11 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         //dynamically
         // let storageRef = storage.ref(`audioBuffers/${user}/${sampleTitle}`);
         
+    };
+
+
+    DatabaseFactory.retrieveBlob = ()=>{
+        return blob;
     };
 
 

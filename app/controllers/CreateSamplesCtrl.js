@@ -13,6 +13,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	var rec = null;
 	var newSource = null;
 	var newBuffer = null;
+	let arrayBuffer = null;
 
 	//video file submission handler
 	$("#userFileInput").change(function() {
@@ -125,7 +126,36 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	};
 
 	$scope.getSampleWav = ()=>{
-		Database.getSampleWav("testTitle");
+		Database.downloadSampleWav("testTitle");
+	};
+
+
+
+
+	$scope.decodeAndPlaySample = ()=>{
+		let blob = Database.retrieveBlob();
+		console.log("blob", blob);
+
+		let reader = new FileReader();
+		reader.readAsArrayBuffer(blob);
+		reader.onload = (e)=>{
+			console.log("e.target.result", e.target.result);
+			arrayBuffer = e.target.result;
+			
+
+
+
+			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
+				console.log("decodedData", decodedData);
+				let decodedDataSourceNode = AUD_CTX.createBufferSource();
+				decodedDataSourceNode.buffer = decodedData;
+				decodedDataSourceNode.connect(AUD_CTX.destination);
+			    decodedDataSourceNode.start(0);
+			 // use the decoded data here
+			});
+		};
+
+
 	};
 
 	// $scope.getSampleWav = ()=>{
