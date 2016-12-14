@@ -1,26 +1,23 @@
 "use strict";
-app.controller('AssignSamplesCtrl', function($scope, Database){
+app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory){
 	$scope.greeting = "Assign Samples Controller Connected";
 
 
 
 	let arrayBuffer = null;
-	let sampleBuffer = null;
+	let bufferToBeAssigned = null;
 
 
 
 	$scope.sampleTitleQuery = "";
 
 
-
+//sample retrieval logic
+//****************************************************
 	$scope.getSampleWav = ()=>{
 		Database.downloadSampleWav($scope.sampleTitleQuery);
 		// $scope.decodeSample(); 
 	};
-
-
-
-
 
 //want this to be triggered through a ".then()" attached to Database.downloadSampleWav, but for now I'll tie it to a button in the dom because that function does not yet return a promise
 	$scope.decodeSample = ()=>{
@@ -32,20 +29,55 @@ app.controller('AssignSamplesCtrl', function($scope, Database){
 			// console.log("e.target.result", e.target.result);
 			arrayBuffer = e.target.result;
 			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
-				sampleBuffer = decodedData;
+				bufferToBeAssigned = decodedData;
+				console.log("blob decoded");
 			});
 		};
 	};
 
 	$scope.playSample = ()=>{
 		let sampleSourceNode = AUD_CTX.createBufferSource();
-		sampleSourceNode.buffer = sampleBuffer;
+		sampleSourceNode.buffer = bufferToBeAssigned;
 		sampleSourceNode.connect(AUD_CTX.destination);
 	    sampleSourceNode.start(0);
+	};
+//****************************************************
+
+
+
+
+
+
+
+
+
+//sample assignment logic
+//****************************************************
+
+	$scope.channelSelect = null;
+
+	$scope.assignSample = ()=>{
+		if ($scope.channelSelect) {
+			PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
+		}
+		console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+//****************************************************
 
 
 

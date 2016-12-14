@@ -6,76 +6,60 @@ app.factory("PatchFactory", ()=>{
 
 
 	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
-	let currentPatch = {
-
-
-		//object form, patch.channels.forEach didn't like it
-		// channels: {
-
-		// 	channel0: 
-		// 		{
-		// 			channelNum: 0,
-		// 			sourceOsc: null,
-		// 			gain: null,
-		// 			gainValue: 1
-		// 		},
-		// 	channel1: 
-		// 		{
-		// 			channelNum: 1,
-		// 			sourceOsc: null,
-		// 			gain: null,
-		// 			gainValue: 0.5
-		// 		}
-		// }
-
-
-
-
+	PatchFactory.currentPatch = {
 		channels: [
 
 			{
+				sampleBuffer: null,
 				channelNum: 0,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 1,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 2,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 3,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 4,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 5,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 6,
 				sourceOsc: null,
 				gain: null,
 				gainValue: 1
 			},
 			{
+				sampleBuffer: null,
 				channelNum: 7,
 				sourceOsc: null,
 				gain: null,
@@ -84,85 +68,12 @@ app.factory("PatchFactory", ()=>{
 		]
 
 
-		// chan_0: {
-		// 	osc: null,
-		// 	gain: null,
-		// 	gainValue: 1
-
-		// }
-		// let chan_0 = currentPatch.chan_0; 
-
-		//nodes
-
-
-		//path(excluding audio source)
-		// chan_0.gain0.connect(AUD_CTX.destination);
-
-
-		//node values
-
-		// channels.push
 
 	};
 
 
-
-
-	// let currentPatch = {
-
-	// 	channels: [
-
-	// 		{
-	// 			channelNum: 0,
-	// 			sourceOsc: null,
-	// 			gain: null,
-	// 			gainValue: 1
-	// 		},
-	// 		{
-	// 			channelNum: 1,
-	// 			sourceOsc: null,
-	// 			gain: null,
-	// 			gainValue: 0.5
-	// 		}
-	// 	]
-
-
-	// 	// chan_0: {
-	// 	// 	osc: null,
-	// 	// 	gain: null,
-	// 	// 	gainValue: 1
-
-	// 	// }
-	// 	// let chan_0 = currentPatch.chan_0; 
-
-	// 	//nodes
-
-
-	// 	//path(excluding audio source)
-	// 	// chan_0.gain0.connect(AUD_CTX.destination);
-
-
-	// 	//node values
-
-	// 	// channels.push
-
-	// };
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
 	PatchFactory.getCurrentPatch = ()=>{
-		return currentPatch;	
+		return PatchFactory.currentPatch;	
 	};
 
 
