@@ -61,6 +61,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory){
 			PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
 		}
 		console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
 
