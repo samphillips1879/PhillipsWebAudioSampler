@@ -22,6 +22,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 	// render the video in view
 	function processVideoFile(file) {
+		console.log("processVideoFile running");
 		Database.uploadVideoToStorageBucket(file, "Title input manually through code");
 	}
 
@@ -40,15 +41,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	let setupForSampleCapture = ()=>{
 		console.log("setupForSampleCapture triggered");
 		// let videoEl = $('#userVideo')[0];
-
 		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
 		console.log("source", source);
 		source.connect(AUD_CTX.destination);
-
-
-
 		rec = new Recorder(source);
-		
 		console.log("source established, path initialized: source -> destination");
 		// videoEl.play();
 		// console.log("video started");
@@ -75,12 +71,30 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	function createNewBuffer( buffers ) {
 	    // newSource = AUD_CTX.createBufferSource();
 	    newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
+	 //    console.log("trying to save blank buffer");
+	 //    Database.postSampleToFB(newBuffer, "test title")
+		// .then((dbObject)=>{
+		// 	console.log("dbObject", dbObject);
+		// });
+		// let channel0Data = buffers[0];
+		// console.log("channel0Data", channel0Data);
+		// Database.postChannelDataToFB(channel0Data)
+		// .then((obj)=>{
+		// 	console.log("channel 0 firebase key", obj);
+		// 	let channel1Data = buffers[1];
+		// 	console.log("channel1Data", channel0Data);
+		// 	Database.postChannelDataToFB(channel1Data)
+		// 	.then((obj)=>{
+		// 		console.log("channel 1 firebase key", obj);
+		// 	});
+		// });
 	    newBuffer.getChannelData(0).set(buffers[0]);
 	    newBuffer.getChannelData(1).set(buffers[1]);
 	    // newSource.buffer = newBuffer;
 
 	    // newSource.connect( AUD_CTX.destination );
 	    console.log("newBuffer", newBuffer);
+	    // console.log("newBuffer.getChannelData(0)", newBuffer.getChannelData(0));
 	}
 
 	//play back the current sample recording
@@ -91,6 +105,54 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		newSource.connect(AUD_CTX.destination);
 	    newSource.start(0);
 	};
+
+	$scope.saveSampleWav = ()=>{
+		console.log("save sample initialized");
+		rec.exportWAV((blob)=>{
+			Database.postNewSampleWav(blob, "testTitle");
+		});
+
+		// let bufferInObject = {
+		// 	audioBuffer: newBuffer
+		// };
+		// Database.postNewSample(bufferInObject)
+		// Database.postNewSample({hello: "world"})
+		// Database.postNewSample(newBuffer, "test title")
+		// Database.postSampleToFB(newBuffer, "test title")
+		// .then((dbObject)=>{
+		// 	console.log("dbObject", dbObject);
+		// });
+	};
+
+	$scope.getSampleWav = ()=>{
+		Database.getSampleWav("testTitle");
+	};
+
+	// $scope.getSampleWav = ()=>{
+	// 	Database.getSampleWav()
+	// 	.then((sampleWav)=>{
+	// 		console.log("got sampleWav");
+	// 		console.log("sampleWav", sampleWav);
+	// 	});
+	// };
+
+	// $scope.getBuffer = ()=>{
+	// 	let titleSearch = $("#bufferTitleInput").val();
+	// 	Database.getBuffer(titleSearch)
+	// 	.then((gotten)=>{
+	// 		console.log("gotten buffer", gotten);
+	// 	});
+	// };
+
+	// $scope.getBufferFailedAttempt = ()=>{
+	// 	let keySearch = $("#bufferKeyInput").val();
+	// 	Database.tryToGetBuffer(keySearch)
+	// 	.then((gotten)=>{
+	// 		console.log("gotten buffer", gotten);
+	// 	});
+	// };
+
+
 });
 
 

@@ -6,6 +6,17 @@
 	<button id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="btn-default">During playback, click here to begin capturing an audio sample from your video</button>
 	<button ng-click="endSampleCapture()" class="btn-default">Click here to set the end of your audio sample</button>
 	<button ng-click="previewSample()" class="btn-default">Click here to preview sample</button>
+	<button ng-click="saveSampleWav()" class="btn-default">Click here to save your new sample</button>
+
+
+
+	<!-- <input type="text" id="bufferKeyInput" placeholder="insert buffer key here">
+	<button ng-click="getBufferFailedAttempt()">get buffer after inputting key above</button> -->
+	<input type="text" id="bufferTitleInput" placeholder="insert sample title here">
+	<button ng-click="getSampleWav()">click to get your sample after inputting title</button>
+
+
+
 </div>
 <div id="userVideoHolder">
 	<video crossOrigin="anonymous" id="userVideo" controls="controls"></video>
