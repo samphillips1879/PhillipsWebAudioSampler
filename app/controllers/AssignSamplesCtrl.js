@@ -8,10 +8,16 @@ app.controller('AssignSamplesCtrl', function($scope, Database){
 	let sampleBuffer = null;
 
 
+
+	$scope.sampleTitleQuery = "";
+
+
+
 	$scope.getSampleWav = ()=>{
-		Database.downloadSampleWav("testTitle");
+		Database.downloadSampleWav($scope.sampleTitleQuery);
 		// $scope.decodeSample(); 
 	};
+
 
 
 

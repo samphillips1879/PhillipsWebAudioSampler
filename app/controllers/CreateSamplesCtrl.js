@@ -15,6 +15,23 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	var newBuffer = null;
 	let arrayBuffer = null;
 
+
+
+
+
+	$scope.sampleTitle = "";
+
+
+
+
+
+
+
+
+
+
+
+
 	//video file submission handler
 	$("#userFileInput").change(function() {
 	    console.log("this.files", this.files);
@@ -91,7 +108,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.saveSampleWav = ()=>{
 		console.log("save sample initialized");
 		rec.exportWAV((blob)=>{
-			Database.postNewSampleWav(blob, "testTitle");
+			Database.postNewSampleWav(blob, $scope.sampleTitle);
 		});
 	};
 
