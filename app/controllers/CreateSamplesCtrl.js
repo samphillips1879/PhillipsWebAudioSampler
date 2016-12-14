@@ -55,6 +55,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	//start recording sample
 	$scope.beginSampleCapture = ()=>{	
 			console.log("sample capture starting");
+			rec.clear();
 			rec.record();
 		};
 
@@ -69,33 +70,13 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 	//recorderJs documentation: 
 	// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
+
+	//this buffer is only used for the user to preview their sample. What actually gets saved to the storage bucket is a .wav file that contains the same audio information
 	function createNewBuffer( buffers ) {
-	    // newSource = AUD_CTX.createBufferSource();
 	    newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
-	 //    console.log("trying to save blank buffer");
-	 //    Database.postSampleToFB(newBuffer, "test title")
-		// .then((dbObject)=>{
-		// 	console.log("dbObject", dbObject);
-		// });
-		// let channel0Data = buffers[0];
-		// console.log("channel0Data", channel0Data);
-		// Database.postChannelDataToFB(channel0Data)
-		// .then((obj)=>{
-		// 	console.log("channel 0 firebase key", obj);
-		// 	let channel1Data = buffers[1];
-		// 	console.log("channel1Data", channel0Data);
-		// 	Database.postChannelDataToFB(channel1Data)
-		// 	.then((obj)=>{
-		// 		console.log("channel 1 firebase key", obj);
-		// 	});
-		// });
 	    newBuffer.getChannelData(0).set(buffers[0]);
 	    newBuffer.getChannelData(1).set(buffers[1]);
-	    // newSource.buffer = newBuffer;
-
-	    // newSource.connect( AUD_CTX.destination );
 	    console.log("newBuffer", newBuffer);
-	    // console.log("newBuffer.getChannelData(0)", newBuffer.getChannelData(0));
 	}
 
 	//play back the current sample recording
@@ -112,75 +93,39 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		rec.exportWAV((blob)=>{
 			Database.postNewSampleWav(blob, "testTitle");
 		});
-
-		// let bufferInObject = {
-		// 	audioBuffer: newBuffer
-		// };
-		// Database.postNewSample(bufferInObject)
-		// Database.postNewSample({hello: "world"})
-		// Database.postNewSample(newBuffer, "test title")
-		// Database.postSampleToFB(newBuffer, "test title")
-		// .then((dbObject)=>{
-		// 	console.log("dbObject", dbObject);
-		// });
-	};
-
-	$scope.getSampleWav = ()=>{
-		Database.downloadSampleWav("testTitle");
 	};
 
 
 
 
-	$scope.decodeAndPlaySample = ()=>{
-		let blob = Database.retrieveBlob();
-		console.log("blob", blob);
-
-		let reader = new FileReader();
-		reader.readAsArrayBuffer(blob);
-		reader.onload = (e)=>{
-			console.log("e.target.result", e.target.result);
-			arrayBuffer = e.target.result;
-			
-
-
-
-			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
-				console.log("decodedData", decodedData);
-				let decodedDataSourceNode = AUD_CTX.createBufferSource();
-				decodedDataSourceNode.buffer = decodedData;
-				decodedDataSourceNode.connect(AUD_CTX.destination);
-			    decodedDataSourceNode.start(0);
-			 // use the decoded data here
-			});
-		};
-
-
-	};
-
+//////////////////
+//this section being moved to AssignSamplesCtrl
 	// $scope.getSampleWav = ()=>{
-	// 	Database.getSampleWav()
-	// 	.then((sampleWav)=>{
-	// 		console.log("got sampleWav");
-	// 		console.log("sampleWav", sampleWav);
-	// 	});
+	// 	Database.downloadSampleWav("testTitle");
 	// };
 
-	// $scope.getBuffer = ()=>{
-	// 	let titleSearch = $("#bufferTitleInput").val();
-	// 	Database.getBuffer(titleSearch)
-	// 	.then((gotten)=>{
-	// 		console.log("gotten buffer", gotten);
-	// 	});
-	// };
 
-	// $scope.getBufferFailedAttempt = ()=>{
-	// 	let keySearch = $("#bufferKeyInput").val();
-	// 	Database.tryToGetBuffer(keySearch)
-	// 	.then((gotten)=>{
-	// 		console.log("gotten buffer", gotten);
-	// 	});
+
+
+	// $scope.decodeAndPlaySample = ()=>{
+	// 	let blob = Database.retrieveBlob();
+	// 	console.log("blob", blob);
+	// 	let reader = new FileReader();
+	// 	reader.readAsArrayBuffer(blob);
+	// 	reader.onload = (e)=>{
+	// 		console.log("e.target.result", e.target.result);
+	// 		arrayBuffer = e.target.result;
+	// 		AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
+	// 			console.log("decodedData", decodedData);
+	// 			let decodedDataSourceNode = AUD_CTX.createBufferSource();
+	// 			decodedDataSourceNode.buffer = decodedData;
+	// 			decodedDataSourceNode.connect(AUD_CTX.destination);
+	// 		    decodedDataSourceNode.start(0);
+	// 		});
+	// 	};
 	// };
+///////////////////
+
 
 
 });
