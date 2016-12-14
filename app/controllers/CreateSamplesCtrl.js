@@ -2,199 +2,193 @@
 app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.greeting = "Create Samples Controller Connected";
 
-
+	//variable declarations
+	let conSampleRate = AUD_CTX.sampleRate;
 	let the_url;
 	// let videoEl = $('#userVideo')[0];
 	let source = null;
 	let sourceAnalyser = null;
 	let sample = null;
 	let samplesArray = [];
-	let conSampleRate = AUD_CTX.sampleRate;
-	var rec;
+	var rec = null;
+	var newSource = null;
+	var newBuffer = null;
+	let arrayBuffer = null;
 
-
-
-
-
-
-
-
-	//VIDEO FILE INPUT and upload HANDLING*********************
-	// detect a change in file input
+	//video file submission handler
 	$("#userFileInput").change(function() {
-	    // will log a FileList object
 	    console.log("this.files", this.files);
-	    // grab the first file in the FileList object and pass it to the function
-	    renderFile(this.files[0]);
+	    processVideoFile(this.files[0]);
 	});
 
-
-
-
-
-
-
-
-
 	// render the video in view
-	function renderFile(file) {
-		Database.uploadVideoToDatabase(file, "Title input manually through code");
+	function processVideoFile(file) {
+		console.log("processVideoFile running");
+		Database.uploadVideoToStorageBucket(file, "Title input manually through code");
 	}
 
-
+	//setup web audio path once video loaded
 	$('video').on('loadeddata', function (e) {
 	    console.log("video loaded");
 	    setupForSampleCapture();
 	});
 
-	// $('video').on("ended", ()=>{
-	// 		$scope.endSampleCapture();
-	// });
+	//catch to stop sample capture if video ends
+	$('video').on("ended", ()=>{
+			$scope.endSampleCapture();
+	});
 
-
+	//create web audio path
 	let setupForSampleCapture = ()=>{
 		console.log("setupForSampleCapture triggered");
 		// let videoEl = $('#userVideo')[0];
-
 		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
 		console.log("source", source);
 		source.connect(AUD_CTX.destination);
-
-
-
 		rec = new Recorder(source);
-		
 		console.log("source established, path initialized: source -> destination");
 		// videoEl.play();
 		// console.log("video started");
 	};
 
 
-
+	//start recording sample
 	$scope.beginSampleCapture = ()=>{	
 			console.log("sample capture starting");
 			rec.record();
 		};
 
-
+	//stop recording sample
 	$scope.endSampleCapture = ()=>{
 		console.log("sample capture ending");
-
-//recorderJs
-///////
 		rec.stop();
-
-		// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
-
-		function getBufferCallback( buffers ) {
-		    var newSource = AUD_CTX.createBufferSource();
-		    var newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
-		    newBuffer.getChannelData(0).set(buffers[0]);
-		    newBuffer.getChannelData(1).set(buffers[1]);
-		    newSource.buffer = newBuffer;
-
-		    newSource.connect( AUD_CTX.destination );
-		    newSource.start(0);
-		}
-
-
-		rec.getBuffer(getBufferCallback);
-///////
-
-
 		$('#userVideo')[0].pause();
-		
-
+		rec.getBuffer(createNewBuffer);
 		console.log("sample capture ended");
-		
+	};
+
+	//recorderJs documentation: 
+	// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
+	function createNewBuffer( buffers ) {
+	    // newSource = AUD_CTX.createBufferSource();
+	    newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
+	 //    console.log("trying to save blank buffer");
+	 //    Database.postSampleToFB(newBuffer, "test title")
+		// .then((dbObject)=>{
+		// 	console.log("dbObject", dbObject);
+		// });
+		// let channel0Data = buffers[0];
+		// console.log("channel0Data", channel0Data);
+		// Database.postChannelDataToFB(channel0Data)
+		// .then((obj)=>{
+		// 	console.log("channel 0 firebase key", obj);
+		// 	let channel1Data = buffers[1];
+		// 	console.log("channel1Data", channel0Data);
+		// 	Database.postChannelDataToFB(channel1Data)
+		// 	.then((obj)=>{
+		// 		console.log("channel 1 firebase key", obj);
+		// 	});
+		// });
+	    newBuffer.getChannelData(0).set(buffers[0]);
+	    newBuffer.getChannelData(1).set(buffers[1]);
+	    // newSource.buffer = newBuffer;
+
+	    // newSource.connect( AUD_CTX.destination );
+	    console.log("newBuffer", newBuffer);
+	    // console.log("newBuffer.getChannelData(0)", newBuffer.getChannelData(0));
+	}
+
+	//play back the current sample recording
+	$scope.previewSample = ()=>{
+		console.log("previewing sample");
+		newSource = AUD_CTX.createBufferSource();
+		newSource.buffer = newBuffer;
+		newSource.connect(AUD_CTX.destination);
+	    newSource.start(0);
+	};
+
+	$scope.saveSampleWav = ()=>{
+		console.log("save sample initialized");
+		rec.exportWAV((blob)=>{
+			Database.postNewSampleWav(blob, "testTitle");
+		});
+
+		// let bufferInObject = {
+		// 	audioBuffer: newBuffer
+		// };
+		// Database.postNewSample(bufferInObject)
+		// Database.postNewSample({hello: "world"})
+		// Database.postNewSample(newBuffer, "test title")
+		// Database.postSampleToFB(newBuffer, "test title")
+		// .then((dbObject)=>{
+		// 	console.log("dbObject", dbObject);
+		// });
+	};
+
+	$scope.getSampleWav = ()=>{
+		Database.downloadSampleWav("testTitle");
 	};
 
 
-	// var timeout, clicker = $('#sampleCaptureBtn');
 
-	// $('#sampleCaptureBtn').mousedown(function () {
-	//     $scope.beginSampleCapture(); 
-	//     timeout = setInterval(function () {
-	//         //do same thing here again
-	//         $scope.endSampleCapture();
-	//         $scope.beginSampleCapture(); 
 
-	//     }, 1000 / conSampleRate);
+	$scope.decodeAndPlaySample = ()=>{
+		let blob = Database.retrieveBlob();
+		console.log("blob", blob);
 
-	//     return false;
-	// });
-	// $('#sampleCaptureBtn').mouseup(function () {
-	// 	$scope.endSampleCapture();
-	//     clearInterval(timeout);
-	//     return false;
-	// });
-	// $('#sampleCaptureBtn').mouseout(function () {
-	// 	$scope.endSampleCapture();
-	//     clearInterval(timeout);
-	//     return false;
-	// });   
+		let reader = new FileReader();
+		reader.readAsArrayBuffer(blob);
+		reader.onload = (e)=>{
+			console.log("e.target.result", e.target.result);
+			arrayBuffer = e.target.result;
+			
 
 
 
+			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
+				console.log("decodedData", decodedData);
+				let decodedDataSourceNode = AUD_CTX.createBufferSource();
+				decodedDataSourceNode.buffer = decodedData;
+				decodedDataSourceNode.connect(AUD_CTX.destination);
+			    decodedDataSourceNode.start(0);
+			 // use the decoded data here
+			});
+		};
 
 
+	};
+
+	// $scope.getSampleWav = ()=>{
+	// 	Database.getSampleWav()
+	// 	.then((sampleWav)=>{
+	// 		console.log("got sampleWav");
+	// 		console.log("sampleWav", sampleWav);
+	// 	});
+	// };
+
+	// $scope.getBuffer = ()=>{
+	// 	let titleSearch = $("#bufferTitleInput").val();
+	// 	Database.getBuffer(titleSearch)
+	// 	.then((gotten)=>{
+	// 		console.log("gotten buffer", gotten);
+	// 	});
+	// };
+
+	// $scope.getBufferFailedAttempt = ()=>{
+	// 	let keySearch = $("#bufferKeyInput").val();
+	// 	Database.tryToGetBuffer(keySearch)
+	// 	.then((gotten)=>{
+	// 		console.log("gotten buffer", gotten);
+	// 	});
+	// };
 
 
-// 		// SAMPLING LOGIC
-
-		// var timeout, clicker = $('#sampleCaptureBtn');
-
-		// $('#Clicker').mousedown(function () {
-		//     //do something here
-		//     timeout = setInterval(function () {
-		//         //do same thing here again
-		//     }, 1000 / conSampleRate);
-
-		//     return false;
-		// });
-		// $('#Clicker').mouseup(function () {
-		//     clearInterval(timeout);
-		//     return false;
-		// });
-		// $('#Clicker').mouseout(function () {
-		//     clearInterval(timeout);
-		//     return false;
-		// });
-
-
-
-
-
-
-
-// 		//this is the default length of the analyser's.... buffer?
-// 		// sourceAnalyser.fftSize = 2048;
-
-
-
-// 		// sample = new Float32Array(sourceAnalyser.frequencyBinCount);
-// 		// sourceAnalyser.getFloatFrequencyData(sample);
-// 		// console.log("sample", sample);
-// 		// samplesArray = samplesArray.concat(sample);
-// 		// console.log("samplesArray", samplesArray);
+});
 
 
 
 
-
-
-
-// 		// sourceAnalyser = null;
-
-
-// 	};
-
-
-
-
-
-
-
+//Failed attempt at manually reproducing recorderJs' functionality; that is, taking the raw audio PCM data and converting it into an audioBuffer that can be played back via an audioBufferSourceNode
 	// $scope.beginSampleCapture = ()=>{
 	// 		console.log("setting up path, inserting analyser");
 	// 		// source = AUD_CTX.createMediaElementSource(videoEl);
@@ -205,8 +199,6 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// 		console.log("path complete: source -> analyser -> destination");	
 	// 		console.log("sample capture started");
 	// 	};
-
-
 	// $scope.endSampleCapture = ()=>{
 	// 	console.log("sample capture ending");
 	// 	$('#userVideo')[0].pause();
@@ -215,17 +207,6 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// 	console.log("sample", sample);
 	// 	samplesArray = samplesArray.concat(sample);
 	// 	console.log("samplesArray", samplesArray);
-
 	// 	sourceAnalyser = null;
-
-
-		
 	// 	sourceAnalyser = null;
-		
 	// };
-
-});
-
-
-
-
