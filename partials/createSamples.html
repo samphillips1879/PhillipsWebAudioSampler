@@ -8,30 +8,13 @@
 
 
 
-<!-- <h4>sample iframe (embed) urls for development stage</h4>
-<h6>wrap the text in iframe tags before trying to grab video</h6>
-<p>
-	<span>donald trump china video</span><br>
-	width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?rel=0" frameborder="0" allowfullscreen
-</p>
-
-<p>
-	<span>wilhelm scream</span><br>
-	width="560" height="315" src="https://www.youtube.com/embed/xn6hhrX34Pw?rel=0" frameborder="0" allowfullscreen
-</p> -->
 
 <div id="creationInputs">
 	<h5><i>Please select the video you wish to sample (for now, please upload small files. Like, less than 20mb if possible)</i></h5>
 	<input id="userFileInput" type="file">
-	<!-- <input id="userVideoTitle" type="text"> -->
-	<!-- <button ng-click="setupForSampleCapture()" class="btn-default">after your video loads, click here to start playback</button> -->
-
-
-	<!-- <button id="sampleCaptureBtn" class="btn-default">During playback, click here to begin capturing an audio sample from your video</button> -->
-
 	<button id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="btn-default">During playback, click here to begin capturing an audio sample from your video</button>
-
 	<button ng-click="endSampleCapture()" class="btn-default">Click here to set the end of your audio sample</button>
+	<button ng-click="previewSample()" class="btn-default">Click here to preview sample</button>
 
 	
 

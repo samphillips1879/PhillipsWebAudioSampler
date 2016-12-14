@@ -3,14 +3,16 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.greeting = "Create Samples Controller Connected";
 
 
+	let conSampleRate = AUD_CTX.sampleRate;
 	let the_url;
 	// let videoEl = $('#userVideo')[0];
 	let source = null;
 	let sourceAnalyser = null;
 	let sample = null;
 	let samplesArray = [];
-	let conSampleRate = AUD_CTX.sampleRate;
-	var rec;
+	var rec = null;
+	var newSource = null;
+	var newBuffer = null;
 
 
 
@@ -19,13 +21,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 
-	//VIDEO FILE INPUT and upload HANDLING*********************
-	// detect a change in file input
+	//video file submission handler
 	$("#userFileInput").change(function() {
-	    // will log a FileList object
 	    console.log("this.files", this.files);
-	    // grab the first file in the FileList object and pass it to the function
-	    renderFile(this.files[0]);
+	    processVideoFile(this.files[0]);
 	});
 
 
@@ -37,7 +36,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 
 	// render the video in view
-	function renderFile(file) {
+	function processVideoFile(file) {
 		Database.uploadVideoToDatabase(file, "Title input manually through code");
 	}
 
@@ -79,122 +78,40 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 	$scope.endSampleCapture = ()=>{
 		console.log("sample capture ending");
-
-//recorderJs
-///////
 		rec.stop();
-
-		// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
-
-		function getBufferCallback( buffers ) {
-		    var newSource = AUD_CTX.createBufferSource();
-		    var newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
-		    newBuffer.getChannelData(0).set(buffers[0]);
-		    newBuffer.getChannelData(1).set(buffers[1]);
-		    newSource.buffer = newBuffer;
-
-		    newSource.connect( AUD_CTX.destination );
-		    newSource.start(0);
-		}
-
-
-		rec.getBuffer(getBufferCallback);
-///////
-
-
 		$('#userVideo')[0].pause();
-		
-
+		rec.getBuffer(createNewBuffer);
 		console.log("sample capture ended");
-		
+	};
+
+	//recorderJs documentation: 
+	// This will pass the recorded stereo buffer (as an array of two Float32Arrays, for the separate left and right channels) to the callback. It can be played back by creating a new source buffer and setting these buffers as the separate channel data:
+	function createNewBuffer( buffers ) {
+	    // newSource = AUD_CTX.createBufferSource();
+	    newBuffer = AUD_CTX.createBuffer( 2, buffers[0].length, AUD_CTX.sampleRate );
+	    newBuffer.getChannelData(0).set(buffers[0]);
+	    newBuffer.getChannelData(1).set(buffers[1]);
+	    // newSource.buffer = newBuffer;
+
+	    // newSource.connect( AUD_CTX.destination );
+	    console.log("newBuffer", newBuffer);
+	}
+
+
+	$scope.previewSample = ()=>{
+		console.log("previewing sample");
+		newSource = AUD_CTX.createBufferSource();
+		newSource.buffer = newBuffer;
+		newSource.connect(AUD_CTX.destination);
+	    newSource.start(0);
 	};
 
 
-	// var timeout, clicker = $('#sampleCaptureBtn');
-
-	// $('#sampleCaptureBtn').mousedown(function () {
-	//     $scope.beginSampleCapture(); 
-	//     timeout = setInterval(function () {
-	//         //do same thing here again
-	//         $scope.endSampleCapture();
-	//         $scope.beginSampleCapture(); 
-
-	//     }, 1000 / conSampleRate);
-
-	//     return false;
-	// });
-	// $('#sampleCaptureBtn').mouseup(function () {
-	// 	$scope.endSampleCapture();
-	//     clearInterval(timeout);
-	//     return false;
-	// });
-	// $('#sampleCaptureBtn').mouseout(function () {
-	// 	$scope.endSampleCapture();
-	//     clearInterval(timeout);
-	//     return false;
-	// });   
+	
 
 
 
-
-
-
-
-// 		// SAMPLING LOGIC
-
-		// var timeout, clicker = $('#sampleCaptureBtn');
-
-		// $('#Clicker').mousedown(function () {
-		//     //do something here
-		//     timeout = setInterval(function () {
-		//         //do same thing here again
-		//     }, 1000 / conSampleRate);
-
-		//     return false;
-		// });
-		// $('#Clicker').mouseup(function () {
-		//     clearInterval(timeout);
-		//     return false;
-		// });
-		// $('#Clicker').mouseout(function () {
-		//     clearInterval(timeout);
-		//     return false;
-		// });
-
-
-
-
-
-
-
-// 		//this is the default length of the analyser's.... buffer?
-// 		// sourceAnalyser.fftSize = 2048;
-
-
-
-// 		// sample = new Float32Array(sourceAnalyser.frequencyBinCount);
-// 		// sourceAnalyser.getFloatFrequencyData(sample);
-// 		// console.log("sample", sample);
-// 		// samplesArray = samplesArray.concat(sample);
-// 		// console.log("samplesArray", samplesArray);
-
-
-
-
-
-
-
-// 		// sourceAnalyser = null;
-
-
-// 	};
-
-
-
-
-
-
-
+//Failed attempt at manually reproducing recorderJs' functionality; that is, taking the raw audio PCM data and converting it into an audioBuffer that can be played back via an audioBufferSourceNode
 	// $scope.beginSampleCapture = ()=>{
 	// 		console.log("setting up path, inserting analyser");
 	// 		// source = AUD_CTX.createMediaElementSource(videoEl);
@@ -205,8 +122,6 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// 		console.log("path complete: source -> analyser -> destination");	
 	// 		console.log("sample capture started");
 	// 	};
-
-
 	// $scope.endSampleCapture = ()=>{
 	// 	console.log("sample capture ending");
 	// 	$('#userVideo')[0].pause();
@@ -215,13 +130,8 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// 	console.log("sample", sample);
 	// 	samplesArray = samplesArray.concat(sample);
 	// 	console.log("samplesArray", samplesArray);
-
 	// 	sourceAnalyser = null;
-
-
-		
 	// 	sourceAnalyser = null;
-		
 	// };
 
 });
