@@ -3,9 +3,6 @@
 app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 	// console.log("URL", FBCreds.URL);
     let DatabaseFactory = {};
-
-
-
     let fbStorage = firebase.storage();
 
 
@@ -45,35 +42,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-
-
-    // DatabaseFactory.storageRef = firebase.storage.ref("videos/file0.mp4");
-    // // var fileUpload = document.getElementById("fileUpload");
-    // fileUpload.on(‘change’, function(evt) {
-    //   var firstFile = evt.target.file[0]; // get the first file uploaded
-    //   var uploadTask = storageRef.put(firstFile);
-    // });
-
-
-    // DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
-
-    //     let user = AuthFactory.getUser();
-    //     // console.log("videoFile", videoFile);
-    //     var storage = firebase.storage();
-    //     // saves video to firebase storage userVideos folder with a name equivalent to the current user
-    //     var storageRef = storage.ref(`userVideos/${user}`);
-    //     console.log("storageRef", storageRef);
-    //     return new Promise((resolve,reject)=>{
-    //         storageRef.put(videoFile)
-    //     })
-    //     .success((successReturnedObject)=>{
-    //         resolve(successReturnedObject);
-    //     });
-    //     .error((error)=>{
-    //         reject(error);
-    //     });
-    // };
-
+    //some slightly poor form here, I know, as dom manipulation should be separate from the factory. However, it works for now, and I intend to clean it up and modularize it appropriately later.
      DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
         let user = AuthFactory.getUser();
         // console.log("videoFile", videoFile);

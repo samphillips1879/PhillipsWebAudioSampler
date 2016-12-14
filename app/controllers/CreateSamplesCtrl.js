@@ -2,7 +2,7 @@
 app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	$scope.greeting = "Create Samples Controller Connected";
 
-
+	//variable declarations
 	let conSampleRate = AUD_CTX.sampleRate;
 	let the_url;
 	// let videoEl = $('#userVideo')[0];
@@ -14,43 +14,29 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	var newSource = null;
 	var newBuffer = null;
 
-
-
-
-
-
-
-
 	//video file submission handler
 	$("#userFileInput").change(function() {
 	    console.log("this.files", this.files);
 	    processVideoFile(this.files[0]);
 	});
 
-
-
-
-
-
-
-
-
 	// render the video in view
 	function processVideoFile(file) {
 		Database.uploadVideoToDatabase(file, "Title input manually through code");
 	}
 
-
+	//setup web audio path once video loaded
 	$('video').on('loadeddata', function (e) {
 	    console.log("video loaded");
 	    setupForSampleCapture();
 	});
 
-	// $('video').on("ended", ()=>{
-	// 		$scope.endSampleCapture();
-	// });
+	//catch to stop sample capture if video ends
+	$('video').on("ended", ()=>{
+			$scope.endSampleCapture();
+	});
 
-
+	//create web audio path
 	let setupForSampleCapture = ()=>{
 		console.log("setupForSampleCapture triggered");
 		// let videoEl = $('#userVideo')[0];
@@ -69,13 +55,13 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	};
 
 
-
+	//start recording sample
 	$scope.beginSampleCapture = ()=>{	
 			console.log("sample capture starting");
 			rec.record();
 		};
 
-
+	//stop recording sample
 	$scope.endSampleCapture = ()=>{
 		console.log("sample capture ending");
 		rec.stop();
@@ -97,7 +83,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	    console.log("newBuffer", newBuffer);
 	}
 
-
+	//play back the current sample recording
 	$scope.previewSample = ()=>{
 		console.log("previewing sample");
 		newSource = AUD_CTX.createBufferSource();
@@ -105,9 +91,8 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 		newSource.connect(AUD_CTX.destination);
 	    newSource.start(0);
 	};
+});
 
-
-	
 
 
 
@@ -133,9 +118,3 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	// 	sourceAnalyser = null;
 	// 	sourceAnalyser = null;
 	// };
-
-});
-
-
-
-
