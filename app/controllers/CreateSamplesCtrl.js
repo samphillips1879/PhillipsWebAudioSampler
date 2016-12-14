@@ -22,7 +22,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 
 	// render the video in view
 	function processVideoFile(file) {
-		Database.uploadVideoToDatabase(file, "Title input manually through code");
+		Database.uploadVideoToStorageBucket(file, "Title input manually through code");
 	}
 
 	//setup web audio path once video loaded

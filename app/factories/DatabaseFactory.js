@@ -42,8 +42,8 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-    //some slightly poor form here, I know, as dom manipulation should be separate from the factory. However, it works for now, and I intend to clean it up and modularize it appropriately later.
-     DatabaseFactory.uploadVideoToDatabase = (videoFile, title)=>{
+     DatabaseFactory.uploadVideoToStorageBucket = (videoFile, title)=>{
+        //some slightly poor form here, I know, as dom manipulation should be separate from the factory. However, it works for now, and I intend to clean it up/modularize it appropriately later.
         let user = AuthFactory.getUser();
         // console.log("videoFile", videoFile);
         var storage = firebase.storage();
@@ -52,6 +52,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         console.log("storageRef", storageRef);
         storageRef.put(videoFile)
         .then((thing)=>{
+            //gets a url to the video, hosted in app's storage bucket, and sets it as the source for the userVideo in the dom
             // console.log("thing", thing);
             storageRef.getDownloadURL().then(function(url) {
                 $("#userVideo")[0].src = url;
