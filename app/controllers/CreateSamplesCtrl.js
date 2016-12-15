@@ -1,5 +1,5 @@
 "use strict";
-app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
+app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory){
 	$scope.greeting = "Create Samples Controller Connected";
 
 	//variable declarations
@@ -105,12 +105,49 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database){
 	    newSource.start(0);
 	};
 
-	$scope.saveSampleWav = ()=>{
-		console.log("save sample initialized");
-		rec.exportWAV((blob)=>{
-			Database.postNewSampleWav(blob, $scope.sampleTitle);
+
+
+
+
+
+
+
+
+
+
+
+	$scope.saveSample = ()=>{
+		console.log("saveSample triggered");
+
+
+		let user = AuthFactory.getUser();
+		console.log("user for catalogCard", user);
+		let title = $scope.sampleTitle;
+		let isPublic = true;
+		let catalogCard = {
+			user, title, isPublic
+		};
+
+		Database.postSampleToCatalog(catalogCard)
+		//caution here, catalogId might not actually be the object key. It might be a returned object with a name attribute that is equal to what I'm looking for. 
+		.then((object)=>{
+			// console.log("object", object);
+			console.log("object.name: ", object.name);
+			rec.exportWAV((blob)=>{
+				Database.postNewSampleWav(blob, object.name);
+			});
 		});
-	};
+	};	
+
+
+
+
+	// $scope.saveSampleWav = ()=>{
+	// 	console.log("save sample initialized");
+	// 	rec.exportWAV((blob)=>{
+	// 		Database.postNewSampleWav(blob, $scope.sampleTitle);
+	// 	});
+	// };
 
 
 

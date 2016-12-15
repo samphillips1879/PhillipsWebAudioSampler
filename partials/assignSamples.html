@@ -7,7 +7,8 @@
 
 
 <input type="text" size="40" id="sampleTitleSearchInput" placeholder="search for a sample by title" ng-model="sampleTitleQuery">
-<button ng-click="getSampleWav()">retrieve sample by exact title</button>
+<button ng-click="getSampleCards('public')">browse all publically submitted samples</button>
+<button ng-click="getSampleCards('user')">browse samples you've made</button>
 
 
 <button ng-click="decodeSample()">decode your sample once it has been retrieved</button>
@@ -33,3 +34,50 @@
 </select>
 
 <button ng-click="assignSample()">click to assign your sample to a channel in your current patch</button>
+
+
+
+
+
+<div ng-repeat="card in catalog | filter: sampleTitleQuery">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <!-- <div class="col-xs-1"><input type="checkbox" name=""/></div> -->
+	    <div class="col-xs-4 sampleCatalogCard container">
+	    	<h4 class="col-xs-12">{{card.title}}</h4>
+
+
+
+
+	    <div class="col-xs-1" ng-click="getSampleWav(card.user, card.wavName)"><button class="btn btn-danger">retrieve this sample</button></div>
+
+	    </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
