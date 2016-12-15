@@ -80,6 +80,32 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
+
+
+
+
+
+
+
+
+
+
+
+
+    DatabaseFactory.postSampleToCatalog = (catalogCard)=>{
+        return new Promise((resolve,reject)=>{
+            $http.post(`${FBCreds.URL}/sampleCatalog.json`, angular.toJson(catalogCard))
+            .success((catalogObj)=>{
+                resolve(catalogObj);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
+
+
     DatabaseFactory.postNewSampleWav = (newSample, bufferTitle)=>{
         console.log("posting new sample");
         let user = AuthFactory.getUser();
@@ -102,6 +128,21 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             // });
         });
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     DatabaseFactory.downloadSampleWav = (sampleTitle)=>{
         //this section also is gonna need some proper separation of responsibilities, but right now I gotta reach mvp, so we're just gonna let it be ugly
