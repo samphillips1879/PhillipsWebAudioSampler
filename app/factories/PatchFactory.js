@@ -8,6 +8,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 0,
 				sourceOsc: null,
 				gain: null,
@@ -16,6 +17,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 1,
 				sourceOsc: null,
 				gain: null,
@@ -24,6 +26,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 2,
 				sourceOsc: null,
 				gain: null,
@@ -32,6 +35,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 3,
 				sourceOsc: null,
 				gain: null,
@@ -40,6 +44,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 4,
 				sourceOsc: null,
 				gain: null,
@@ -48,6 +53,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 5,
 				sourceOsc: null,
 				gain: null,
@@ -56,6 +62,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 6,
 				sourceOsc: null,
 				gain: null,
@@ -64,6 +71,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				sampleSource: null,
 				sampleBuffer: null,
+				sampleTitle: null,
 				channelNum: 7,
 				sourceOsc: null,
 				gain: null,
