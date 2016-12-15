@@ -16,6 +16,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 	let arrayBuffer = null;
 
 	$scope.sampleTitle = "";
+	$scope.sampleImage = "";
 
 	//video file submission handler
 	$("#userFileInput").change(function() {
@@ -94,6 +95,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 		console.log("user for catalogCard", user);
 		let title = $scope.sampleTitle;
 		let isPublic = true;
+		let img = $scope.sampleImage;
 		let catalogCard = {
 			user, title, isPublic
 		};
