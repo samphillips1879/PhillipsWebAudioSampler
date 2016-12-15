@@ -10,6 +10,7 @@ app.factory("PatchFactory", ()=>{
 		channels: [
 
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 0,
 				sourceOsc: null,
@@ -17,6 +18,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 1,
 				sourceOsc: null,
@@ -24,6 +26,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 2,
 				sourceOsc: null,
@@ -31,6 +34,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 3,
 				sourceOsc: null,
@@ -38,6 +42,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 4,
 				sourceOsc: null,
@@ -45,6 +50,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 5,
 				sourceOsc: null,
@@ -52,6 +58,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 6,
 				sourceOsc: null,
@@ -59,6 +66,7 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			},
 			{
+				sampleSource: null,
 				sampleBuffer: null,
 				channelNum: 7,
 				sourceOsc: null,

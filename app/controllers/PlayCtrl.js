@@ -17,7 +17,7 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 
 
 //patch initialization
-	$scope.patch = PatchFactory.getCurrentPatch();
+	$scope.patch = PatchFactory.currentPatch;
 	// console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
 	let patch = $scope.patch; //this is to normalize the following logic, so that what follows can be stored outside of anything involving $scope
 	// console.log("patch", patch);
@@ -38,21 +38,56 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 
 
 
+
+
+	$scope.playSample = (channelNumber)=>{
+		console.log(`playing sample at chan ${channelNumber}`);
+
+	 	if(patch.channels[channelNumber].sampleSource){
+	 		patch.channels[channelNumber].sampleSource.stop();
+	 		patch.channels[channelNumber].sampleSource = null;
+	 	}
+	 	// let sampleSourceNode = AUD_CTX.createBufferSource();
+	 	// sampleSourceNode.buffer = bufferToBeAssigned;
+
+
+
+	 	patch.channels[channelNumber].sampleSource = AUD_CTX.createBufferSource();
+	 	patch.channels[channelNumber].sampleSource.buffer = patch.channels[channelNumber].sampleBuffer;
+
+	 	
+	 	patch.channels[channelNumber].sampleSource.connect(patch.channels[channelNumber].gain);
+	 	patch.channels[channelNumber].sampleSource.start();
+	};
+	$scope.stopSample = (channelNumber)=>{
+		console.log(`stopping sample at chan ${channelNumber}`);
+		patch.channels[channelNumber].sampleSource.stop();
+		patch.channels[channelNumber].sampleSource = null;
+	};
+
 	
-	$scope.playOsc = (channelNumber)=>{
-		if(patch.channels[channelNumber].sourceOsc){
-			patch.channels[channelNumber].sourceOsc.stop();
-			patch.channels[channelNumber].sourceOsc = null;
-		}
-		patch.channels[channelNumber].sourceOsc = AUD_CTX.createOscillator();
-		patch.channels[channelNumber].sourceOsc.connect(patch.channels[channelNumber].gain);
-		patch.channels[channelNumber].sourceOsc.start();
-	};
-	$scope.stopOsc = (channelNumber)=>{
-		console.log("stopping an osc");
-		patch.channels[channelNumber].sourceOsc.stop();
-		patch.channels[channelNumber].sourceOsc = null;
-	};
+
+
+
+
+
+
+//osc version
+
+	// $scope.playOsc = (channelNumber)=>{
+	// 	if(patch.channels[channelNumber].sourceOsc){
+	// 		patch.channels[channelNumber].sourceOsc.stop();
+	// 		patch.channels[channelNumber].sourceOsc = null;
+	// 	}
+	// 	patch.channels[channelNumber].sourceOsc = AUD_CTX.createOscillator();
+	// 	patch.channels[channelNumber].sourceOsc.connect(patch.channels[channelNumber].gain);
+	// 	patch.channels[channelNumber].sourceOsc.start();
+	// };
+	// $scope.stopOsc = (channelNumber)=>{
+	// 	console.log("stopping an osc");
+	// 	patch.channels[channelNumber].sourceOsc.stop();
+	// 	patch.channels[channelNumber].sourceOsc = null;
+	// };
 
 	
 
