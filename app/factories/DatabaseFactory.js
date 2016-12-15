@@ -230,6 +230,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             // $http.get(`${wavURL}`)
             .success((wavBlob)=>{
                 console.log("got wav here in DatabaseFactory", wavBlob);
+                resolve(wavBlob);
 
 
                 // let blob = new Blob(wav);
