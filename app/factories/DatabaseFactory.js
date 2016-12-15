@@ -107,8 +107,9 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     DatabaseFactory.getPublicSampleCatalogCards = ()=>{
         console.log("factory retrieving all public sample catalog cards");  
         return new Promise((resolve,reject)=>{
-            $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="isPublic"&equalTo="true"`)
+            $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="isPublic"&equalTo=true`)
             .success((publicSampleCards)=>{
+                console.log("publciSampleCards", publicSampleCards);
                 let array = [];
                 Object.keys(publicSampleCards).forEach((key)=>{
                     publicSampleCards[key].wavName = key;
