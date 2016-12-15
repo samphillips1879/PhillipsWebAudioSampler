@@ -36,7 +36,23 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 	$scope.getSampleWav = (user, wavName)=>{
-		Database.downloadSampleWav(user, wavName);
+		Database.getWavURL(user, wavName)
+		.then((wavURL)=>{
+			Database.downloadWav(wavURL)
+			.then((wav)=>{
+				console.log("got wav here in AssignSamplesCtrl", wav);
+				let reader = new FileReader();
+				// reader.readAsArrayBuffer(wav);
+				// reader.onload = (e)=>{
+				// 	// console.log("e.target.result", e.target.result);
+				// 	arrayBuffer = e.target.result;
+				// 	AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
+				// 		bufferToBeAssigned = decodedData;
+				// 		console.log("blob decoded");
+				// 	});
+				// };
+			});
+		});
 		// $scope.decodeSample(); 
 	};
 
