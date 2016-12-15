@@ -35,18 +35,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	$scope.getSampleWav = (user, wavName)=>{
 		Database.downloadSampleWav(user, wavName);
 		// $scope.decodeSample(); 
