@@ -35,7 +35,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 
 
-	$scope.getSampleWav = (user, wavName)=>{
+	$scope.getSample = (user, wavName)=>{
 		Database.getWavURL(user, wavName)
 		.then((wavURL)=>{
 			Database.downloadWav(wavURL)
@@ -53,24 +53,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 				reader.readAsArrayBuffer(wav);
 			});
 		});
-		// $scope.decodeSample(); 
 	};
 
-//want this to be triggered through a ".then()" attached to Database.downloadSampleWav, but for now I'll tie it to a button in the dom because that function does not yet return a promise
-	$scope.decodeSample = ()=>{
-		let blob = Database.retrieveBlob();
-		console.log("blob about to be decoded", blob);
-		let reader = new FileReader();
-		reader.readAsArrayBuffer(blob);
-		reader.onload = (e)=>{
-			// console.log("e.target.result", e.target.result);
-			arrayBuffer = e.target.result;
-			AUD_CTX.decodeAudioData(arrayBuffer).then(function(decodedData) {
-				bufferToBeAssigned = decodedData;
-				console.log("blob decoded");
-			});
-		};
-	};
 
 	$scope.playSample = ()=>{
 		let sampleSourceNode = AUD_CTX.createBufferSource();
