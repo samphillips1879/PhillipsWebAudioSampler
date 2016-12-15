@@ -38,7 +38,7 @@ app.config(($routeProvider)=>{
     	controller: 'CreateSamplesCtrl',
     	resolve: {isAuth}
     })
-    .when('/samples/assign', {
+    .when('/samples/browse', {
     	templateUrl: 'partials/assignSamples.html',
     	controller: 'AssignSamplesCtrl',
     	resolve: {isAuth}
