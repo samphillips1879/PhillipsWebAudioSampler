@@ -11,10 +11,10 @@ app.controller('NavCtrl', function($scope, AuthFactory){
 
 	$scope.navItems = [
 		{name: "Logout", url: "#/logout"}, 
-		{name: "Play", url:"#/play"}, 
 		{name: "Create Samples", url: "#/samples/create"},
-		{name: "Assign Samples", url: "#/samples/assign"},
-		{name: "Patches", url: "#/patches"}
+		{name: "Browse Samples", url: "#/samples/browse"},
+		{name: "Patches", url: "#/patches"},
+		{name: "Play", url:"#/play"} 
 	];
 	$scope.guestNavItems = [
 		{name: "login/register", url: "#/login"},
