@@ -123,7 +123,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 		let user = AuthFactory.getUser();
 		console.log("user for catalogCard", user);
 		let title = $scope.sampleTitle;
-		let isPublic = false;
+		let isPublic = true;
 		let catalogCard = {
 			user, title, isPublic
 		};
