@@ -1,5 +1,5 @@
 "use strict";
-app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory){
+app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory){
 	$scope.greeting = "Assign Samples Controller Connected";
 
 
@@ -14,6 +14,31 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory){
 
 //sample retrieval logic
 //****************************************************
+
+	$scope.getSampleCards = (limitTo)=>{
+		if (limitTo === "public") {
+			console.log("browsing public samples");
+			Database.getPublicSampleCatalogCards();
+		} else if (limitTo === "user") {
+			let user = AuthFactory.getUser();
+			console.log("browsing samples made by user: ", user);
+			Database.getUserSampleCatalogCards(user);
+		}
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$scope.getSampleWav = ()=>{
 		Database.downloadSampleWav($scope.sampleTitleQuery);
 		// $scope.decodeSample(); 

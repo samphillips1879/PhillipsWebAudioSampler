@@ -7,7 +7,8 @@
 
 
 <input type="text" size="40" id="sampleTitleSearchInput" placeholder="search for a sample by title" ng-model="sampleTitleQuery">
-<button ng-click="getSampleWav()">retrieve sample by exact title</button>
+<button ng-click="getSampleCards('public')">browse all publically submitted samples</button>
+<button ng-click="getSampleCards('user')">browse samples you've made</button>
 
 
 <button ng-click="decodeSample()">decode your sample once it has been retrieved</button>

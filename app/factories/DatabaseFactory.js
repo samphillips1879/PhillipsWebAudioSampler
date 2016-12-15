@@ -7,7 +7,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     let blob = null;
 
 
-    DatabaseFactory.getUserSamples = ()=>{
+    DatabaseFactory.browseUserSamples = ()=>{
     	let samples = [];
         let currentUser = AuthFactory.getUser();
     	return new Promise((resolve, reject)=>{
@@ -25,7 +25,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     	});
     };
 
-    DatabaseFactory.getCommunitySamples = ()=>{
+    DatabaseFactory.browseCommunitySamples = ()=>{
         let samples = [];
         // let currentUser = AuthFactory.getUser();
         return new Promise((resolve, reject)=>{
@@ -104,6 +104,34 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
+    DatabaseFactory.getPublicSampleCatalogCards = ()=>{
+        console.log("factory retrieving all public sample catalog cards");  
+        return new Promise((resolve,reject)=>{
+            $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="isPublic"&equalTo="true"`)
+            .success((publicSampleCards)=>{
+                console.log("got public sample catalog cards: ", publicSampleCards);
+                resolve(publicSampleCards);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
+    DatabaseFactory.getUserSampleCatalogCards = (user)=>{
+        console.log("factory retrieving sample catalog cards for user: ", user);  
+        return new Promise((resolve,reject)=>{
+            $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
+            .success((userSampleCards)=>{
+                console.log("got user's sample catalog cards: ", userSampleCards);
+                resolve(userSampleCards);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
 
 
     DatabaseFactory.postNewSampleWav = (newSample, bufferTitle)=>{
@@ -115,8 +143,8 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         var storageRef = storage.ref(`audioBuffers/${user}/${bufferTitle}`);
         console.log("storageRef", storageRef);
         storageRef.put(newSample)
-        .then((thing)=>{
-            console.log("thing", thing);
+        .then((object)=>{
+            console.log(".wav saved to bucket", object);
             //gets a url to the video, hosted in app's storage bucket, and sets it as the source for the userVideo in the dom
             // console.log("thing", thing);
             // storageRef.getDownloadURL().then(function(url) {
@@ -128,21 +156,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             // });
         });
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     DatabaseFactory.downloadSampleWav = (sampleTitle)=>{
         //this section also is gonna need some proper separation of responsibilities, but right now I gotta reach mvp, so we're just gonna let it be ugly
