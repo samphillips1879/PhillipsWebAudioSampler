@@ -109,6 +109,10 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         return new Promise((resolve,reject)=>{
             $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="isPublic"&equalTo="true"`)
             .success((publicSampleCards)=>{
+                Object.keys(publicSampleCards).forEach((key)=>{
+                    publicSampleCards[key].wavName = key;
+                    // items.push(publicSampleCards[key]);
+                });
                 console.log("got public sample catalog cards: ", publicSampleCards);
                 resolve(publicSampleCards);
             })
@@ -123,6 +127,10 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         return new Promise((resolve,reject)=>{
             $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
             .success((userSampleCards)=>{
+                Object.keys(userSampleCards).forEach((key)=>{
+                    userSampleCards[key].wavName = key;
+                    // items.push(userSampleCards[key]);
+                });
                 console.log("got user's sample catalog cards: ", userSampleCards);
                 resolve(userSampleCards);
             })
