@@ -2,13 +2,9 @@
 
 app.factory("PatchFactory", ()=>{
 	let PatchFactory = {};
-
-
-
 	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
 	PatchFactory.currentPatch = {
 		channels: [
-
 			{
 				sampleSource: null,
 				sampleBuffer: null,
@@ -74,22 +70,11 @@ app.factory("PatchFactory", ()=>{
 				gainValue: 1
 			}
 		]
-
-
-
 	};
-
 
 	PatchFactory.getCurrentPatch = ()=>{
 		return PatchFactory.currentPatch;	
 	};
-
-
-
-
-
-
-
 
 	return PatchFactory;
 });
