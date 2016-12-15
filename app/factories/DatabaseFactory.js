@@ -109,12 +109,18 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         return new Promise((resolve,reject)=>{
             $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="isPublic"&equalTo="true"`)
             .success((publicSampleCards)=>{
+                let array = [];
                 Object.keys(publicSampleCards).forEach((key)=>{
                     publicSampleCards[key].wavName = key;
-                    // items.push(publicSampleCards[key]);
+
+                    array = $.map(publicSampleCards, function(value, index) {
+                        return [value];
+                    });
                 });
-                console.log("got public sample catalog cards: ", publicSampleCards);
-                resolve(publicSampleCards);
+                console.log("got public sample catalog cards: ", array);
+                // console.log("got public sample catalog cards: ", publicSampleCards);
+                resolve(array);
+                // resolve(publicSampleCards);
             })
             .error((error)=>{
                 reject(error);
@@ -127,12 +133,19 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         return new Promise((resolve,reject)=>{
             $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
             .success((userSampleCards)=>{
+                let array = [];
                 Object.keys(userSampleCards).forEach((key)=>{
                     userSampleCards[key].wavName = key;
-                    // items.push(userSampleCards[key]);
+
+
+                    array = $.map(userSampleCards, function(value, index) {
+                        return [value];
+                    });
                 });
-                console.log("got user's sample catalog cards: ", userSampleCards);
-                resolve(userSampleCards);
+                // console.log("got user's sample catalog cards: ", userSampleCards);
+                console.log("got user's sample catalog cards: ", array);
+                resolve(array);
+                // resolve(userSampleCards);
             })
             .error((error)=>{
                 reject(error);
@@ -165,15 +178,15 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-    DatabaseFactory.downloadSampleWav = (sampleTitle)=>{
+    DatabaseFactory.downloadSampleWav = (user, wavName)=>{
         //this section also is gonna need some proper separation of responsibilities, but right now I gotta reach mvp, so we're just gonna let it be ugly
-        let user = AuthFactory.getUser();
+        // let user = AuthFactory.getUser();
         console.log("making storage variable");
         let storage = firebase.storage();
         console.log("made storage variable");
         console.log("making storageRef variable");
     //dynamic    
-        let storageRef = storage.ref(`audioBuffers/${user}/${sampleTitle}`);
+        let storageRef = storage.ref(`audioBuffers/${user}/${wavName}`);
         console.log("made storageRef variable");
         console.log("trying to get downloadURL");
         storageRef.getDownloadURL().then(function(url) {

@@ -18,11 +18,19 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	$scope.getSampleCards = (limitTo)=>{
 		if (limitTo === "public") {
 			console.log("browsing public samples");
-			Database.getPublicSampleCatalogCards();
+			Database.getPublicSampleCatalogCards()
+			.then((catCards)=>{
+				$scope.catalog = catCards;
+				$scope.$apply();
+			});
 		} else if (limitTo === "user") {
 			let user = AuthFactory.getUser();
 			console.log("browsing samples made by user: ", user);
-			Database.getUserSampleCatalogCards(user);
+			Database.getUserSampleCatalogCards(user)
+			.then((catCards)=>{
+				$scope.catalog = catCards;
+				$scope.$apply();
+			});
 		}
 	};
 
@@ -39,8 +47,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 
-	$scope.getSampleWav = ()=>{
-		Database.downloadSampleWav($scope.sampleTitleQuery);
+	$scope.getSampleWav = (user, wavName)=>{
+		Database.downloadSampleWav(user, wavName);
 		// $scope.decodeSample(); 
 	};
 
