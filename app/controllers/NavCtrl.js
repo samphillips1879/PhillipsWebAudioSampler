@@ -1,13 +1,5 @@
 "use strict";
 app.controller('NavCtrl', function($scope, AuthFactory){
-	// $scope.searchText = SearchTerms;
-
-	// console.log("AuthFactory.isAuthenticated", AuthFactory.isAuthenticated());
-
-		// console.log("authenticated");
-
-
-
 
 	$scope.navItems = [
 		{name: "Logout", url: "#/logout"}, 

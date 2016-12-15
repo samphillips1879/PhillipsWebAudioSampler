@@ -1,16 +1,9 @@
 "use strict";
 app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory){
 	$scope.greeting = "Assign Samples Controller Connected";
-
-
-
 	let arrayBuffer = null;
 	let bufferToBeAssigned = null;
-
-
-
 	$scope.sampleTitleQuery = "";
-
 
 //sample retrieval logic
 //****************************************************
@@ -33,7 +26,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 			});
 		}
 	};
-
 
 	$scope.getSample = (user, wavName)=>{
 		Database.getWavURL(user, wavName)
@@ -64,14 +56,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 //****************************************************
 
-
-
-
-
-
-
-
-
 //sample assignment logic
 //****************************************************
 
@@ -85,21 +69,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //****************************************************
-
-
 
 });

@@ -1,12 +1,10 @@
 "use strict";
 
 app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
-	// console.log("URL", FBCreds.URL);
     let DatabaseFactory = {};
     let fbStorage = firebase.storage();
     let blob = null;
     let wavURL = null;
-
 
     DatabaseFactory.browseUserSamples = ()=>{
     	let samples = [];
@@ -56,17 +54,14 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         storageRef.put(videoFile)
         .then((thing)=>{
             //gets a url to the video, hosted in app's storage bucket, and sets it as the source for the userVideo in the dom
-            // console.log("thing", thing);
             storageRef.getDownloadURL().then(function(url) {
                 $("#userVideo")[0].src = url;
-                // console.log("url", url);
                 console.log("set video src equal to", url);
             }).catch(function(error) {
               // Handle any errors
             });
         });
     };
-
 
     DatabaseFactory.downloadUserVideo = (videoUrl)=>{
         console.log("trying to download", videoUrl);
@@ -80,18 +75,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             });
         });
     };
-
-
-
-
-
-
-
-
-
-
-
-
 
     DatabaseFactory.postSampleToCatalog = (catalogCard)=>{
         return new Promise((resolve,reject)=>{
@@ -114,15 +97,12 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                 let array = [];
                 Object.keys(publicSampleCards).forEach((key)=>{
                     publicSampleCards[key].wavName = key;
-
                     array = $.map(publicSampleCards, function(value, index) {
                         return [value];
                     });
                 });
                 console.log("got public sample catalog cards: ", array);
-                // console.log("got public sample catalog cards: ", publicSampleCards);
                 resolve(array);
-                // resolve(publicSampleCards);
             })
             .error((error)=>{
                 reject(error);
@@ -138,16 +118,12 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                 let array = [];
                 Object.keys(userSampleCards).forEach((key)=>{
                     userSampleCards[key].wavName = key;
-
-
                     array = $.map(userSampleCards, function(value, index) {
                         return [value];
                     });
                 });
-                // console.log("got user's sample catalog cards: ", userSampleCards);
                 console.log("got user's sample catalog cards: ", array);
                 resolve(array);
-                // resolve(userSampleCards);
             })
             .error((error)=>{
                 reject(error);
@@ -160,23 +136,12 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     DatabaseFactory.postNewSampleWav = (newSample, bufferTitle)=>{
         console.log("posting new sample");
         let user = AuthFactory.getUser();
-        // console.log("videoFile", videoFile);
         var storage = firebase.storage();
-        // saves video to firebase storage userVideos folder with a name equivalent to the current user
         var storageRef = storage.ref(`audioBuffers/${user}/${bufferTitle}`);
         console.log("storageRef", storageRef);
         storageRef.put(newSample)
         .then((object)=>{
             console.log(".wav saved to bucket", object);
-            //gets a url to the video, hosted in app's storage bucket, and sets it as the source for the userVideo in the dom
-            // console.log("thing", thing);
-            // storageRef.getDownloadURL().then(function(url) {
-            //     $("#userVideo")[0].src = url;
-            //     // console.log("url", url);
-            //     console.log("set video src equal to", url);
-            // }).catch(function(error) {
-            //   // Handle any errors
-            // });
         });
     };
 
@@ -186,182 +151,42 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         return storageRef.getDownloadURL();
     };
 
-
-
     DatabaseFactory.downloadWav = (wavURL)=>{
-        // return new Promise((resolve,reject)=>{
-        //     console.log("tried to get downloadURL", wavURL);
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.responseType = 'blob';
-        //     xhr.onload = function(event) {
-
-
-        //         if (this.status >= 200 && this.status < 300) {
-        //                 console.log("xhr.response", xhr.response);
-        //                 resolve(xhr.response);
-        //               } else {
-        //                 reject({
-        //                   status: this.status,
-        //                   statusText: xhr.statusText
-        //                 });
-        //         // blob = xhr.response;
-        //         // console.log("blob", blob);
-        //     }
-        //     xhr.open('GET', wavURL);
-        //     xhr.send();
-
-        //     };
-
-        // });
-
-
-
-
-//this all one chunk
-
         console.log("trying to download wav from: ", wavURL);
         return new Promise((resolve,reject)=>{
             $http({
-                    url: `${wavURL}`,
-                    method: "GET",
-                    responseType: "blob"
-
-                })
-            // $http.get(`${wavURL}`)
+                url: `${wavURL}`,
+                method: "GET",
+                responseType: "blob"
+            })
             .success((wavBlob)=>{
                 console.log("got wav here in DatabaseFactory", wavBlob);
                 resolve(wavBlob);
-
-
-                // let blob = new Blob(wav);
-                // console.log("blob", blob);
-                // resolve(wav);
-                // let array = [];
-                // Object.keys(userSampleCards).forEach((key)=>{
-                //     userSampleCards[key].wavName = key;
-
-
-                //     array = $.map(userSampleCards, function(value, index) {
-                //         return [value];
-                //     });
-                // });
-                // // console.log("got user's sample catalog cards: ", userSampleCards);
-                // console.log("got user's sample catalog cards: ", array);
-                // resolve(array);
-                // resolve(userSampleCards);
             })
             .error((error)=>{
                 reject(error);
             });
         });
-
-
-
-
-
-
-
-
-
     };
-    //     .then(function(url) {
 
-
-
-
-
-
-
-            
-    //       console.log("tried to get downloadURL", url);
-    //       var xhr = new XMLHttpRequest();
-    //       xhr.responseType = 'blob';
-    //       xhr.onload = function(event) {
-    //         blob = xhr.response;
-    //         console.log("blob", blob);
-    //       };
-    //       xhr.open('GET', url);
-    //       xhr.send();
-
-    //     }
-
-
-
-
-    //     console.log("making storage variable");
-    //     let storage = firebase.storage();
-    //     console.log("made storage variable");
-    //     console.log("making storageRef variable");
-    // //dynamic    
-    //     let storageRef = storage.ref(`audioBuffers/${user}/${wavName}`);
-    //     console.log("made storageRef variable");
-    //     console.log("trying to get downloadURL");
-    //     storageRef.getDownloadURL().then(function(url) {
-    //       console.log("tried to get downloadURL", url);
-    //       var xhr = new XMLHttpRequest();
-    //       xhr.responseType = 'blob';
-    //       xhr.onload = function(event) {
-    //         blob = xhr.response;
-    //         console.log("blob", blob);
-    //       };
-    //       xhr.open('GET', url);
-    //       xhr.send();
-
-    //     }).catch(function(error) {
-    //       // Handle any errors
-    //     });
+    // DatabaseFactory.retrieveBlob = ()=>{
+    //     return blob;
     // };
 
-
-
-
-    // DatabaseFactory.downloadSampleWav = (user, wavName)=>{
-    //     //this section also is gonna need some proper separation of responsibilities, but right now I gotta reach mvp, so we're just gonna let it be ugly
-    //     // let user = AuthFactory.getUser();
-    //     console.log("making storage variable");
-    //     let storage = firebase.storage();
-    //     console.log("made storage variable");
-    //     console.log("making storageRef variable");
-    // //dynamic    
-    //     let storageRef = storage.ref(`audioBuffers/${user}/${wavName}`);
-    //     console.log("made storageRef variable");
-    //     console.log("trying to get downloadURL");
-    //     storageRef.getDownloadURL().then(function(url) {
-    //       console.log("tried to get downloadURL", url);
-    //       var xhr = new XMLHttpRequest();
-    //       xhr.responseType = 'blob';
-    //       xhr.onload = function(event) {
-    //         blob = xhr.response;
-    //         console.log("blob", blob);
-    //       };
-    //       xhr.open('GET', url);
-    //       xhr.send();
-
-    //     }).catch(function(error) {
-    //       // Handle any errors
-    //     });
+    // DatabaseFactory.updateSample = (updatedSample, sampleId)=>{
+    // 	// let targ = $routeParams.itemId;
+    // 	// console.log("targ =", targ);
+    // 	// console.log("updatedItem", updatedItem);
+    // 	return new Promise((resolve,reject)=>{
+    // 		$http.put(`${FBCreds.URL}/samples/${sampleId}.json`, angular.toJson(updatedSample))
+    // 		.success((sampleObject)=>{
+    // 			resolve(sampleObject);
+    // 		})
+    // 		.error((error)=>{
+    // 			reject(error);
+    // 		});
+    // 	});
     // };
-
-
-    DatabaseFactory.retrieveBlob = ()=>{
-        return blob;
-    };
-
-
-    DatabaseFactory.updateSample = (updatedSample, sampleId)=>{
-    	// let targ = $routeParams.itemId;
-    	// console.log("targ =", targ);
-    	// console.log("updatedItem", updatedItem);
-    	return new Promise((resolve,reject)=>{
-    		$http.put(`${FBCreds.URL}/samples/${sampleId}.json`, angular.toJson(updatedSample))
-    		.success((sampleObject)=>{
-    			resolve(sampleObject);
-    		})
-    		.error((error)=>{
-    			reject(error);
-    		});
-    	});
-    };
 
     DatabaseFactory.deleteSample = (sampleId)=>{
         return new Promise((resolve,reject)=>{
@@ -375,11 +200,5 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-
-    
-
-
     return DatabaseFactory;
-
-
 });

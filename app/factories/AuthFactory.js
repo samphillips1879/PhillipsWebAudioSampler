@@ -2,16 +2,8 @@
 
 app.factory("AuthFactory", ()=>{
 
-    // {                es6 adding functions to object shorthand
-    //  createUser(){
-
-    //  },
-    // }
-
     let currentUser = null;
-
     let AuthFactory = {};
-
 
     AuthFactory.createUser = (userObj)=>{
         console.log("trying to create user");
@@ -49,6 +41,4 @@ app.factory("AuthFactory", ()=>{
     };
 
     return AuthFactory;
-
-
 });
