@@ -1,6 +1,8 @@
 "use strict";
 app.controller('NavCtrl', function($scope, AuthFactory){
 
+	// $scope.user = AuthFactory.getUser();
+
 	$scope.navItems = [
 		{name: "Logout", url: "#/logout"}, 
 		{name: "Create Samples", url: "#/samples/create"},

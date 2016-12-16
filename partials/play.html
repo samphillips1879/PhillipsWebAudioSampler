@@ -2,16 +2,22 @@
 <div ng-include="'partials/navbar.html'"></div>
 
 <div ng-repeat="channel in patch.channels">
+
+
+
+
+
+
 	<div id="chan{{channel.channelNum}}" class="chanDiv">
 		<div id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons">
 
 		<!-- 	<img src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
 
 
-			<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-primary">Play sample on channel {{channel.channelNum}}</button>
+			<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> {{channel.sampleTitle}}</button>
 
 			
-			<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary">Stop</button>
+			<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
 		</div>
 
 

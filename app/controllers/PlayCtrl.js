@@ -3,6 +3,60 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 	$scope.greeting = "Play Controller Connected";
 	let chan = null;
 
+
+
+
+
+// Binding number keys to sample triggers
+
+	$(document).keydown((e)=>{
+		let key = e.keyCode;
+		if (key === 48) {
+			// console.log("0");
+			$scope.playSample(0); 
+		} else if (key === 49) {
+			// console.log("1");
+			$scope.playSample(1);
+		} else if (key === 50) {
+			// console.log("2");
+			$scope.playSample(2);
+		} else if (key === 51) {
+			// console.log("3");
+			$scope.playSample(3);
+		} else if (key === 52) {
+			// console.log("4");
+			$scope.playSample(4);
+		} else if (key === 53) {
+			// console.log("5");
+			$scope.playSample(5);
+		} else if (key === 54) {
+			// console.log("6");
+			$scope.playSample(6);
+		} else if (key === 55) {
+			// console.log("7");
+			$scope.playSample(7);
+		}
+
+
+
+
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //patch initialization
 	$scope.patch = PatchFactory.currentPatch;
 	// console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
