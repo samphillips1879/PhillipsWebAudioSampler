@@ -12,23 +12,30 @@
 
 
 
-<button ng-click="playSample()">click to play your sample</button>
+<div ng-show="sampleLoaded">
+
+	<button ng-click="playSample()">click to play your sample</button>
 
 
 
 
-<span>Assign sample to channel: </span><select ng-model="channelSelect">
-	<option class="channelAssignSelect" value="0">channel 0</option>
-	<option class="channelAssignSelect" value="1">channel 1</option>
-	<option class="channelAssignSelect" value="2">channel 2</option>
-	<option class="channelAssignSelect" value="3">channel 3</option>
-	<option class="channelAssignSelect" value="4">channel 4</option>
-	<option class="channelAssignSelect" value="5">channel 5</option>
-	<option class="channelAssignSelect" value="6">channel 6</option>
-	<option class="channelAssignSelect" value="7">channel 7</option>
-</select>
+	<span>Assign sample to channel: </span><select ng-model="channelSelect">
+		<option class="channelAssignSelect" value="0">channel 0</option>
+		<option class="channelAssignSelect" value="1">channel 1</option>
+		<option class="channelAssignSelect" value="2">channel 2</option>
+		<option class="channelAssignSelect" value="3">channel 3</option>
+		<option class="channelAssignSelect" value="4">channel 4</option>
+		<option class="channelAssignSelect" value="5">channel 5</option>
+		<option class="channelAssignSelect" value="6">channel 6</option>
+		<option class="channelAssignSelect" value="7">channel 7</option>
+	</select>
 
-<button ng-click="assignSample()">click to assign your sample to a channel in your current patch</button>
+	<button ng-click="assignSample()">click to assign your sample to a channel in your current patch</button>
+
+	
+</div>
+
+
 
 
 

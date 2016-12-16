@@ -97,7 +97,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 		let isPublic = true;
 		let img = $scope.sampleImage;
 		let catalogCard = {
-			user, title, isPublic
+			user, title, isPublic, img
 		};
 
 		Database.postSampleToCatalog(catalogCard)

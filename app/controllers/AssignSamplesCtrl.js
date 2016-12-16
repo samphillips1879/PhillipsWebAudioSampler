@@ -6,6 +6,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	let titleToBeAssigned = null;
 	let imageToBeAssigned = null;
 	$scope.sampleTitleQuery = "";
+	$scope.sampleLoaded = false;
+
 
 //sample retrieval logic
 //****************************************************
@@ -38,6 +40,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 
 	$scope.getSample = (user, wavName)=>{
+		$scope.sampleLoaded = false;
 		Database.getWavURL(user, wavName)
 		.then((wavURL)=>{
 			Database.downloadWav(wavURL)
@@ -50,6 +53,9 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 					AUD_CTX.decodeAudioData(arrayBuffer).then((decodedData)=> {
 						bufferToBeAssigned = decodedData;
 						console.log("blob decoded");
+						$scope.sampleLoaded = true;
+						$scope.$apply();
+						// console.log("tried to set ", );
 					});
 				};
 				reader.readAsArrayBuffer(wav);
