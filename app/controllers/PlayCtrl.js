@@ -8,7 +8,6 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 
 
 // Binding number keys to sample triggers
-
 	$(document).keydown((e)=>{
 		let key = e.keyCode;
 		if (key === 48) {
@@ -36,10 +35,6 @@ app.controller("PlayCtrl", function($scope, PatchFactory){
 			// console.log("7");
 			$scope.playSample(7);
 		}
-
-
-
-
 	});
 
 

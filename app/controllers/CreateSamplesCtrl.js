@@ -108,6 +108,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 			rec.exportWAV((blob)=>{
 				Database.postNewSampleWav(blob, object.name);
 			});
+			// Database.postNewSampleWav()
 		});
 	};	
 });
