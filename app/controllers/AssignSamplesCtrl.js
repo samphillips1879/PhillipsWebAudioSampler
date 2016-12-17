@@ -7,6 +7,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	let imageToBeAssigned = null;
 	$scope.sampleTitleQuery = "";
 	$scope.sampleLoaded = false;
+	numBind = false;
 
 
 
