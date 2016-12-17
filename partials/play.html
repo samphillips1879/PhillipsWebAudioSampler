@@ -1,6 +1,5 @@
-<h2>{{greeting}}</h2>
 <div ng-include="'partials/navbar.html'"></div>
-
+<h2>{{greeting}}</h2>
 <div ng-repeat="channel in patch.channels">
 
 
@@ -9,16 +8,16 @@
 
 
 	<div id="chan{{channel.channelNum}}" class="chanDiv">
-		<div id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons">
 
+
+		<div ng-show="channel.sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons">
 		<!-- 	<img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
-
-
 			<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> {{channel.sampleTitle}}</button>
-
-			
 			<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
 		</div>
+		<a href="#/samples/browse"><button class="btn btn-default" ng-show="!channel.sampleBuffer">
+			Please load a sample to this channel
+		</button></a>
 
 
 

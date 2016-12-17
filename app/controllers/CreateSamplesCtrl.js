@@ -1,6 +1,6 @@
 "use strict";
 app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory){
-	$scope.greeting = "Create Samples Controller Connected";
+	$scope.greeting = "Sample Creation";
 
 	//variable declarations
 	let conSampleRate = AUD_CTX.sampleRate;
