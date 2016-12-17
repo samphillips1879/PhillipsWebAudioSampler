@@ -25,31 +25,62 @@ app.config(($routeProvider)=>{
     })
     .when('/logout', {
     	templateUrl: 'partials/logout.html',
-    	controller: 'LogoutCtrl',
-    	resolve: {isAuth}
+    	controller: 'LogoutCtrl'
     })
     .when('/play', {
     	templateUrl: 'partials/play.html',
-    	controller: 'PlayCtrl',
-    	resolve: {isAuth}
+    	controller: 'PlayCtrl'
     })
     .when('/samples/create', {
     	templateUrl: 'partials/createSamples.html',
-    	controller: 'CreateSamplesCtrl',
-    	resolve: {isAuth}
+    	controller: 'CreateSamplesCtrl'
     })
     .when('/samples/browse', {
     	templateUrl: 'partials/assignSamples.html',
-    	controller: 'AssignSamplesCtrl',
-    	resolve: {isAuth}
+    	controller: 'AssignSamplesCtrl'
     })
     .when('/patches', {
     	templateUrl: 'partials/patches.html',
-    	controller: 'PatchesCtrl',
-    	resolve: {isAuth}
+    	controller: 'PatchesCtrl'
     })
     .otherwise('/login');
 });
+
+
+//resolve configuration. Disabled for airplane 
+// app.config(($routeProvider)=>{
+//     $routeProvider
+//     .when('/login', {
+//         templateUrl: 'partials/login.html',
+//         controller: 'LoginCtrl'
+//     })
+//     .when('/logout', {
+//         templateUrl: 'partials/logout.html',
+//         controller: 'LogoutCtrl',
+//         resolve: {isAuth}
+//     })
+//     .when('/play', {
+//         templateUrl: 'partials/play.html',
+//         controller: 'PlayCtrl',
+//         resolve: {isAuth}
+//     })
+//     .when('/samples/create', {
+//         templateUrl: 'partials/createSamples.html',
+//         controller: 'CreateSamplesCtrl',
+//         resolve: {isAuth}
+//     })
+//     .when('/samples/browse', {
+//         templateUrl: 'partials/assignSamples.html',
+//         controller: 'AssignSamplesCtrl',
+//         resolve: {isAuth}
+//     })
+//     .when('/patches', {
+//         templateUrl: 'partials/patches.html',
+//         controller: 'PatchesCtrl',
+//         resolve: {isAuth}
+//     })
+//     .otherwise('/login');
+// });
 
 
 
