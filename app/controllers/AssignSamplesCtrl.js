@@ -9,32 +9,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	$scope.sampleLoaded = false;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //sample retrieval logic
 //****************************************************
 
