@@ -1,8 +1,6 @@
 "use strict";
 
 app.controller("LoginCtrl", function($scope, AuthFactory, $window){
-	numBind = false;
-
 	$scope.account = {
 		email: "",
 		password: ""

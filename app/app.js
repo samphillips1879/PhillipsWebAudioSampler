@@ -100,7 +100,4 @@ const AUD_CTX = new window.AudioContext();
 	// const AUD_CTX = new (window.AudioContext || window.webkitAudioContext)();
 // ************************
 
-//defining numBind
-let numBind = false;
-
 

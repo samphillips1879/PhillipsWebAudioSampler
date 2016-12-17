@@ -1,7 +1,6 @@
 "use strict";
 app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory){
 	$scope.greeting = "Sample Creation";
-	numBind = false;
 
 	//variable declarations
 	let conSampleRate = AUD_CTX.sampleRate;
