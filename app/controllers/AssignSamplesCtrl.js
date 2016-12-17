@@ -1,6 +1,6 @@
 "use strict";
 app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory){
-	$scope.greeting = "Assign Samples Controller Connected";
+	$scope.greeting = "Assign Samples to Your Current Patch";
 	let arrayBuffer = null;
 	let bufferToBeAssigned = null;
 	let titleToBeAssigned = null;

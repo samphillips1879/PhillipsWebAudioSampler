@@ -1,5 +1,5 @@
 "use strict";
 app.controller('PatchesCtrl', function($scope){
-	$scope.greeting = "Patches Controller Connected";
+	$scope.greeting = "Select a Patch to Play With";
 });
 

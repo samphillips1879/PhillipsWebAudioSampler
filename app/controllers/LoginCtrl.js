@@ -2,8 +2,6 @@
 
 app.controller("LoginCtrl", function($scope, AuthFactory, $window){
 
-	$scope.greeting = "Login Controller Connected";
-
 	$scope.account = {
 		email: "",
 		password: ""

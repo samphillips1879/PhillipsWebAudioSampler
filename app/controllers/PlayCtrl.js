@@ -1,6 +1,6 @@
 "use strict";
 app.controller("PlayCtrl", function($scope, PatchFactory){
-	$scope.greeting = "Play Controller Connected";
+	$scope.greeting = "Make some music";
 	let chan = null;
 
 
