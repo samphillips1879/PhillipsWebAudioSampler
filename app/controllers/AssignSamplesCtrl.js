@@ -1,5 +1,5 @@
 "use strict";
-app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory){
+app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory, SampleFactory){
 	$scope.greeting = "Assign Samples to Your Current Patch";
 	let arrayBuffer = null;
 	let bufferToBeAssigned = null;
@@ -75,11 +75,16 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 //sample assignment logic
 //****************************************************
 
+
+
+
+
+// SampleFactory playback version
 	$scope.channelSelect = null;
 
 	$scope.assignSample = ()=>{
 		if ($scope.channelSelect) {
-			let chan = PatchFactory.currentPatch.channels[$scope.channelSelect];
+			let chan = SampleFactory.channels[$scope.channelSelect];
 			
 			chan.sampleBuffer = bufferToBeAssigned;
 			chan.sampleTitle = titleToBeAssigned;
@@ -90,10 +95,44 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 		}
-		console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+		console.log(`SampleFactory.channels[${$scope.channelSelect}]`, SampleFactory.channels[$scope.channelSelect]);
 		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// currentPatch playback version
+	// $scope.channelSelect = null;
+
+	// $scope.assignSample = ()=>{
+	// 	if ($scope.channelSelect) {
+	// 		let chan = PatchFactory.currentPatch.channels[$scope.channelSelect];
+			
+	// 		chan.sampleBuffer = bufferToBeAssigned;
+	// 		chan.sampleTitle = titleToBeAssigned;
+
+	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
+	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
+
+
+
+	// 	}
+	// 	console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+	// 	console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
+	// };
 //****************************************************
 
 });
