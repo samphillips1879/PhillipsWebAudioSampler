@@ -4,28 +4,31 @@
 	<h5><i>Please select the video you wish to sample (for now, please upload small files. Like, less than 20mb if possible)</i></h5>
 	<input id="userFileInput" type="file">
 
-	<button id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="btn-default">During playback, click here to begin capturing an audio sample from your video</button>
-
-	<button ng-click="endSampleCapture()" class="btn-default">Click here to set the end of your audio sample</button>
-
-	<button ng-click="previewSample()" class="btn-default">Click here to preview sample</button>
-
-	<input type="text" size="100" id="sampleTitleInput" ng-model="sampleTitle" placeholder="input desired sample title (don't use the same title as another sample you've already saved)">
 
 
-	<input type="text" size="100" id="sampleImageInput" ng-model="sampleImage" placeholder="input the url for an image you would like to represent this sample">
+	<button id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="capture-btn btn-success">Begin Sample Capture</button>
+	<button ng-click="endSampleCapture()" class="capture-btn btn-danger">End Sample Capture</button>
 
 
 
 
+	<!-- card for previewing, naming, and saving a captured sample -->
+	<div>
+		<div ng-show="sampleCaptured">
+			<input type="text" size="50" id="sampleTitleInput" ng-model="sampleTitle" placeholder="Name this sample">
+			<button ng-click="previewSample()" class="btn-info">Click here to preview sample</button>
+			<button ng-click="saveSample()" class="btn-info">Click here to save your new sample</button>
+		</div>
+		<div ng-show="!sampleCaptured">
+			<h4>{{captureStatus}}</h4>
+		</div>
+	</div>
 
 
 
 
 
-
-
-	<button ng-click="saveSample()" class="btn-default">Click here to save your new sample</button>
+	<!-- <input type="text" size="100" id="sampleImageInput" ng-model="sampleImage" placeholder="input the url for an image you would like to represent this sample"> -->
 
 
 <!-- 

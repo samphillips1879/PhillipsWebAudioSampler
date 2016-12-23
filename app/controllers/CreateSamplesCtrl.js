@@ -17,6 +17,8 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	$scope.sampleTitle = "";
 	$scope.sampleImage = "";
+	$scope.sampleCaptured = false;
+	$scope.captureStatus = "please capture a sample";
 
 	//video file submission handler
 	$("#userFileInput").change(function() {
@@ -56,6 +58,8 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//start recording sample
 	$scope.beginSampleCapture = ()=>{	
+			$scope.sampleCaptured = false;
+			$scope.captureStatus = "capturing sample...";
 			console.log("sample capture starting");
 			rec.clear();
 			rec.record();
@@ -63,6 +67,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//stop recording sample
 	$scope.endSampleCapture = ()=>{
+		$scope.sampleCaptured = true;
 		console.log("sample capture ending");
 		rec.stop();
 		$('#userVideo')[0].pause();
