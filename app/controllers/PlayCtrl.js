@@ -7,13 +7,14 @@ app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
 
 	// Binding number keys to sample triggers
 	$(document).keydown((e)=>{
+		// console.log("key pressed", e.key);
 		let keyPressed = e.keyCode;
 		if (keyPressed > 47 && keyPressed < 56) {
-			if (PatchFactory.currentPatch.channels[e.key].sampleBuffer) {
+			if (SampleFactory.channels[e.key].sampleBuffer) {
 				if (keyPressed === 48) {
 					$scope.playSample(0); 
 				} else if (keyPressed === 49) {
-					// console.log("1");
+					console.log("1");
 					$scope.playSample(1);
 				} else if (keyPressed === 50) {
 					// console.log("2");
@@ -33,8 +34,9 @@ app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
 				} else if (keyPressed === 55) {
 					// console.log("7");
 					$scope.playSample(7);
-				}
+				} 
 			}
+
 		}
 	});
 
