@@ -46,11 +46,6 @@ app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
 
 	//patch initialization
 
-	//sampleFactory version
-	// $scope.patch = SampleFactory;
-
-
-	//patchFactory version
 	$scope.patch = PatchFactory.currentPatch;
 	$scope.samples = SampleFactory;
 
@@ -58,19 +53,18 @@ app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
 	// console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
 	let patch = $scope.patch; 
 	let samples = $scope.samples;
+//samples might not be getting used
+
 
 	//connecting paths
 	patch.channels.forEach((channel, channelNumber)=>{
 		//create those nodes, homeskillet
 		channel.gain = AUD_CTX.createGain();
-		// console.log("gain node", channel.gain);
 		channel.gain.gain.value = channel.gainValue;
-		// console.log("gain value", channel.gain.gain.value);
 		// connect them paths, yo
-		// console.log("channel.gain", channel.gain, channelNumber);
 		channel.gain.connect(AUD_CTX.destination);
 	});
-//sample version
+
 	$scope.playSample = (channelNumber)=>{
 		console.log(`playing sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
@@ -80,26 +74,9 @@ app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
 	 	}
 	 	chan.sampleSource = AUD_CTX.createBufferSource();
 	 	chan.sampleSource.buffer = chan.sampleBuffer;
-	 	// console.log("chan.sampleSource", chan.sampleSource);
 	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].gain);
 	 	chan.sampleSource.start();
 	};
-
-//patch version
-	// $scope.playSample = (channelNumber)=>{
-	// 	console.log(`playing sample at chan ${channelNumber}`);
-	// 	chan = patch.channels[channelNumber];
-	//  	if(chan.sampleSource){
-	//  		chan.sampleSource.stop();
-	//  		chan.sampleSource = null;
-	//  	}
-	//  	chan.sampleSource = AUD_CTX.createBufferSource();
-	//  	chan.sampleSource.buffer = chan.sampleBuffer;
-	//  	chan.sampleSource.connect(chan.gain);
-	//  	chan.sampleSource.start();
-	// };
-
-
 
 	$scope.stopSample = (channelNumber)=>{
 		console.log(`stopping sample at chan ${channelNumber}`);
