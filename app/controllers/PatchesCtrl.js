@@ -1,6 +1,8 @@
 "use strict";
-app.controller('PatchesCtrl', function($scope, Database, AuthFactory){
+app.controller('PatchesCtrl', function($scope, Database, AuthFactory, PatchFactory, SampleFactory){
 	$scope.greeting = "Pick a Patch to Play With";
+
+	let arrayBuffer = null;
 
 
 
@@ -26,13 +28,68 @@ app.controller('PatchesCtrl', function($scope, Database, AuthFactory){
 
 	$scope.assignPatch = (patch)=>{
 		console.log("assigning patch initialized");	
-
+		PatchFactory.currentPatch = patch;
+		$scope.loadSamples();
 	};
 
 
 
 
+	$scope.loadSamples = ()=>{
+		PatchFactory.currentPatch.channels.forEach((value, index)=>{
+			console.log("loading sample for channel", index);
+			console.log("loading sample", value);
 
+
+
+			if (value.sampleAuthor && value.sampleWavName) {
+
+
+
+
+				
+				Database.getWavURL(value.sampleAuthor, value.sampleWavName)
+				.then((wavURL)=>{
+					console.log("got wavURL", wavURL);
+					Database.downloadWav(wavURL)
+					.then((wav)=>{
+						console.log("got wav here in PatchesCtrl", wav);
+						let reader = new FileReader();
+						reader.onload = (e)=>{
+							// console.log("e.target.result", e.target.result);
+							arrayBuffer = e.target.result;
+							AUD_CTX.decodeAudioData(arrayBuffer).then((decodedData)=> {
+								SampleFactory.channels[index].sampleBuffer = decodedData;
+								console.log("blob decoded");
+								// $scope.sampleLoaded = true;
+								$scope.$apply();
+								// console.log("tried to set ", );
+							});
+						};
+						reader.readAsArrayBuffer(wav);
+					});
+				});
+				
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// SampleFactory.channels[index].sample
+		});
+	};
 
 
 
