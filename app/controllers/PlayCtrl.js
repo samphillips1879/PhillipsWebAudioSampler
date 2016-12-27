@@ -1,7 +1,16 @@
 "use strict";
-app.controller("PlayCtrl", function($scope, PatchFactory, SampleFactory){
+app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFactory){
 	$scope.greeting = "Make some music";
 	let chan = null;
+
+
+
+
+	$scope.savePatch = ()=>{
+		PatchFactory.currentPatch.author = AuthFactory.getUser();
+		console.log("currentPatch = ", PatchFactory.currentPatch);
+		console.log("saving current patch");
+	};
 
 
 
