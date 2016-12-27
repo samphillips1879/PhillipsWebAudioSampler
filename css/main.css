@@ -12,7 +12,9 @@
   margin: auto; }
 
 .chanDiv {
-  margin: 5%; }
+  margin: 5%;
+  border: 1px solid black;
+  padding: 5%; }
 
 #progress_bar.loading {
   opacity: 1.0; }
@@ -24,5 +26,13 @@
 
 .tinyText {
   font-size: .7em; }
+
+.saveButton {
+  height: 3em;
+  border-radius: 25px; }
+
+.cancelButton {
+  height: 3em;
+  border-radius: 25px; }
 
 /*# sourceMappingURL=main.css.map */

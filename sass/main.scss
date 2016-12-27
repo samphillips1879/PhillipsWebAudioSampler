@@ -17,6 +17,8 @@
 
 .chanDiv {
 	margin: 5%;
+	border: 1px solid black;
+	padding: 5%;
 }
 
 
@@ -31,4 +33,19 @@ width: 0;
 
 .tinyText {
 	font-size: .7em;
+}
+
+.saveButton {
+	height: 3em;
+	border-radius: 25px;
+}
+
+.cancelButton {
+	height: 3em;
+	border-radius: 25px;
+}
+
+button {
+	// max-width: 100%;
+	// overflow: auto;
 }

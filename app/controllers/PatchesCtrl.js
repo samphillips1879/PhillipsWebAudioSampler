@@ -63,6 +63,10 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 								console.log("blob decoded");
 								// $scope.sampleLoaded = true;
 								$scope.$apply();
+								console.log("loaded sample at channel: ", index);
+								console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
+								console.log("SampleFactory", SampleFactory);
+								$scope.$apply();
 								// console.log("tried to set ", );
 							});
 						};
@@ -73,6 +77,7 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 			} else {
 				SampleFactory.channels[index].sampleBuffer = null;
 			}
+
 
 
 
