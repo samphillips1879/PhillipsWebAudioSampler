@@ -6,6 +6,17 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     let blob = null;
     let wavURL = null;
 
+
+
+
+    let noResults = [];
+
+
+
+
+
+
+
     DatabaseFactory.browseUserSamples = ()=>{
     	let samples = [];
         let currentUser = AuthFactory.getUser();
@@ -111,24 +122,28 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     };
 
     DatabaseFactory.getUserSampleCatalogCards = (user)=>{
-        console.log("factory retrieving sample catalog cards for user: ", user);  
-        return new Promise((resolve,reject)=>{
-            $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
-            .success((userSampleCards)=>{
-                let array = [];
-                Object.keys(userSampleCards).forEach((key)=>{
-                    userSampleCards[key].wavName = key;
-                    array = $.map(userSampleCards, function(value, index) {
-                        return [value];
+            console.log("factory retrieving sample catalog cards for user: ", user);  
+            return new Promise((resolve,reject)=>{
+                $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
+                .success((userSampleCards)=>{
+                    let array = [];
+                    Object.keys(userSampleCards).forEach((key)=>{
+                        userSampleCards[key].wavName = key;
+                        array = $.map(userSampleCards, function(value, index) {
+                            return [value];
+                        });
                     });
+                    console.log("got user's sample catalog cards: ", array);
+                    if (user !== "anonymous") {
+                        resolve(array);
+                    } else {
+                        resolve(noResults);
+                    }
+                })
+                .error((error)=>{
+                    reject(error);
                 });
-                console.log("got user's sample catalog cards: ", array);
-                resolve(array);
-            })
-            .error((error)=>{
-                reject(error);
             });
-        });
     };
 
 
@@ -246,25 +261,36 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 
 
     DatabaseFactory.getUserPatches = (user)=>{
-        console.log("factory retrieving all public patches");  
-        return new Promise((resolve,reject)=>{
-            $http.get(`${FBCreds.URL}/patches.json?orderBy="author"&equalTo="${user}"`)
-            .success((userPatches)=>{
-                console.log("userPatches", userPatches);
-                let array = [];
-                Object.keys(userPatches).forEach((key)=>{
-                    userPatches[key].patchID = key;
-                    array = $.map(userPatches, function(value, index) {
-                        return [value];
+
+            console.log("factory retrieving all public patches");  
+            return new Promise((resolve,reject)=>{
+                $http.get(`${FBCreds.URL}/patches.json?orderBy="author"&equalTo="${user}"`)
+                .success((userPatches)=>{
+                    console.log("userPatches", userPatches);
+                    let array = [];
+                    Object.keys(userPatches).forEach((key)=>{
+                        userPatches[key].patchID = key;
+                        array = $.map(userPatches, function(value, index) {
+                            return [value];
+                        });
                     });
+                    console.log("got user patches: ", array);
+                    if (user !== "anonymous") {
+                        resolve(array);
+                    } else {
+                        resolve(noResults);
+                    }
+                })
+                .error((error)=>{
+                    reject(error);
                 });
-                console.log("got user patches: ", array);
-                resolve(array);
-            })
-            .error((error)=>{
-                reject(error);
             });
-        });
+        
+
+
+
+
+
     };
 
 

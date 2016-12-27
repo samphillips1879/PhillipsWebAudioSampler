@@ -2,7 +2,7 @@
 
 app.factory("AuthFactory", ()=>{
 
-    let currentUser = null;
+    let currentUser = "anonymous";
     let AuthFactory = {};
 
     AuthFactory.createUser = (userObj)=>{
@@ -15,7 +15,7 @@ app.factory("AuthFactory", ()=>{
     };
 
     AuthFactory.logoutUser = ()=>{
-        currentUser = null;
+        currentUser = "anonymous";
         return firebase.auth().signOut();
     };
 
@@ -29,7 +29,7 @@ app.factory("AuthFactory", ()=>{
                     // console.log("currentUser", currentUser);
                     resolve(true);
                 }else{
-                    currentUser = null;
+                    currentUser = "anonymous";
                     resolve(false);
                 }
             });
