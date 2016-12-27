@@ -1,10 +1,12 @@
 "use strict";
-app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory){
-	$scope.greeting = "Assign Samples to Your Current Patch";
-	let arrayBuffer = null;
-	let bufferToBeAssigned = null;
-	let titleToBeAssigned = null;
-	let imageToBeAssigned = null;
+app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory, SampleFactory){
+	$scope.greeting = "Browse for Samples";
+	let arrayBuffer = null,
+	bufferToBeAssigned = null,
+	titleToBeAssigned = null,
+	imageToBeAssigned = null,
+	authorToBeAssigned = null,
+	wavNameToBeAssigned = null;
 	$scope.sampleTitleQuery = "";
 	$scope.sampleLoaded = false;
 
@@ -31,12 +33,16 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		}
 	};
 
-	$scope.fillAssignmentVariables = (title, img)=>{
+	$scope.fillAssignmentVariables = (title, img, author, wavName)=>{
 		console.log("filling assignment variables");
 		titleToBeAssigned = title;
 		imageToBeAssigned = img;
+		authorToBeAssigned = author;
+		wavNameToBeAssigned = wavName;
 		console.log("titleToBeAssigned", titleToBeAssigned);
 		console.log("imageToBeAssigned", imageToBeAssigned);
+		console.log("wavNameToBeAssigned", wavNameToBeAssigned);
+		console.log("authorToBeAssigned", authorToBeAssigned);
 	};
 
 	$scope.getSample = (user, wavName)=>{
@@ -75,14 +81,25 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 //sample assignment logic
 //****************************************************
 
+
+
+
+
+// SampleFactory playback version
 	$scope.channelSelect = null;
 
 	$scope.assignSample = ()=>{
 		if ($scope.channelSelect) {
-			let chan = PatchFactory.currentPatch.channels[$scope.channelSelect];
+			let chan = SampleFactory.channels[$scope.channelSelect];
 			
 			chan.sampleBuffer = bufferToBeAssigned;
 			chan.sampleTitle = titleToBeAssigned;
+
+			let patchChannel = PatchFactory.currentPatch.channels[$scope.channelSelect];
+			patchChannel.sampleWavName = wavNameToBeAssigned;
+			patchChannel.sampleAuthor = authorToBeAssigned;
+			console.log("titleToBeAssigned", titleToBeAssigned);
+			patchChannel.sampleTitle = titleToBeAssigned;
 
 			// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
 			// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
@@ -90,10 +107,44 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 		}
-		console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+		console.log(`SampleFactory.channels[${$scope.channelSelect}]`, SampleFactory.channels[$scope.channelSelect]);
 		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// currentPatch playback version
+	// $scope.channelSelect = null;
+
+	// $scope.assignSample = ()=>{
+	// 	if ($scope.channelSelect) {
+	// 		let chan = PatchFactory.currentPatch.channels[$scope.channelSelect];
+			
+	// 		chan.sampleBuffer = bufferToBeAssigned;
+	// 		chan.sampleTitle = titleToBeAssigned;
+
+	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
+	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
+
+
+
+	// 	}
+	// 	console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
+	// 	console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
+	// };
 //****************************************************
 
 });
