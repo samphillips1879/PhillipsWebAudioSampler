@@ -98,6 +98,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 			let patchChannel = PatchFactory.currentPatch.channels[$scope.channelSelect];
 			patchChannel.sampleWavName = wavNameToBeAssigned;
 			patchChannel.sampleAuthor = authorToBeAssigned;
+			console.log("titleToBeAssigned", titleToBeAssigned);
+			patchChannel.sampleTitle = titleToBeAssigned;
 
 			// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
 			// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 

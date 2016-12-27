@@ -11,6 +11,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 0,
@@ -21,6 +22,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 1,
@@ -31,6 +33,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 2,
@@ -41,6 +44,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 3,
@@ -51,6 +55,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 4,
@@ -61,6 +66,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 5,
@@ -71,6 +77,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 6,
@@ -81,6 +88,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
+				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 7,

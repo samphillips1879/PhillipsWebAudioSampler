@@ -6,6 +6,7 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 	$scope.savingPatch = false;
+	$scope.patchTitle = "";
 
 
 
@@ -28,6 +29,8 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 			.then((returned)=>{
 				console.log("returned", returned);
 			});
+			$scope.savingPatch = false;
+			$scope.patchTitle = "";
 		} else {
 			window.alert("please input a title for this patch");
 		}

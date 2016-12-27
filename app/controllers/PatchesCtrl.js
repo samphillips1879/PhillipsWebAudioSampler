@@ -1,5 +1,5 @@
 "use strict";
-app.controller('PatchesCtrl', function($scope, Database, AuthFactory, PatchFactory, SampleFactory){
+app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, PatchFactory, SampleFactory){
 	$scope.greeting = "Pick a Patch to Play With";
 
 	let arrayBuffer = null;
@@ -47,7 +47,7 @@ app.controller('PatchesCtrl', function($scope, Database, AuthFactory, PatchFacto
 
 
 
-				
+
 				Database.getWavURL(value.sampleAuthor, value.sampleWavName)
 				.then((wavURL)=>{
 					console.log("got wavURL", wavURL);
@@ -70,6 +70,8 @@ app.controller('PatchesCtrl', function($scope, Database, AuthFactory, PatchFacto
 					});
 				});
 				
+			} else {
+				SampleFactory.channels[index].sampleBuffer = null;
 			}
 
 
@@ -89,6 +91,7 @@ app.controller('PatchesCtrl', function($scope, Database, AuthFactory, PatchFacto
 
 			// SampleFactory.channels[index].sample
 		});
+		$window.location.href = "#/play";
 	};
 
 
