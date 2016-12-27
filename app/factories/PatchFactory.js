@@ -4,13 +4,14 @@ app.factory("PatchFactory", ()=>{
 	let PatchFactory = {};
 	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
 	PatchFactory.currentPatch = {
+		isPublic: true,
+		title: null,
 		author: null,
 		channels: [
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 0,
 				sourceOsc: null,
@@ -20,8 +21,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 1,
 				sourceOsc: null,
@@ -31,8 +31,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 2,
 				sourceOsc: null,
@@ -42,8 +41,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 3,
 				sourceOsc: null,
@@ -53,8 +51,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 4,
 				sourceOsc: null,
@@ -64,8 +61,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 5,
 				sourceOsc: null,
@@ -75,8 +71,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 6,
 				sourceOsc: null,
@@ -86,8 +81,7 @@ app.factory("PatchFactory", ()=>{
 			{
 				// sampleSource: null,
 				// sampleBuffer: null,
-				// sampleTitle: null,
-				sampleWavName: null,
+				// samplesampleWavName: null,
 				sampleAuthor: null,
 				channelNum: 7,
 				sourceOsc: null,

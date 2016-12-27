@@ -200,5 +200,99 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
+
+
+
+
+
+    DatabaseFactory.postNewPatch = (patch)=>{
+        console.log("got a patch: ", patch);
+        return new Promise((resolve,reject)=>{
+            $http.post(`${FBCreds.URL}/patches.json`, angular.toJson(patch))
+            .success((object)=>{
+                resolve(object);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
+
+
+
+    DatabaseFactory.getPublicPatches = ()=>{
+        console.log("factory retrieving all public patches");  
+        return new Promise((resolve,reject)=>{
+            $http.get(`${FBCreds.URL}/patches.json?orderBy="isPublic"&equalTo=true`)
+            .success((publicPatches)=>{
+                console.log("publicPatches", publicPatches);
+                let array = [];
+                Object.keys(publicPatches).forEach((key)=>{
+                    publicPatches[key].patchID = key;
+                    array = $.map(publicPatches, function(value, index) {
+                        return [value];
+                    });
+                });
+                console.log("got public patches: ", array);
+                resolve(array);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
+
+
+    DatabaseFactory.getUserPatches = (user)=>{
+        console.log("factory retrieving all public patches");  
+        return new Promise((resolve,reject)=>{
+            $http.get(`${FBCreds.URL}/patches.json?orderBy="author"&equalTo="${user}"`)
+            .success((userPatches)=>{
+                console.log("userPatches", userPatches);
+                let array = [];
+                Object.keys(userPatches).forEach((key)=>{
+                    userPatches[key].patchID = key;
+                    array = $.map(userPatches, function(value, index) {
+                        return [value];
+                    });
+                });
+                console.log("got user patches: ", array);
+                resolve(array);
+            })
+            .error((error)=>{
+                reject(error);
+            });
+        });
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return DatabaseFactory;
 });

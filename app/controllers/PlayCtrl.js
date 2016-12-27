@@ -1,15 +1,36 @@
 "use strict";
-app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFactory){
-	$scope.greeting = "Make some music";
-	let chan = null;
+app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFactory, Database){
+	$scope.greeting = "Make Some Music";
+	let chan = null,
+		patchTitle = null;
+
+
+	$scope.savingPatch = false;
 
 
 
 
 	$scope.savePatch = ()=>{
+		$scope.savingPatch = true;
 		PatchFactory.currentPatch.author = AuthFactory.getUser();
-		console.log("currentPatch = ", PatchFactory.currentPatch);
-		console.log("saving current patch");
+		
+	};
+
+	$scope.confirmSavePatch = ()=>{
+		patchTitle = $scope.patchTitle;
+		if (patchTitle) {
+			PatchFactory.currentPatch.title = patchTitle;
+			let patch = PatchFactory.currentPatch;
+			console.log("currentPatch = ", patch);
+			console.log("saving current patch");
+			// console.log("saving patch with title: ", patchTitle);
+			Database.postNewPatch(patch)
+			.then((returned)=>{
+				console.log("returned", returned);
+			});
+		} else {
+			window.alert("please input a title for this patch");
+		}
 	};
 
 

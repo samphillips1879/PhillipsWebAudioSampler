@@ -1,8 +1,20 @@
 <div ng-include="'partials/navbar.html'"></div>
 <h2>{{greeting}}</h2>
 
+<div>
 
-<button ng-click="savePatch()" class="capture-btn btn-success">Save Patch</button>
+	<div ng-show="!savingPatch">
+		<button ng-click="savePatch()" class="capture-btn btn-success">Save Patch</button>
+	</div>
+
+	<div ng-show="savingPatch">
+		<input type="text" ng-model="patchTitle">
+		<button ng-click="confirmSavePatch()" class="capture-btn btn-success">Confirm New Patch</button>
+	</div>
+	
+</div>
+
+
 
 <div ng-repeat="channel in patch.channels">
 
