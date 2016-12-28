@@ -8,6 +8,9 @@ h2 {
   text-align: center;
   margin: auto; }
 
+video {
+  max-height: 359px; }
+
 input[type=file] {
   border: 2px solid darkgrey;
   padding: 1%; }
