@@ -6,13 +6,33 @@ h2 {
 	text-align: center;
 	margin: auto;
 	margin-top: 2%;
+	margin-bottom: 2%;
 }
 
+.search-group {
+	text-align: center;
+	margin: auto;
+
+}
+
+
+
+
+
+input[type=file] {
+	border: 2px solid $border;
+	padding: 1%;
+    // margin: 0 auto;
+    // display: inline-block;
+}
 
 .viewWrap {
 	border: 2px solid $border;
 	position: fixed;
 	top: 50px; right: 0; bottom: 0; left: 0;
+	padding-left: 5%;
+	padding-right: 5%;
+	overflow: scroll;
 }
 
 #viewHolder {
@@ -38,7 +58,7 @@ h2 {
 #creationBelt {
 	margin-top: 3em;
 	margin-bottom: 3em;
-	border: 2px solid black;
+	border: 2px solid $border;
 	padding: 2em;
 }
 
@@ -50,7 +70,7 @@ h2 {
 
 .chanDiv {
 	margin: 5%;
-	border: 1px solid black;
+	border: 1px solid $border;
 	padding: 5%;
 }
 
