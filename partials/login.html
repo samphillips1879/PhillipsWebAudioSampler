@@ -1,17 +1,28 @@
 <div ng-include="'partials/guestNavbar.html'"></div>
-<h2>{{greeting}}</h2>
 
 
-<section class="auth-form">
-	<h2>Login or Register</h2>
-	<div>
-		Email: <input type="email" name="userEmail" autofocus="true" ng-model="account.email">
-	</div>
-	<div>
-		Password: <input type="password" name="userPassword" autofocus="false" ng-model="account.password">
-	</div>
-	<div>
-		<button class="btn btn-info" ng-click="login()">Login</button>
-		<button class="btn btn-default" ng-click="register()">Register</button>
-	</div>
-</section>
+<div class="viewWrap">
+
+
+	<h2>{{greeting}}</h2>
+
+
+	<section class="auth-form">
+		<h2>Login or Register</h2>
+		<div>
+			Email: <input type="email" name="userEmail" autofocus="true" ng-model="account.email">
+		</div>
+		<div>
+			Password: <input type="password" name="userPassword" autofocus="false" ng-model="account.password">
+		</div>
+		<div>
+			<button class="btn btn-info" ng-click="login()">Login</button>
+			<button class="btn btn-default" ng-click="register()">Register</button>
+		</div>
+	</section>
+
+
+
+
+
+</div>
