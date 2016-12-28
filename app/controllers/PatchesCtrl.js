@@ -36,9 +36,14 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 
 
 	$scope.loadSamples = ()=>{
+		//an attempt to wait to switch views until the last sample has been loaded
+		let counter = 0;
+
 		PatchFactory.currentPatch.channels.forEach((value, index)=>{
 			console.log("loading sample for channel", index);
 			console.log("loading sample", value);
+
+
 
 
 
@@ -63,6 +68,15 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 								console.log("blob decoded");
 								// $scope.sampleLoaded = true;
 								$scope.$apply();
+								console.log("loaded sample at channel: ", index);
+								console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
+								console.log("SampleFactory", SampleFactory);
+								$scope.$apply();
+
+								counter++;
+								if (counter === 8) {
+									$window.location.href = "#/play";
+								}
 								// console.log("tried to set ", );
 							});
 						};
@@ -72,7 +86,12 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 				
 			} else {
 				SampleFactory.channels[index].sampleBuffer = null;
+				counter ++;
+				if (counter === 8) {
+					$window.location.href = "#/play";
+				}
 			}
+
 
 
 
@@ -91,7 +110,7 @@ app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, P
 
 			// SampleFactory.channels[index].sample
 		});
-		$window.location.href = "#/play";
+		// $window.location.href = "#/play";
 	};
 
 

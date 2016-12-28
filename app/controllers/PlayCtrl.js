@@ -13,13 +13,16 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 	$scope.savePatch = ()=>{
 		$scope.savingPatch = true;
-		PatchFactory.currentPatch.author = AuthFactory.getUser();
+		// $("#patchTitleInput")[0].focus();
+		// console.log($("#patchTitleInput"));
+		// PatchFactory.currentPatch.author = AuthFactory.getUser();
 		
 	};
 
 	$scope.confirmSavePatch = ()=>{
 		patchTitle = $scope.patchTitle;
 		if (patchTitle) {
+			PatchFactory.currentPatch.author = AuthFactory.getUser();
 			PatchFactory.currentPatch.title = patchTitle;
 			let patch = PatchFactory.currentPatch;
 			console.log("currentPatch = ", patch);
@@ -35,6 +38,13 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 			window.alert("please input a title for this patch");
 		}
 	};
+
+	$scope.cancelSavePatch = ()=>{
+		$scope.savingPatch = false;
+		$scope.patchTitle = "";
+	};
+
+
 
 
 

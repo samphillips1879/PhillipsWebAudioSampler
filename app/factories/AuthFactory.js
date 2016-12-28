@@ -5,6 +5,10 @@ app.factory("AuthFactory", ()=>{
     let currentUser = "anonymous";
     let AuthFactory = {};
 
+
+    AuthFactory.registered = false;
+
+
     AuthFactory.createUser = (userObj)=>{
         console.log("trying to create user");
         return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password);
@@ -16,6 +20,7 @@ app.factory("AuthFactory", ()=>{
 
     AuthFactory.logoutUser = ()=>{
         currentUser = "anonymous";
+        AuthFactory.registered = false;
         return firebase.auth().signOut();
     };
 
@@ -26,10 +31,12 @@ app.factory("AuthFactory", ()=>{
                 if(user){
                     // console.log("user from if in isAuth", user);
                     currentUser = user.uid;
+                    AuthFactory.registered = true;
                     // console.log("currentUser", currentUser);
                     resolve(true);
                 }else{
                     currentUser = "anonymous";
+                    AuthFactory.registered = false;
                     resolve(false);
                 }
             });

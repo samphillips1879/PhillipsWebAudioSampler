@@ -1,7 +1,10 @@
 "use strict";
-app.controller('NavCtrl', function($scope, AuthFactory){
+app.controller('NavCtrl', function($scope, AuthFactory, $window){
 
 	// $scope.user = AuthFactory.getUser();
+
+	$scope.registered = false;
+
 
 	$scope.navItems = [
 		{name: "Logout", url: "#/logout"}, 
