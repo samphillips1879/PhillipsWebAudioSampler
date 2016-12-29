@@ -1,4 +1,6 @@
 $border: darkgrey;
+$choiceButton: darkgrey;
+$buttonText: black;
 
 
 
@@ -15,9 +17,20 @@ h2 {
 
 }
 
-// .choiceButton {
-// 	max-width: 80%;
-// }
+.choiceButton {
+	background-color: $choiceButton;
+	color: $buttonText;
+}
+
+.browseResults {
+	margin: 5%;
+	border: 1px solid $border;
+	// position: relative;
+	// top: 5%; 
+	// right: 5%; 
+	// bottom: 5%; 
+	// left: 5%;
+}
 
 
 

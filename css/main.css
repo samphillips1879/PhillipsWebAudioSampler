@@ -8,6 +8,14 @@ h2 {
   text-align: center;
   margin: auto; }
 
+.choiceButton {
+  background-color: darkgrey;
+  color: black; }
+
+.browseResults {
+  margin: 5%;
+  border: 1px solid darkgrey; }
+
 video {
   max-height: 359px; }
 
