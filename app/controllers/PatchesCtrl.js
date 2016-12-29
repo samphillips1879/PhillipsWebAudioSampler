@@ -1,6 +1,6 @@
 "use strict";
 app.controller('PatchesCtrl', function($scope, $window, Database, AuthFactory, PatchFactory, SampleFactory){
-	$scope.greeting = "Pick a Patch to Play With";
+	$scope.greeting = "Pick-a-Patch";
 
 	let arrayBuffer = null;
 

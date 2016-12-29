@@ -16,10 +16,12 @@
 
 
 
-	<div class="search-group">
-		<input type="text" size="40" id="sampleTitleSearchInput" placeholder="filter results" ng-model="sampleTitleQuery">
-		<button ng-click="getPatches('public')">browse  public patches</button>
-		<button ng-click="getPatches('user')">browse patches you've made</button>
+	<div class="search-group container">
+		<div class="row">
+			<input type="text" class="col-sm-4" id="sampleTitleSearchInput" placeholder="filter results" ng-model="sampleTitleQuery">
+			<button class="col-sm-4" ng-click="getPatches('public')">Public Patches</button>
+			<button class="col-sm-4" ng-click="getPatches('user')">Your Patches</button>
+		</div>
 	</div>
 
 

@@ -10,21 +10,29 @@ h2 {
 
 .choiceButton {
   background-color: darkgrey;
-  color: black; }
+  color: black;
+  overflow: scroll; }
 
 .browseResults {
   margin: 5%;
-  border: 1px solid darkgrey; }
+  border: 1px solid black;
+  position: relative;
+  overflow: scroll;
+  height: 70%;
+  width: 80%;
+  margin: auto;
+  top: 5%; }
 
 video {
   max-height: 359px; }
 
 input[type=file] {
-  border: 2px solid darkgrey;
+  border: 2px solid black;
   padding: 1%; }
 
 .viewWrap {
-  border: 2px solid darkgrey;
+  border: 2px solid black;
+  border-top: 0;
   position: fixed;
   top: 50px;
   right: 0;
@@ -35,7 +43,7 @@ input[type=file] {
   overflow: scroll; }
 
 #viewHolder {
-  border: 2px solid darkgrey;
+  border: 2px solid black;
   position: fixed;
   top: 0;
   right: 0;
@@ -43,7 +51,7 @@ input[type=file] {
   left: 0; }
 
 .navbar {
-  border: 2px solid darkgrey;
+  border: 2px solid black;
   width: 100%;
   position: fixed;
   top: 0;
@@ -53,10 +61,13 @@ input[type=file] {
 .indexRow {
   margin-top: 25em; }
 
+.panel-body {
+  border: 1px solid black; }
+
 #creationBelt {
   margin-top: 3em;
   margin-bottom: 3em;
-  border: 2px solid darkgrey;
+  border: 2px solid black;
   padding: 2em; }
 
 .captureStatus {
@@ -65,8 +76,12 @@ input[type=file] {
 
 .chanDiv {
   margin: 5%;
-  border: 1px solid darkgrey;
+  border: 1px solid black;
   padding: 5%; }
+
+.sampleCatalogCard {
+  margin-top: 3%;
+  margin-bottom: 0; }
 
 #progress_bar.loading {
   opacity: 1.0; }
