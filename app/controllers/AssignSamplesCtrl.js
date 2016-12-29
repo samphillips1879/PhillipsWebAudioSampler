@@ -9,6 +9,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	wavNameToBeAssigned = null;
 	$scope.sampleTitleQuery = "";
 	$scope.sampleLoaded = false;
+	$scope.sampleBeltMessage = "Please Load a Sample";
 
 
 //sample retrieval logic
@@ -46,6 +47,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 
 	$scope.getSample = (user, wavName)=>{
+		$scope.sampleBeltMessage = "loading sample...";
 		$scope.sampleLoaded = false;
 		Database.getWavURL(user, wavName)
 		.then((wavURL)=>{

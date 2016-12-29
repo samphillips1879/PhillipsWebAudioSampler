@@ -42,6 +42,16 @@ input[type=file] {
   padding-right: 5%;
   overflow: scroll; }
 
+.sampleBelt {
+  border: 1px solid black;
+  height: 50px;
+  margin-top: 10px; }
+  .sampleBelt h4 {
+    font-weight: 300; }
+
+.beltButton {
+  height: 100%; }
+
 #viewHolder {
   border: 2px solid black;
   position: fixed;
