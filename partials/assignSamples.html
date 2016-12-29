@@ -54,19 +54,19 @@
 
 
 
-	<div ng-repeat="card in catalog | filter: sampleTitleQuery">
+	<div ng-repeat="card in catalog | filter: sampleTitleQuery" class="col-xs-4 sampleCatalogCard container">
 	  <div class="panel panel-default">
 	    <div class="panel-body">
 	      <!-- <div class="col-xs-1"><input type="checkbox" name=""/></div> -->
-		    <div class="col-xs-4 sampleCatalogCard container">
+		    <!-- <div class="col-xs-4 sampleCatalogCard container"> -->
 		    	<!-- <h4 class="col-xs-12">{{card.title}}</h4> -->
 
 
 
 
-		    <div class="col-xs-1" ng-click="getSample(card.user, card.wavName); fillAssignmentVariables(card.title, card.img, card.user, card.wavName)"><button class="btn btn-info">{{card.title}}</button></div>
+			    <div class="col-xs-12" ng-click="getSample(card.user, card.wavName); fillAssignmentVariables(card.title, card.img, card.user, card.wavName)"><button class="btn btn-info choiceButton col-xs-12">{{card.title}}</button></div>
 
-		    </div>
+		    <!-- </div> -->
 	      
 	    </div>
 	  </div>
