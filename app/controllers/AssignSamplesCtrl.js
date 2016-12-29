@@ -88,10 +88,11 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 // SampleFactory playback version
-	$scope.channelSelect = null;
+	$scope.channelSelect = "Load to Channel: ";
+	// $scope.channelSelect = null;
 
 	$scope.assignSample = ()=>{
-		if ($scope.channelSelect) {
+		if ($scope.channelSelect !== "Load to Channel: ") {
 			let chan = SampleFactory.channels[$scope.channelSelect];
 			
 			chan.sampleBuffer = bufferToBeAssigned;
@@ -103,14 +104,9 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 			console.log("titleToBeAssigned", titleToBeAssigned);
 			patchChannel.sampleTitle = titleToBeAssigned;
 
-			// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
-			// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
-
-
+			
 
 		}
-		console.log(`SampleFactory.channels[${$scope.channelSelect}]`, SampleFactory.channels[$scope.channelSelect]);
-		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
 
