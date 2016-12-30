@@ -35,7 +35,12 @@
 <!-- ************************************* -->
 			<!-- turn this div into a row that the buttons can fill -->
 				<!-- <div > -->
-					<sampleTitle class="col-sm-12">{{channel.sampleTitle}}</sampleTitle>
+
+
+
+					<div class="row">
+						<sampleTitle class="col-sm-10 col-sm-offset-1"><span>{{channel.sampleTitle}}</span></sampleTitle>
+					</div>
 
 					<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons row col-sm-12">
 
@@ -67,11 +72,12 @@
 
 
 
+					<div class="row" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+						<a href="#/samples/browse"><button class="btn btn-default chanButtons col-sm-10 col-sm-offset-1" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+							Load Sample
+						</button></a>
+					</div>
 
-
-					<a href="#/samples/browse"><button class="btn btn-default chanButtons" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
-						Load Sample
-					</button></a>
 
 
 				<!-- </div> -->
