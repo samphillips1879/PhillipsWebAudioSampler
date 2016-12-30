@@ -53,7 +53,7 @@ h2 {
 }
 
 .choiceButton {
-	background-color: $choiceButton;
+	background-color: $light;
 	color: $buttonText;
 	overflow: scroll;
 }
@@ -145,12 +145,14 @@ input[type=file] {
 	padding-left: 6.5%;
 	padding-right: 8%;
 	background-color: $choiceButton;
+	border: 1px solid $border;
 }
 
 .triggerIcon {
 	text-align: center;
 	margin: auto;
 }
+
 
 sampleTitle {
 	height: 3em;
@@ -187,6 +189,7 @@ sampleTitle {
 }
 
 .navbar {
+
 	border: 2px solid $border;
 	width: 100%;
 	position: fixed;
@@ -225,6 +228,19 @@ sampleTitle {
 	// background-color: $middle;
 }
 
+.margCard {
+	padding: 0;
+}
+
+.panel-body {
+	padding: 0;
+	margin: 0;
+}
+.panel-default {
+	padding: 0;
+	margin: 0;
+}
+
 .channelGroup {
 	margin-top	: 5%;
 	border: 1px solid $border;
@@ -234,6 +250,7 @@ sampleTitle {
 .chanButtons {
 	margin-top: 5px;
 	margin-bottom: 5px;
+	overflow: scroll;
 }
 
 .sampleCatalogCard {
@@ -277,4 +294,11 @@ width: 0;
 button {
 	// max-width: 100%;
 	// overflow: auto;
+}
+
+
+
+
+.sampleTriggerRow {
+	min-height: 35px;
 }

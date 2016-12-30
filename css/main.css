@@ -12,7 +12,7 @@ h2 {
   margin: auto; }
 
 .choiceButton {
-  background-color: #368DA7;
+  background-color: #8BCDE0;
   color: black;
   overflow: scroll; }
 
@@ -75,7 +75,8 @@ input[type=file] {
 .sampleTriggerButton {
   padding-left: 6.5%;
   padding-right: 8%;
-  background-color: #368DA7; }
+  background-color: #368DA7;
+  border: 1px solid #38535A; }
 
 .triggerIcon {
   text-align: center;
@@ -130,6 +131,17 @@ sampleTitle {
   min-height: 150px;
   background-color: #8BCDE0; }
 
+.margCard {
+  padding: 0; }
+
+.panel-body {
+  padding: 0;
+  margin: 0; }
+
+.panel-default {
+  padding: 0;
+  margin: 0; }
+
 .channelGroup {
   margin-top: 5%;
   border: 1px solid #38535A;
@@ -137,7 +149,8 @@ sampleTitle {
 
 .chanButtons {
   margin-top: 5px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  overflow: scroll; }
 
 .sampleCatalogCard {
   margin-top: 3%; }
@@ -167,5 +180,8 @@ sampleTitle {
 .cancelButton {
   height: 3em;
   border-radius: 25px; }
+
+.sampleTriggerRow {
+  min-height: 35px; }
 
 /*# sourceMappingURL=main.css.map */
