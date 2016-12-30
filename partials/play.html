@@ -29,7 +29,7 @@
 
 	<!-- sample controls -->
 	<div class="container col-xs-12">
-		<div class="col-sm-3" ng-repeat="channel in patch.channels">
+		<div class="col-sm-3 repeatDiv" ng-repeat="channel in patch.channels">
 			<div id="chan{{channel.channelNum}}" class="chanDiv">
 
 <!-- ************************************* -->
@@ -44,8 +44,8 @@
 							
 
 							<!-- <img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
-							<button ng-click="playSample(channel.channelNum)" type="button" class="sampleTriggerButton btn btn-primary col-sm-3"><span class="glyphicon glyphicon-play"></span> <!-- {{channel.sampleTitle}} --></button>
-							<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary col-sm-3 sampleTriggerButton"><span class="glyphicon glyphicon-stop"></span></button>
+							<button ng-click="playSample(channel.channelNum)" type="button" class="sampleTriggerButton btn btn-primary col-sm-3 glyphicon glyphicon-play"><!-- <span class="triggerIcon glyphicon glyphicon-play"></span> --> <!-- {{channel.sampleTitle}} --></button>
+							<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary col-sm-3 sampleTriggerButton glyphicon glyphicon-stop"><!-- <span class="glyphicon glyphicon-stop"></span> --></button>
 							<!-- <loop begin button> -->
 							<!-- <loop stop button> -->
 							<!-- both these buttons will copy styling from play and stop buttons -->
@@ -69,7 +69,7 @@
 
 
 
-					<a href="#/samples/browse"><button class="btn btn-default" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+					<a href="#/samples/browse"><button class="btn btn-default chanButtons" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
 						Load Sample
 					</button></a>
 

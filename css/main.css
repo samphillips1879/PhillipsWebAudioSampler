@@ -56,7 +56,11 @@ input[type=file] {
     outline-offset: -1px; }
 
 .sampleTriggerButton {
-  padding-right: 20%; }
+  padding-left: 6.5%; }
+
+.triggerIcon {
+  text-align: center;
+  margin: auto; }
 
 sampleTitle {
   height: 2em;
@@ -102,10 +106,18 @@ sampleTitle {
 .chanDiv {
   margin: 5%;
   border: 1px solid black;
-  padding: 5%; }
+  padding: 5%;
+  min-height: 150px; }
+
+.chanButtons {
+  margin-top: 5px;
+  margin-bottom: 5px; }
 
 .sampleCatalogCard {
   margin-top: 3%; }
+
+.repeatDiv {
+  margin: 0; }
 
 #progress_bar.loading {
   opacity: 1.0; }
