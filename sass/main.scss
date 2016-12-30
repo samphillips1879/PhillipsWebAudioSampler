@@ -27,7 +27,9 @@ $buttonText: black;
 
 body {
 	// background-color: $dark;
-	background-color: $light;
+	// background-color: $light;
+	background-color: $middle;
+
 }
 
 
@@ -101,6 +103,7 @@ input[type=file] {
 }
 
 .sampleBelt {
+	background-color: $light;
 	border: 1px solid $border;
 	border-bottom-width: 3px;
 	height: 50px;
@@ -109,13 +112,34 @@ input[type=file] {
 		font-weight: 300;
 	}
 	select {
-		border-radius: 0;
 		// -webkit-appearance: none;
-		border: 0;
-		outline: 1px inset $border; outline-offset:-1px
+
+		// border-radius: 0;
+		// border: 0;
+		outline: 1px inset $border; outline-offset:-1px;
+		color: $highlight;
+		background-color: $dark;
+		border: 5px ridge $highlight;
+		height: 50px;
+
 	}
 }
 
+.beltButton {
+	height: 50px;
+	color: $dark;
+	background-color: $highlight;
+	border: 2px groove $border;
+
+	&:hover {
+		background-color: $light;
+	}
+	&:active {
+		background-color: $middle;
+		color: $light;
+	}
+
+}
 
 .sampleTriggerButton {
 	padding-left: 6.5%;
@@ -140,10 +164,13 @@ sampleTitle {
 }
 
 
-.beltButton {
-	height: 50px;
-	color: $highlight;
-	// border: 1px groove $border;
+
+.beltSelect {
+
+
+
+	// background-color: $dark;
+	// border: 5px ridge $highlight;
 }
 
 // .beltSelect {
@@ -194,7 +221,8 @@ sampleTitle {
 	border: 1px solid $border;
 	padding: 5%;
 	min-height: 150px;
-	background-color: $middle;
+	background-color: $light;
+	// background-color: $middle;
 }
 
 .channelGroup {

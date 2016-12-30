@@ -1,5 +1,5 @@
 body {
-  background-color: #8BCDE0; }
+  background-color: #368DA7; }
 
 h2 {
   text-align: center;
@@ -46,6 +46,7 @@ input[type=file] {
   overflow: scroll; }
 
 .sampleBelt {
+  background-color: #8BCDE0;
   border: 1px solid #38535A;
   border-bottom-width: 3px;
   height: 50px;
@@ -53,10 +54,23 @@ input[type=file] {
   .sampleBelt h4 {
     font-weight: 300; }
   .sampleBelt select {
-    border-radius: 0;
-    border: 0;
     outline: 1px inset #38535A;
-    outline-offset: -1px; }
+    outline-offset: -1px;
+    color: #46B8DA;
+    background-color: #1D4C5A;
+    border: 5px ridge #46B8DA;
+    height: 50px; }
+
+.beltButton {
+  height: 50px;
+  color: #1D4C5A;
+  background-color: #46B8DA;
+  border: 2px groove #38535A; }
+  .beltButton:hover {
+    background-color: #8BCDE0; }
+  .beltButton:active {
+    background-color: #368DA7;
+    color: #8BCDE0; }
 
 .sampleTriggerButton {
   padding-left: 6.5%;
@@ -75,10 +89,6 @@ sampleTitle {
   padding-top: 2%;
   text-align: center;
   background-color: #38535A;
-  color: #46B8DA; }
-
-.beltButton {
-  height: 50px;
   color: #46B8DA; }
 
 #viewHolder {
@@ -118,7 +128,7 @@ sampleTitle {
   border: 1px solid #38535A;
   padding: 5%;
   min-height: 150px;
-  background-color: #368DA7; }
+  background-color: #8BCDE0; }
 
 .channelGroup {
   margin-top: 5%;
