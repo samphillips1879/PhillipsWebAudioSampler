@@ -56,7 +56,8 @@ input[type=file] {
     outline-offset: -1px; }
 
 .sampleTriggerButton {
-  padding-left: 6.5%; }
+  padding-left: 6.5%;
+  padding-right: 8%; }
 
 .triggerIcon {
   text-align: center;
@@ -104,10 +105,15 @@ sampleTitle {
   margin: auto; }
 
 .chanDiv {
-  margin: 5%;
+  margin: 0;
   border: 1px solid black;
   padding: 5%;
   min-height: 150px; }
+
+.channelGroup {
+  margin-top: 5%;
+  border: 1px solid black;
+  padding: 0; }
 
 .chanButtons {
   margin-top: 5px;
@@ -117,7 +123,8 @@ sampleTitle {
   margin-top: 3%; }
 
 .repeatDiv {
-  margin: 0; }
+  padding-left: 0;
+  padding-right: 0; }
 
 #progress_bar.loading {
   opacity: 1.0; }

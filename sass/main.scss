@@ -88,6 +88,7 @@ input[type=file] {
 
 .sampleTriggerButton {
 	padding-left: 6.5%;
+	padding-right: 8%;
 }
 
 .triggerIcon {
@@ -152,10 +153,16 @@ sampleTitle {
 
 
 .chanDiv {
-	margin: 5%;
+	margin: 0;
 	border: 1px solid $border;
 	padding: 5%;
 	min-height: 150px;
+}
+
+.channelGroup {
+	margin-top	: 5%;
+	border: 1px solid $border;
+	padding: 0;
 }
 
 .chanButtons {
@@ -170,7 +177,8 @@ sampleTitle {
 }
 
 .repeatDiv {
-	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 
