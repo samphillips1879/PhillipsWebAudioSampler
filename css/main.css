@@ -1,3 +1,6 @@
+body {
+  background-color: #8BCDE0; }
+
 h2 {
   text-align: center;
   margin: auto;
@@ -9,13 +12,13 @@ h2 {
   margin: auto; }
 
 .choiceButton {
-  background-color: darkgrey;
+  background-color: #368DA7;
   color: black;
   overflow: scroll; }
 
 .browseResults {
   margin: 5%;
-  border: 3px solid black;
+  border: 3px solid #38535A;
   position: relative;
   overflow: scroll;
   height: 70%;
@@ -27,11 +30,11 @@ video {
   max-height: 359px; }
 
 input[type=file] {
-  border: 2px solid black;
+  border: 2px solid #38535A;
   padding: 1%; }
 
 .viewWrap {
-  border: 2px solid black;
+  border: 2px solid #38535A;
   border-top: 0;
   position: fixed;
   top: 50px;
@@ -43,7 +46,7 @@ input[type=file] {
   overflow: scroll; }
 
 .sampleBelt {
-  border: 1px solid black;
+  border: 1px solid #38535A;
   border-bottom-width: 3px;
   height: 50px;
   margin-top: 10px; }
@@ -52,12 +55,13 @@ input[type=file] {
   .sampleBelt select {
     border-radius: 0;
     border: 0;
-    outline: 1px inset black;
+    outline: 1px inset #38535A;
     outline-offset: -1px; }
 
 .sampleTriggerButton {
   padding-left: 6.5%;
-  padding-right: 8%; }
+  padding-right: 8%;
+  background-color: #368DA7; }
 
 .triggerIcon {
   text-align: center;
@@ -66,17 +70,17 @@ input[type=file] {
 sampleTitle {
   height: 2em;
   overflow: scroll;
-  border: 1px solid black;
+  border: 1px solid #38535A;
   vertical-align: middle;
   padding-top: 2%;
   text-align: center; }
 
 .beltButton {
   height: 50px;
-  color: blue; }
+  color: #46B8DA; }
 
 #viewHolder {
-  border: 2px solid black;
+  border: 2px solid #38535A;
   position: fixed;
   top: 0;
   right: 0;
@@ -84,7 +88,7 @@ sampleTitle {
   left: 0; }
 
 .navbar {
-  border: 2px solid black;
+  border: 2px solid #38535A;
   width: 100%;
   position: fixed;
   top: 0;
@@ -100,7 +104,7 @@ sampleTitle {
 #creationBelt {
   margin-top: 3em;
   margin-bottom: 3em;
-  border: 2px solid black;
+  border: 2px solid #38535A;
   padding: 2em; }
 
 .captureStatus {
@@ -109,13 +113,13 @@ sampleTitle {
 
 .chanDiv {
   margin: 0;
-  border: 1px solid black;
+  border: 1px solid #38535A;
   padding: 5%;
   min-height: 150px; }
 
 .channelGroup {
   margin-top: 5%;
-  border: 1px solid black;
+  border: 1px solid #38535A;
   padding: 0; }
 
 .chanButtons {

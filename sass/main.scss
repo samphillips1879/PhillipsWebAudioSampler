@@ -1,8 +1,38 @@
-$border: black;
-$choiceButton: darkgrey;
+
+$highlight: #46B8DA;
+$border: #38535A;
+$light: #8BCDE0;
+$middle: #368DA7;
+$dark: #1D4C5A;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $border: black;
+$choiceButton: $middle;
 $buttonText: black;
 // $beltBorder: darkblue;
-$highlight: blue;
+// $highlight: blue;
+
+
+
+body {
+	background-color: $light;
+}
+
+
+
+
+
 
 
 
@@ -89,6 +119,7 @@ input[type=file] {
 .sampleTriggerButton {
 	padding-left: 6.5%;
 	padding-right: 8%;
+	background-color: $choiceButton;
 }
 
 .triggerIcon {
