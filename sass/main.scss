@@ -130,10 +130,11 @@ input[type=file] {
 sampleTitle {
 	height: 2em;
 	overflow: scroll;
-	border: 1px solid $border;
+	border: 5px ridge $highlight;
 	vertical-align: middle;
 	padding-top: 2%;
 	text-align: center;
+	background-color: $border;
 }
 
 

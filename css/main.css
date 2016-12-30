@@ -70,10 +70,11 @@ input[type=file] {
 sampleTitle {
   height: 2em;
   overflow: scroll;
-  border: 1px solid #38535A;
+  border: 5px ridge #46B8DA;
   vertical-align: middle;
   padding-top: 2%;
-  text-align: center; }
+  text-align: center;
+  background-color: #38535A; }
 
 .beltButton {
   height: 50px;
