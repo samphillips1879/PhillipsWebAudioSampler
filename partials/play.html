@@ -13,9 +13,8 @@
 
 	<h2>{{greeting}}</h2>
 
-
+	<!-- save patch content -->
 	<div class="container col-xs-10 col-xs-offset-1">
-
 		<div ng-show="!savingPatch">
 			<button ng-click="savePatch()" class="capture-btn btn-success saveButton">Save Patch</button>
 		</div>
@@ -28,20 +27,56 @@
 		
 	</div>
 
-
+	<!-- sample controls -->
 	<div class="container col-xs-12">
 		<div class="col-sm-3" ng-repeat="channel in patch.channels">
 			<div id="chan{{channel.channelNum}}" class="chanDiv">
 
+<!-- ************************************* -->
+			<!-- turn this div into a row that the buttons can fill -->
+				<!-- <div > -->
+					<sampleTitle class="col-sm-12">{{channel.sampleTitle}}</sampleTitle>
 
-				<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons">
-				<!-- 	<img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
-					<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> {{channel.sampleTitle}}</button>
-					<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
-				</div>
-				<a href="#/samples/browse"><button class="btn btn-default" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
-					Load Sample
-				</button></a>
+					<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons row col-sm-12">
+
+
+						<!-- <div class="row"> -->
+							
+
+							<!-- <img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
+							<button ng-click="playSample(channel.channelNum)" type="button" class="sampleTriggerButton btn btn-primary col-sm-3"><span class="glyphicon glyphicon-play"></span> <!-- {{channel.sampleTitle}} --></button>
+							<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-primary col-sm-3 sampleTriggerButton"><span class="glyphicon glyphicon-stop"></span></button>
+							<!-- <loop begin button> -->
+							<!-- <loop stop button> -->
+							<!-- both these buttons will copy styling from play and stop buttons -->
+							<!-- also include a cancel loop button, that's smaller and on a different plane -->
+
+							
+						<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+
+
+
+
+					<a href="#/samples/browse"><button class="btn btn-default" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+						Load Sample
+					</button></a>
+
+
+				<!-- </div> -->
+
+
 
 
 

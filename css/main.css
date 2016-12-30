@@ -55,6 +55,14 @@ input[type=file] {
     outline: 1px inset black;
     outline-offset: -1px; }
 
+.sampleTriggerButton {
+  padding-right: 20%; }
+
+sampleTitle {
+  height: 2em;
+  overflow: scroll;
+  border: 1px solid black; }
+
 .beltButton {
   height: 50px;
   color: blue; }

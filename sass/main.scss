@@ -86,6 +86,17 @@ input[type=file] {
 }
 
 
+.sampleTriggerButton {
+	padding-right: 20%;
+}
+
+sampleTitle {
+	height: 2em;
+	overflow: scroll;
+	border: 1px solid $border;
+}
+
+
 .beltButton {
 	height: 50px;
 	color: $highlight;
