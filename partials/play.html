@@ -16,12 +16,12 @@
 	<!-- save patch content -->
 	<div class="container col-xs-10 col-xs-offset-1">
 		<div ng-show="!savingPatch">
-			<button ng-click="savePatch()" class="capture-btn btn-success saveButton">Save Patch</button>
+			<button ng-click="savePatch()" class="capture-btn btn-info saveButton">Save Patch</button>
 		</div>
 
 		<div ng-show="savingPatch">
 			<input id="patchTitleInput" placeholder="name this patch" type="text" ng-model="patchTitle">
-			<button ng-click="confirmSavePatch()" class="capture-btn btn-success saveButton">Confirm New Patch</button>
+			<button ng-click="confirmSavePatch()" class="capture-btn btn-info saveButton">Confirm New Patch</button>
 			<button ng-click="cancelSavePatch()" class="capture-btn btn-danger cancelButton">Cancel</button>
 		</div>
 		

@@ -26,6 +26,7 @@ $buttonText: black;
 
 
 body {
+	// background-color: $dark;
 	background-color: $light;
 }
 
@@ -192,6 +193,7 @@ sampleTitle {
 	border: 1px solid $border;
 	padding: 5%;
 	min-height: 150px;
+	background-color: $middle;
 }
 
 .channelGroup {
@@ -233,6 +235,9 @@ width: 0;
 .saveButton {
 	height: 3em;
 	border-radius: 25px;
+	border: 5px groove $highlight;
+	border-bottom-style: ridge;
+	border-right-style: ridge;
 }
 
 .cancelButton {
