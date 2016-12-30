@@ -68,13 +68,14 @@ input[type=file] {
   margin: auto; }
 
 sampleTitle {
-  height: 2em;
+  height: 3em;
   overflow: scroll;
   border: 5px ridge #46B8DA;
   vertical-align: middle;
   padding-top: 2%;
   text-align: center;
-  background-color: #38535A; }
+  background-color: #38535A;
+  color: #46B8DA; }
 
 .beltButton {
   height: 50px;
