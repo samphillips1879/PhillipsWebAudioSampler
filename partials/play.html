@@ -42,16 +42,29 @@
 				<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons row col-xs-12 sampleTriggerRow">
 
 
+
+
+
+					<!-- Sample Control Buttons -->
 					<!-- <div class="row"> -->
 						
 
-						<!-- <img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
 						<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 glyphicon glyphicon-play sampleTriggerButton"></button>
 						<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 sampleTriggerButton glyphicon glyphicon-stop"></button>
-						<!-- <loop begin button> -->
-						<!-- <loop stop button> -->
-						<!-- both these buttons will copy styling from play and stop buttons -->
-						<!-- also include a cancel loop button, that's smaller and on a different plane -->
+
+
+
+						<!-- <loop button> -->
+						<!-- visibly engaged when active, turns loop on -->
+						<button ng-click="toggleLoop(channel.channelNum)" type="button" class="btn btn-info col-xs-3 sampleTriggerButton glyphicon glyphicon-retweet"></button>
+
+
+
+
+						<!-- <set loop beginning button> -->
+						<!-- <set loop end button> -->
+						<!-- these buttons will copy styling from play and stop buttons -->
+						
 
 						
 					<!-- </div> -->

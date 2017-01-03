@@ -179,13 +179,52 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	};
 
 	$scope.stopSample = (channelNumber)=>{
-		console.log(`stopping sample at chan ${channelNumber}`);
+		// console.log(`stopping sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 		chan.sampleSource.stop();
 		chan.sampleSource = null;
 	};
 
-	//to bring in a new patch, set an event that, once triggered, sets $scope.patch to whatever patch is saved in PatchFactory
+
+
+
+
+	$scope.toggleLoop = (channelNumber)=>{
+		let chan = patch.channels[channelNumber];
+		// let loopSample = SampleFactory.channels[channelNumber].sampleSource.loop
+		if (!chan.loopSample) {
+			console.log("falsy at least");
+			chan.loopSample = true;
+			SampleFactory.channels[channelNumber].sampleSource.loop = true;
+		} else {
+			console.log("truthy at least");
+			chan.loopSample = false;
+			SampleFactory.channels[channelNumber].sampleSource.loop = false;
+		}
+	};
+// $scope.toggleLoop = (channelNumber)=>{
+// 		let chan = patch.channels[channelNumber];
+// 		if (!patch.channels[channelNumber].loopSample) {
+// 			console.log("falsy at least");
+// 			patch.channels[channelNumber].loopSample = true;
+// 		} else {
+// 			console.log("truthy at least");
+// 			patch.channels[channelNumber].loopSample = false;
+
+// 		}
+// 	};
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
 
