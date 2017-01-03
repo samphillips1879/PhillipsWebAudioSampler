@@ -71,6 +71,20 @@ input[type=file] {
   padding-right: 5%;
   overflow: scroll; }
 
+#patchTitleHolder {
+  margin-top: 5px;
+  min-height: 45px;
+  padding: 0;
+  padding-top: 10px; }
+  #patchTitleHolder span {
+    text-align: left; }
+  #patchTitleHolder h6 {
+    display: inline;
+    text-align: center; }
+
+#patchTitle {
+  text-align: center; }
+
 .sampleBelt {
   background-color: #8BCDE0;
   border: 1px solid #38535A;
@@ -173,7 +187,7 @@ sampleTitle {
   margin: 0; }
 
 .channelGroup {
-  margin-top: 5%;
+  margin-top: 50px;
   border: 1px solid #38535A;
   padding: 0; }
 
