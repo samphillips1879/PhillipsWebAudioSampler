@@ -181,7 +181,9 @@ sampleTitle {
   border: 5px groove #46B8DA;
   border-bottom-style: ridge;
   border-right-style: ridge;
-  color: #1D4C5A; }
+  color: #1D4C5A;
+  padding-left: 5px;
+  padding-right: 5px; }
 
 .cancelButton {
   height: 3em;
