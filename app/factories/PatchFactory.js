@@ -23,7 +23,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -40,7 +40,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -57,7 +57,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -74,7 +74,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -91,7 +91,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -108,7 +108,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -125,7 +125,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			},
 			{
 				// sampleSource: null,
@@ -142,7 +142,7 @@ app.factory("PatchFactory", ()=>{
 				hiPassFilter: null,
 				hiPassHz: 0,
 				loPassFilter: null,
-				loPassHz: 22000
+				loPassHz: 20000
 			}
 		]
 	};

@@ -101,10 +101,12 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		//create those nodes, homeskillet
 		channel.hiPassFilter = AUD_CTX.createBiquadFilter();
 		channel.hiPassFilter.type = 'highpass';
+		// channel.hiPassFilter.frequency.value = 0;
 		channel.hiPassFilter.frequency.value = channel.hiPassHz;
 
 		channel.loPassFilter = AUD_CTX.createBiquadFilter();
 		channel.loPassFilter.type = 'lowpass';
+		// channel.loPassFilter.frequency.value = 22000;
 		channel.loPassFilter.frequency.value = channel.loPassHz;
 
 		channel.gain = AUD_CTX.createGain();
@@ -226,6 +228,24 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 				chan.samplePlaybackRate = element.value;
 			};
 		});
+
+
+
+		// $(".hiPassHzControl").each((index, element)=>{
+		// 	element.oninput = ()=>{
+		// 		console.log("slider changed");
+		// 		let chan = patch.channels[index];
+		// 		let samp = SampleFactory.channels[index];
+
+				
+		// 		// samp.sampleSource.playbackRate.value = element.value;
+
+		// 		chan.hiPassHz = element.value;
+		// 		// chan.samplePlaybackRate = element.value;
+		// 	};
+		// });
+
+
 	});
 
 
