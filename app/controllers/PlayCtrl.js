@@ -3,6 +3,7 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	$scope.greeting = "Make Some Music";
 	let chan = null,
 		patchTitle = null;
+	let loop = false;
 
 
 	$scope.savingPatch = false;
@@ -132,6 +133,24 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	});
 
 	$scope.playSample = (channelNumber)=>{
+
+
+
+
+		console.log("patch", patch);
+		console.log("patch.channels", patch.channels);
+		console.log("channelNumber", channelNumber);
+		console.log("patch.channels[channelNumber]", patch.channels[channelNumber]);
+
+
+
+
+		loop = patch.channels[channelNumber].loopSample;
+		console.log("loop", loop);
+		
+
+
+
 		console.log(`playing sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 	 	if(chan.sampleSource){
@@ -140,8 +159,23 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	 	}
 	 	chan.sampleSource = AUD_CTX.createBufferSource();
 	 	chan.sampleSource.buffer = chan.sampleBuffer;
+	 	// if (patch.channels[channelNumber].loopSample) {
+	 	// 	console.log("sample wants to loop");
+	 	// 	chan.sampleSource.loop = true;
+	 	// 	console.log("chan.sampleSource.loop", chan.sampleSource.loop);
+	 	// } else {
+	 	// 	console.log("sample doesn't want to loop");
+	 	// }
 	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].gain);
+	 	// chan.sampleSource.loop = true;
 	 	chan.sampleSource.start();
+	 	if (loop) {
+	 		// console.log("sample wants to loop");
+	 		chan.sampleSource.loop = true;
+	 		// console.log("chan.sampleSource.loop", chan.sampleSource.loop);
+	 	} else if (!loop){
+	 		// console.log("sample doesn't want to loop");
+	 	}
 	};
 
 	$scope.stopSample = (channelNumber)=>{
