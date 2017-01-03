@@ -5,7 +5,7 @@ app.factory("PatchFactory", ()=>{
 	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
 	PatchFactory.currentPatch = {
 		isPublic: true,
-		title: null,
+		title: "Default Patch",
 		author: null,
 		channels: [
 			{
