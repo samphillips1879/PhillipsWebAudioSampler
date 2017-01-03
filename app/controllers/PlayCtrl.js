@@ -2,22 +2,15 @@
 app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFactory, Database){
 	$scope.greeting = "Make Some Music";
 	let chan = null,
-		patchTitle = null;
-	let loop = false;
-
+		patchTitle = null,
+		loop = false;
 
 	$scope.savingPatch = false;
 	$scope.patchTitle = "";
 
 
-
-
 	$scope.savePatch = ()=>{
 		$scope.savingPatch = true;
-		// $("#patchTitleInput")[0].focus();
-		// console.log($("#patchTitleInput"));
-		// PatchFactory.currentPatch.author = AuthFactory.getUser();
-		
 	};
 
 	$scope.confirmSavePatch = ()=>{
@@ -45,19 +38,10 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		$scope.patchTitle = "";
 	};
 
-
 	let showButtonPress = (channelNum)=>{
 		$(".glyphicon-play").eq(channelNum).addClass("active");
 		// .active (and include the aria-pressed="true" attribute) 
 	};
-
-	// let showButtonRelease = (channelNum)=>{
-	// 	$(".glyphicon-play").eq(channelNum).removeClass("active");
-	// };
-
-
-
-
 
 	// Binding number keys to sample triggers
 	$(document).keydown((e)=>{
@@ -188,45 +172,26 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 
-
+//currently assumes all patches you are bringing in do not have any looped samples. Will still work if the sample DOES, however the INITIAL colorization of the buttons will be reversed
 	$scope.toggleLoop = (channelNumber)=>{
 		let chan = patch.channels[channelNumber];
+		let samp = SampleFactory.channels[channelNumber];
 		if (!chan.loopSample) {
 			console.log("falsy at least");
 			chan.loopSample = true;
 			$(".glyphicon-retweet").eq(channelNumber).addClass("engagedLoop");
-			SampleFactory.channels[channelNumber].sampleSource.loop = true;
+			if (samp.sampleSource) {
+				samp.sampleSource.loop = true;
+			}
 		} else {
 			console.log("truthy at least");
 			chan.loopSample = false;
 			$(".glyphicon-retweet").eq(channelNumber).removeClass("engagedLoop");
-			SampleFactory.channels[channelNumber].sampleSource.loop = false;
+			if (samp.sampleSource) {
+				samp.sampleSource.loop = false;
+			}
 		}
 	};
-// $scope.toggleLoop = (channelNumber)=>{
-// 		let chan = patch.channels[channelNumber];
-// 		if (!patch.channels[channelNumber].loopSample) {
-// 			console.log("falsy at least");
-// 			patch.channels[channelNumber].loopSample = true;
-// 		} else {
-// 			console.log("truthy at least");
-// 			patch.channels[channelNumber].loopSample = false;
-
-// 		}
-// 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 
 
