@@ -105,6 +105,7 @@ h2 {
 	background-color: $highlight;
 	color: $buttonText;
 	overflow: scroll;
+	min-height: 60px;
 }
 
 .browseResults {
@@ -325,7 +326,7 @@ sampleTitle {
 	margin: 0;
 	border: 1px solid $border;
 	padding: 5%;
-	min-height: 300px;
+	min-height: 315px;
 	background-color: $light;
 	// background-color: $middle;
 }
@@ -353,6 +354,7 @@ sampleTitle {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	overflow: scroll;
+	// min-height: 40px;
 }
 
 .sampleCatalogCard {

@@ -25,7 +25,8 @@ h2 {
 .choiceButton {
   background-color: #46B8DA;
   color: black;
-  overflow: scroll; }
+  overflow: scroll;
+  min-height: 60px; }
 
 .browseResults {
   margin: 5%;
@@ -173,7 +174,7 @@ sampleTitle {
   margin: 0;
   border: 1px solid #38535A;
   padding: 5%;
-  min-height: 300px;
+  min-height: 315px;
   background-color: #8BCDE0; }
 
 .margCard {

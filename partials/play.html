@@ -12,7 +12,7 @@
 
 
 	<h2>{{greeting}}</h2>
-	<div class="container">
+	<div class="container-fluid">
 			<button ng-show="!savingPatch" ng-click="savePatch()" class="patchHeadButton capture-btn btn-info saveButton">Save Patch</button>
 
 			<input ng-show="savingPatch" id="patchTitleInput" class="patchHeadButton saveButton" placeholder="name this patch" type="text" ng-model="patchTitle">
@@ -99,13 +99,23 @@
 
 					<div class="chanGainSlider">
 						<h6>Volume</h6>
-						<input type="range" id="chan_{{channel.channelNum}}_gainValue" min="0" max="10" defaultValue="1" step="0.1" ng-model="patch.channels[channel.channelNum].gain.gain.value">
+						<input type="range" id="chan_{{channel.channelNum}}_gainValue" class="gainControl" min="0" max="10" defaultValue="1" step="0.1" ng-model="patch.channels[channel.channelNum].gain.gain.value">
 					</div>
 
-					<div>
+					<div class="chanSpeedSlider">
 						<h6>Speed</h6><!-- <span class="playback-rate-value">1.0</span> -->
 						<input ng-model="patch.channels[channel.channelNum].samplePlaybackRate" class="playbackRateControl" type="range" min="0.25" max="3" step="0.05" value="1">
-						
+						<!-- <input ng-model="patch.channels[channel.channelNum].samplePlaybackRate" class="playbackRateControl" type="range" min="0.25" max="3" step="0.05" value="1"> -->
+					</div>
+
+					<div class="chanHiPassSlider">
+						<h6>High Pass Filter</h6>
+						<input ng-model="patch.channels[channel.channelNum].hiPassFilter.frequency.value" class="hiPassHzControl" type="range" min="0" max="20000" step="10">
+					</div>
+
+					<div class="chanLoPassSlider">
+						<h6>Low Pass Filter</h6>
+						<input ng-model="patch.channels[channel.channelNum].loPassFilter.frequency.value" class="loPassHzControl" type="range" min="0" max="20000" step="10">
 					</div>
 
 
