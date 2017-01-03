@@ -43,9 +43,8 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		// .active (and include the aria-pressed="true" attribute) 
 	};
 
-	// Binding number keys to sample triggers
+	// Binding number keys to sample triggers... this can be dried up
 	$(document).keydown((e)=>{
-		// console.log("key pressed", e.key);
 		let keyPressed = e.keyCode;
 		if (keyPressed > 47 && keyPressed < 56) {
 			if (SampleFactory.channels[e.key].sampleBuffer) {
@@ -56,33 +55,22 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 					console.log("1");
 					$scope.playSample(1);
 				} else if (keyPressed === 50) {
-					// console.log("2");
 					$scope.playSample(2);
 				} else if (keyPressed === 51) {
-					// console.log("3");
 					$scope.playSample(3);
 				} else if (keyPressed === 52) {
-					// console.log("4");
 					$scope.playSample(4);
 				} else if (keyPressed === 53) {
-					// console.log("5");
 					$scope.playSample(5);
 				} else if (keyPressed === 54) {
-					// console.log("6");
 					$scope.playSample(6);
 				} else if (keyPressed === 55) {
-					// console.log("7");
 					$scope.playSample(7);
 				} 
 			}
-
 		}
 	});
-
-
-
-
-	//
+	
 	$(document).keyup((e)=>{
 		// console.log("key pressed", e.key);
 		let keyPressed = e.keyCode;
@@ -101,7 +89,6 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	$scope.samples = SampleFactory;
 
 
-	// console.log("$scope.patch", $scope.patch); //setting the patch to either the default template or whatever the user has saved as their currentPatch
 	let patch = $scope.patch; 
 	let samples = $scope.samples;
 //samples might not be getting used
@@ -109,10 +96,26 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 	//connecting paths
 	patch.channels.forEach((channel, channelNumber)=>{
+
+
 		//create those nodes, homeskillet
+		channel.hiPassFilter = AUD_CTX.createBiquadFilter();
+		channel.hiPassFilter.type = 'highpass';
+		channel.hiPassFilter.frequency.value = channel.hiPassHz;
+
+		channel.loPassFilter = AUD_CTX.createBiquadFilter();
+		channel.loPassFilter.type = 'lowpass';
+		channel.loPassFilter.frequency.value = channel.loPassHz;
+
 		channel.gain = AUD_CTX.createGain();
 		channel.gain.gain.value = channel.gainValue;
-		// connect them paths, yo
+
+
+
+		// connecting them paths
+
+		channel.hiPassFilter.connect(channel.loPassFilter);
+		channel.loPassFilter.connect(channel.gain);
 		channel.gain.connect(AUD_CTX.destination);
 	});
 
@@ -167,7 +170,7 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 
-	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].gain);
+	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].hiPassFilter);
 	 	// chan.sampleSource.loop = true;
 	 	chan.sampleSource.start();
 	 	if (loop) {

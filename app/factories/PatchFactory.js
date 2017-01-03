@@ -19,7 +19,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 0,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -32,7 +36,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 1,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -45,7 +53,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 2,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -58,7 +70,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 3,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -71,7 +87,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 4,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -84,7 +104,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 5,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -97,7 +121,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 6,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			},
 			{
 				// sampleSource: null,
@@ -110,7 +138,11 @@ app.factory("PatchFactory", ()=>{
 				channelNum: 7,
 				sourceOsc: null,
 				gain: null,
-				gainValue: 1
+				gainValue: 1,
+				hiPassFilter: null,
+				hiPassHz: 0,
+				loPassFilter: null,
+				loPassHz: 22000
 			}
 		]
 	};
