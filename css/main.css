@@ -239,4 +239,14 @@ sampleTitle {
 .navbar-header a {
   color: white; }
 
+.patchHead {
+  background-color: #8BCDE0;
+  border: 1px solid #38535A;
+  border-bottom-width: 3px;
+  min-height: 60px;
+  margin-top: 10px; }
+
+.patchHeadButton {
+  margin: 7px; }
+
 /*# sourceMappingURL=main.css.map */
