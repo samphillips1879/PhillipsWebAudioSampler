@@ -150,6 +150,23 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	 	// } else {
 	 	// 	console.log("sample doesn't want to loop");
 	 	// }
+	 	// chan.sampleSource.playbackRate.value = 2;
+	 	console.log("PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate", PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate);
+
+	 	let startingPlaybackRate = PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate;
+
+	 	// console.log("PatchFactory", PatchFactory.currentPatch.channels[channelNumber]);
+	 	console.log("startingPlaybackRate", startingPlaybackRate);
+
+
+
+	 	if (startingPlaybackRate) {
+		 	chan.sampleSource.playbackRate.value = startingPlaybackRate;
+	 	}
+	 	// chan.sampleSource.playbackRate.value = PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate;
+
+
+
 	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].gain);
 	 	// chan.sampleSource.loop = true;
 	 	chan.sampleSource.start();
@@ -192,7 +209,47 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 			}
 		}
 	};
+
+
+
+	$(document).ready(()=>{
+		// console.log($(".playbackRateControl"));
+		$(".playbackRateControl").each((index, element)=>{
+			element.oninput = ()=>{
+				console.log("slider changed");
+				let chan = patch.channels[index];
+				let samp = SampleFactory.channels[index];
+				samp.sampleSource.playbackRate.value = element.value;
+				chan.samplePlaybackRate = element.value;
+			};
+		});
+	});
+
+
+	// $(".playback-rate-control").on("input", function(e){
+	// 	console.log("e", e);
+	// });
+
+
+	// playbackControl.oninput = function() {
+	//   source.playbackRate.value = playbackControl.value;
+	//   playbackValue.innerHTML = playbackControl.value;
+	// }
+
+
+
+
+
+
+
+
+
+
 });
+
+
+
+
 
 
 
