@@ -92,7 +92,7 @@ h2 {
 }
 
 .choiceButton {
-	background-color: $light;
+	background-color: $highlight;
 	color: $buttonText;
 	overflow: scroll;
 }
@@ -101,6 +101,7 @@ h2 {
 	margin: 5%;
 	border: 3px solid $border;
 	position: relative;
+	background-color: $light;
 	// z-index: 100;
 	overflow: scroll;
 	height: 70%;
@@ -110,7 +111,7 @@ h2 {
 	// right: 5%; 
 	// bottom: 5%; 
 	margin: auto;
-	top: 5%;
+	top: 3%;
 	// left: 5%;
 }
 
@@ -172,6 +173,7 @@ input[type=file] {
 
 	&:hover {
 		background-color: $light;
+		color: white;
 	}
 	&:active {
 		background-color: $middle;

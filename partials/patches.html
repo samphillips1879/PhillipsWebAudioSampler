@@ -18,9 +18,11 @@
 
 	<div class="search-group container">
 		<div class="row">
-			<input type="text" class="col-sm-4" id="sampleTitleSearchInput" placeholder="filter results" ng-model="sampleTitleQuery">
-			<button class="col-sm-4" ng-click="getPatches('public')">Public Patches</button>
-			<button class="col-sm-4" ng-click="getPatches('user')">Your Patches</button>
+			<button class="col-xs-6 beltButton saveButton" ng-click="getPatches('public')">Public Patches</button>
+			<button class="col-xs-6 beltButton saveButton" ng-click="getPatches('user')">Your Patches</button>
+		</div>
+		<div class="row">
+			<input type="text" class="col-xs-12 saveButton" id="sampleTitleSearchInput" placeholder="filter results" ng-model="sampleTitleQuery">
 		</div>
 	</div>
 

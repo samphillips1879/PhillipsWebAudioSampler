@@ -17,7 +17,7 @@ h2 {
   margin: auto; }
 
 .choiceButton {
-  background-color: #8BCDE0;
+  background-color: #46B8DA;
   color: black;
   overflow: scroll; }
 
@@ -25,11 +25,12 @@ h2 {
   margin: 5%;
   border: 3px solid #38535A;
   position: relative;
+  background-color: #8BCDE0;
   overflow: scroll;
   height: 70%;
   width: 80%;
   margin: auto;
-  top: 5%; }
+  top: 3%; }
 
 video {
   max-height: 359px; }
@@ -72,7 +73,8 @@ input[type=file] {
   background-color: #46B8DA;
   border: 2px groove #38535A; }
   .beltButton:hover {
-    background-color: #8BCDE0; }
+    background-color: #8BCDE0;
+    color: white; }
   .beltButton:active {
     background-color: #368DA7;
     color: #8BCDE0; }
