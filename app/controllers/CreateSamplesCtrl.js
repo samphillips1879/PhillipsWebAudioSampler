@@ -23,19 +23,19 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//video file submission handler
 	$("#userFileInput").change(function() {
-	    console.log("this.files", this.files);
+	    // console.log("this.files", this.files);
 	    processVideoFile(this.files[0]);
 	});
 
 	// render the video in view
 	function processVideoFile(file) {
-		console.log("processVideoFile running");
+		// console.log("processVideoFile running");
 		Database.uploadVideoToStorageBucket(file, "Title input manually through code");
 	}
 
 	//setup web audio path once video loaded
 	$('video').on('loadeddata', function (e) {
-	    console.log("video loaded");
+	    // console.log("video loaded");
 	    setupForSampleCapture();
 	});
 
@@ -46,15 +46,12 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//create web audio path
 	let setupForSampleCapture = ()=>{
-		console.log("setupForSampleCapture triggered");
-		// let videoEl = $('#userVideo')[0];
+		// console.log("setupForSampleCapture triggered");
 		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-		console.log("source", source);
+		// console.log("source", source);
 		source.connect(AUD_CTX.destination);
 		rec = new Recorder(source);
-		console.log("source established, path initialized: source -> destination");
-		// videoEl.play();
-		// console.log("video started");
+		// console.log("source established, path initialized: source -> destination");
 	};
 
 	//start recording sample
@@ -91,7 +88,7 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//play back the current sample recording
 	$scope.previewSample = ()=>{
-		console.log("previewing sample");
+		// console.log("previewing sample");
 		newSource = AUD_CTX.createBufferSource();
 		newSource.buffer = newBuffer;
 		newSource.connect(AUD_CTX.destination);
@@ -99,51 +96,26 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 	};
 
 	$scope.saveSample = ()=>{
-		console.log("saveSample triggered");
-		let user = AuthFactory.getUser();
-		console.log("user for catalogCard", user);
-		let title = $scope.sampleTitle;
-		let isPublic = true;
-		let img = $scope.sampleImage;
-		let catalogCard = {
-			user, title, isPublic, img
-		};
-
-		Database.postSampleToCatalog(catalogCard)
-		//caution here, catalogId might not actually be the object key. It might be a returned object with a name attribute that is equal to what I'm looking for. 
-		.then((object)=>{
-			// console.log("object", object);
-			console.log("object.name: ", object.name);
-			rec.exportWAV((blob)=>{
-				Database.postNewSampleWav(blob, object.name);
+		// console.log("saveSample triggered");
+		if ($scope.sampleTitle) {
+			let user = AuthFactory.getUser();
+			// console.log("user for catalogCard", user);
+			let title = $scope.sampleTitle;
+			let isPublic = true;
+			let img = $scope.sampleImage;
+			let catalogCard = {
+				user, title, isPublic, img
+			};
+			Database.postSampleToCatalog(catalogCard)
+			.then((object)=>{
+				// console.log("object.name: ", object.name);
+				rec.exportWAV((blob)=>{
+					Database.postNewSampleWav(blob, object.name);
+				});
 			});
-			// Database.postNewSampleWav()
-		});
+		} else {
+			window.alert("please input a title for this sample");
+		}
+
 	};	
 });
-
-
-
-
-//Failed attempt at manually reproducing recorderJs' functionality; that is, taking the raw audio PCM data and converting it into an audioBuffer that can be played back via an audioBufferSourceNode
-	// $scope.beginSampleCapture = ()=>{
-	// 		console.log("setting up path, inserting analyser");
-	// 		// source = AUD_CTX.createMediaElementSource(videoEl);
-	// 		sourceAnalyser = AUD_CTX.createAnalyser();
-	// 		source.connect(sourceAnalyser);
-	// 		console.log("sourceAnalyser.fftSize", sourceAnalyser.fftSize);
-	// 		sourceAnalyser.connect(AUD_CTX.destination);
-	// 		console.log("path complete: source -> analyser -> destination");	
-	// 		console.log("sample capture started");
-	// 	};
-	// $scope.endSampleCapture = ()=>{
-	// 	console.log("sample capture ending");
-	// 	$('#userVideo')[0].pause();
-	// 	sample = new Float32Array(sourceAnalyser.frequencyBinCount);
-	// 	sourceAnalyser.getFloatFrequencyData(sample);
-	// 	console.log("sample", sample);
-	// 	samplesArray = samplesArray.concat(sample);
-	// 	console.log("samplesArray", samplesArray);
-	// 	sourceAnalyser = null;
-	// 	sourceAnalyser = null;
-	// };

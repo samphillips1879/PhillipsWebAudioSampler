@@ -310,6 +310,7 @@ sampleTitle {
 	margin-top: 3em;
 	margin-bottom: 3em;
 	border: 2px solid $border;
+	border-radius: 25px;
 	padding: 2em;
 	background-color: $light;
 }
@@ -472,5 +473,34 @@ button {
 	text-align: left;
 	span {
 		margin-top: 10px;
+	}
+}
+
+
+.glyphicon-retweet {
+	background-color: $pink;
+	color: white;
+	&:hover {
+		color: white;
+	// 	background-color: $pink;
+	}
+	&:active {
+		color: white;
+		background-color: $dark;
+	}
+	&:focus {
+		color: white;
+	}
+}
+
+.engagedLoop {
+	background-color: green;
+	&:hover {
+		color: white;
+		background-color: green;
+	}
+	&:active {
+		color: white;
+		background-color: $dark;
 	}
 }

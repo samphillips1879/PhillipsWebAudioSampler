@@ -2,21 +2,15 @@
 app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFactory, Database){
 	$scope.greeting = "Make Some Music";
 	let chan = null,
-		patchTitle = null;
-
+		patchTitle = null,
+		loop = false;
 
 	$scope.savingPatch = false;
 	$scope.patchTitle = "";
 
 
-
-
 	$scope.savePatch = ()=>{
 		$scope.savingPatch = true;
-		// $("#patchTitleInput")[0].focus();
-		// console.log($("#patchTitleInput"));
-		// PatchFactory.currentPatch.author = AuthFactory.getUser();
-		
 	};
 
 	$scope.confirmSavePatch = ()=>{
@@ -44,19 +38,10 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		$scope.patchTitle = "";
 	};
 
-
 	let showButtonPress = (channelNum)=>{
 		$(".glyphicon-play").eq(channelNum).addClass("active");
 		// .active (and include the aria-pressed="true" attribute) 
 	};
-
-	let showButtonRelease = (channelNum)=>{
-		$(".glyphicon-play").eq(channelNum).removeClass("active");
-	};
-
-
-
-
 
 	// Binding number keys to sample triggers
 	$(document).keydown((e)=>{
@@ -132,6 +117,24 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	});
 
 	$scope.playSample = (channelNumber)=>{
+
+
+
+
+		console.log("patch", patch);
+		console.log("patch.channels", patch.channels);
+		console.log("channelNumber", channelNumber);
+		console.log("patch.channels[channelNumber]", patch.channels[channelNumber]);
+
+
+
+
+		loop = patch.channels[channelNumber].loopSample;
+		console.log("loop", loop);
+		
+
+
+
 		console.log(`playing sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 	 	if(chan.sampleSource){
@@ -140,19 +143,55 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	 	}
 	 	chan.sampleSource = AUD_CTX.createBufferSource();
 	 	chan.sampleSource.buffer = chan.sampleBuffer;
+	 	// if (patch.channels[channelNumber].loopSample) {
+	 	// 	console.log("sample wants to loop");
+	 	// 	chan.sampleSource.loop = true;
+	 	// 	console.log("chan.sampleSource.loop", chan.sampleSource.loop);
+	 	// } else {
+	 	// 	console.log("sample doesn't want to loop");
+	 	// }
 	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].gain);
+	 	// chan.sampleSource.loop = true;
 	 	chan.sampleSource.start();
+	 	if (loop) {
+	 		// console.log("sample wants to loop");
+	 		chan.sampleSource.loop = true;
+	 		// console.log("chan.sampleSource.loop", chan.sampleSource.loop);
+	 	} else if (!loop){
+	 		// console.log("sample doesn't want to loop");
+	 	}
 	};
 
 	$scope.stopSample = (channelNumber)=>{
-		console.log(`stopping sample at chan ${channelNumber}`);
+		// console.log(`stopping sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 		chan.sampleSource.stop();
 		chan.sampleSource = null;
 	};
 
-	//to bring in a new patch, set an event that, once triggered, sets $scope.patch to whatever patch is saved in PatchFactory
 
+
+
+//currently assumes all patches you are bringing in do not have any looped samples. Will still work if the sample DOES, however the INITIAL colorization of the buttons will be reversed
+	$scope.toggleLoop = (channelNumber)=>{
+		let chan = patch.channels[channelNumber];
+		let samp = SampleFactory.channels[channelNumber];
+		if (!chan.loopSample) {
+			console.log("falsy at least");
+			chan.loopSample = true;
+			$(".glyphicon-retweet").eq(channelNumber).addClass("engagedLoop");
+			if (samp.sampleSource) {
+				samp.sampleSource.loop = true;
+			}
+		} else {
+			console.log("truthy at least");
+			chan.loopSample = false;
+			$(".glyphicon-retweet").eq(channelNumber).removeClass("engagedLoop");
+			if (samp.sampleSource) {
+				samp.sampleSource.loop = false;
+			}
+		}
+	};
 });
 
 

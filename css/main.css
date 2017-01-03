@@ -161,6 +161,7 @@ sampleTitle {
   margin-top: 3em;
   margin-bottom: 3em;
   border: 2px solid #38535A;
+  border-radius: 25px;
   padding: 2em;
   background-color: #8BCDE0; }
 
@@ -276,5 +277,25 @@ sampleTitle {
   text-align: left; }
   #loginCard span {
     margin-top: 10px; }
+
+.glyphicon-retweet {
+  background-color: #E05E85;
+  color: white; }
+  .glyphicon-retweet:hover {
+    color: white; }
+  .glyphicon-retweet:active {
+    color: white;
+    background-color: #1D4C5A; }
+  .glyphicon-retweet:focus {
+    color: white; }
+
+.engagedLoop {
+  background-color: green; }
+  .engagedLoop:hover {
+    color: white;
+    background-color: green; }
+  .engagedLoop:active {
+    color: white;
+    background-color: #1D4C5A; }
 
 /*# sourceMappingURL=main.css.map */
