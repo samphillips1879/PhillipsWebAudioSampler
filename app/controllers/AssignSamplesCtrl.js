@@ -1,6 +1,6 @@
 "use strict";
 app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory, SampleFactory){
-	$scope.greeting = "Browse for Samples";
+	$scope.greeting = "Sample Selection";
 	let arrayBuffer = null,
 	bufferToBeAssigned = null,
 	titleToBeAssigned = null,
@@ -9,6 +9,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	wavNameToBeAssigned = null;
 	$scope.sampleTitleQuery = "";
 	$scope.sampleLoaded = false;
+	$scope.sampleBeltMessage = "Please Load a Sample";
+	$scope.currentSampleTitle = "";
 
 
 //sample retrieval logic
@@ -39,6 +41,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		imageToBeAssigned = img;
 		authorToBeAssigned = author;
 		wavNameToBeAssigned = wavName;
+		$scope.currentSampleTitle = `"${title}"`;
 		console.log("titleToBeAssigned", titleToBeAssigned);
 		console.log("imageToBeAssigned", imageToBeAssigned);
 		console.log("wavNameToBeAssigned", wavNameToBeAssigned);
@@ -46,6 +49,7 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	};
 
 	$scope.getSample = (user, wavName)=>{
+		$scope.sampleBeltMessage = "Loading Sample...";
 		$scope.sampleLoaded = false;
 		Database.getWavURL(user, wavName)
 		.then((wavURL)=>{
@@ -86,10 +90,11 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 
 
 // SampleFactory playback version
-	$scope.channelSelect = null;
+	$scope.channelSelect = "Load to Channel: ";
+	// $scope.channelSelect = null;
 
 	$scope.assignSample = ()=>{
-		if ($scope.channelSelect) {
+		if ($scope.channelSelect !== "Load to Channel: ") {
 			let chan = SampleFactory.channels[$scope.channelSelect];
 			
 			chan.sampleBuffer = bufferToBeAssigned;
@@ -101,14 +106,9 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 			console.log("titleToBeAssigned", titleToBeAssigned);
 			patchChannel.sampleTitle = titleToBeAssigned;
 
-			// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
-			// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
-
-
+			
 
 		}
-		console.log(`SampleFactory.channels[${$scope.channelSelect}]`, SampleFactory.channels[$scope.channelSelect]);
-		console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
 	};
 
 

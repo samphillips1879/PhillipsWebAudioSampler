@@ -45,6 +45,16 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	};
 
 
+	let showButtonPress = (channelNum)=>{
+		$(".glyphicon-play").eq(channelNum).addClass("active");
+		// .active (and include the aria-pressed="true" attribute) 
+	};
+
+	let showButtonRelease = (channelNum)=>{
+		$(".glyphicon-play").eq(channelNum).removeClass("active");
+	};
+
+
 
 
 
@@ -54,6 +64,7 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		let keyPressed = e.keyCode;
 		if (keyPressed > 47 && keyPressed < 56) {
 			if (SampleFactory.channels[e.key].sampleBuffer) {
+				showButtonPress(e.key);
 				if (keyPressed === 48) {
 					$scope.playSample(0); 
 				} else if (keyPressed === 49) {
@@ -80,6 +91,18 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 				} 
 			}
 
+		}
+	});
+
+
+
+
+	//
+	$(document).keyup((e)=>{
+		// console.log("key pressed", e.key);
+		let keyPressed = e.keyCode;
+		if (keyPressed > 47 && keyPressed < 56) {
+			$(".glyphicon-play").eq(e.key).removeClass("active");
 		}
 	});
 

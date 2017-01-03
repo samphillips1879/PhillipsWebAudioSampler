@@ -1,19 +1,67 @@
+body {
+  background-color: #368DA7;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px; }
+
+button {
+  letter-spacing: 2px; }
+
 h2 {
   text-align: center;
   margin: auto;
   margin-top: 2%;
-  margin-bottom: 2%; }
+  margin-bottom: 2%;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-family: 'Orbitron', sans-serif; }
+
+.alphaAndOmega {
+  min-height: 70px; }
 
 .search-group {
   text-align: center;
   margin: auto; }
 
+.choiceButton {
+  background-color: #46B8DA;
+  color: black;
+  overflow: scroll; }
+
+.browseResults {
+  margin: 5%;
+  border: 3px solid #38535A;
+  position: relative;
+  background-color: #8BCDE0;
+  padding-bottom: 15px;
+  overflow: scroll;
+  height: 70%;
+  width: 80%;
+  margin: auto;
+  top: 5px; }
+
+video {
+  max-height: 359px;
+  margin-top: 25px;
+  background-color: #8BCDE0;
+  border: 2px solid #38535A;
+  padding: 5px; }
+
+.instructions {
+  display: inline-block;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-align: center;
+  font-style: italic; }
+
 input[type=file] {
-  border: 2px solid darkgrey;
-  padding: 1%; }
+  border: 2px solid #38535A;
+  padding-top: 10px;
+  padding-left: 25px;
+  background-color: #8BCDE0; }
 
 .viewWrap {
-  border: 2px solid darkgrey;
+  border: 2px solid #38535A;
+  border-top: 0;
   position: fixed;
   top: 50px;
   right: 0;
@@ -23,8 +71,71 @@ input[type=file] {
   padding-right: 5%;
   overflow: scroll; }
 
+#patchTitleHolder {
+  margin-top: 5px;
+  min-height: 45px;
+  padding: 0;
+  padding-top: 10px; }
+  #patchTitleHolder span {
+    text-align: left; }
+  #patchTitleHolder h6 {
+    display: inline;
+    text-align: center; }
+
+#patchTitle {
+  text-align: center; }
+
+.sampleBelt {
+  background-color: #8BCDE0;
+  border: 1px solid #38535A;
+  border-bottom-width: 3px;
+  height: 50px;
+  margin-top: 10px; }
+  .sampleBelt h4 {
+    font-weight: 300; }
+  .sampleBelt select {
+    outline: 1px inset #38535A;
+    outline-offset: -1px;
+    color: #46B8DA;
+    background-color: #1D4C5A;
+    border: 5px ridge #46B8DA;
+    height: 50px; }
+
+.beltButton {
+  height: 50px;
+  color: #1D4C5A;
+  background-color: #46B8DA;
+  border: 2px groove #38535A; }
+  .beltButton:hover {
+    background-color: #8BCDE0;
+    color: white; }
+  .beltButton:active {
+    background-color: #368DA7;
+    color: #8BCDE0; }
+
+.sampleTriggerButton {
+  padding-left: 6.5%;
+  padding-right: 8%;
+  background-color: #368DA7;
+  border: 1px solid #38535A; }
+
+.triggerIcon {
+  text-align: center;
+  margin: auto; }
+
+sampleTitle {
+  height: 3em;
+  overflow: scroll;
+  border: 5px ridge #46B8DA;
+  vertical-align: middle;
+  padding-top: 2%;
+  text-align: center;
+  background-color: #38535A;
+  color: #46B8DA;
+  font-family: 'Orbitron', sans-serif; }
+
 #viewHolder {
-  border: 2px solid darkgrey;
+  border: 2px solid #38535A;
   position: fixed;
   top: 0;
   right: 0;
@@ -32,30 +143,65 @@ input[type=file] {
   left: 0; }
 
 .navbar {
-  border: 2px solid darkgrey;
+  border: 2px solid #38535A;
   width: 100%;
   position: fixed;
   top: 0;
   right: 0;
-  left: 0; }
+  left: 0;
+  background-color: #8BCDE0; }
 
 .indexRow {
   margin-top: 25em; }
 
+.panel-body {
+  border: 1px solid black; }
+
 #creationBelt {
   margin-top: 3em;
   margin-bottom: 3em;
-  border: 2px solid darkgrey;
-  padding: 2em; }
+  border: 2px solid #38535A;
+  padding: 2em;
+  background-color: #8BCDE0; }
 
 .captureStatus {
   text-align: center;
   margin: auto; }
 
 .chanDiv {
-  margin: 5%;
-  border: 1px solid darkgrey;
-  padding: 5%; }
+  margin: 0;
+  border: 1px solid #38535A;
+  padding: 5%;
+  min-height: 175px;
+  background-color: #8BCDE0; }
+
+.margCard {
+  padding: 0; }
+
+.panel-body {
+  padding: 0;
+  margin: 0; }
+
+.panel-default {
+  padding: 0;
+  margin: 0; }
+
+.channelGroup {
+  margin-top: 5px;
+  border: 1px solid #38535A;
+  padding: 0; }
+
+.chanButtons {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  overflow: scroll; }
+
+.sampleCatalogCard {
+  margin-top: 3%; }
+
+.repeatDiv {
+  padding-left: 0;
+  padding-right: 0; }
 
 #progress_bar.loading {
   opacity: 1.0; }
@@ -70,10 +216,65 @@ input[type=file] {
 
 .saveButton {
   height: 3em;
-  border-radius: 25px; }
+  border-radius: 25px;
+  border: 5px groove #46B8DA;
+  border-bottom-style: ridge;
+  border-right-style: ridge;
+  color: #1D4C5A;
+  padding-left: 5px;
+  padding-right: 5px; }
 
 .cancelButton {
   height: 3em;
-  border-radius: 25px; }
+  border-radius: 25px;
+  border: 5px groove #B04A68;
+  border-bottom-style: ridge;
+  border-right-style: ridge;
+  background-color: #E05E85;
+  color: white; }
+  .cancelButton:hover {
+    background-color: #B04A68; }
+
+.sampleTriggerButton {
+  background-color: #368DA7; }
+  .sampleTriggerButton:active {
+    background-color: black; }
+
+.loadButton {
+  background-color: white;
+  border: 2px groove #38535A;
+  border-bottom-style: ridge;
+  border-right-style: ridge; }
+  .loadButton:hover {
+    background-color: #46B8DA; }
+
+.sampleTriggerRow {
+  min-height: 35px; }
+
+.navbar-header a {
+  color: white; }
+
+.patchHead {
+  background-color: #8BCDE0;
+  border: 1px solid #38535A;
+  border-bottom-width: 3px;
+  min-height: 60px;
+  margin-top: 10px; }
+
+.patchHeadButton {
+  margin: 7px; }
+
+#loginCard {
+  margin: 5%;
+  border: 3px solid #38535A;
+  background-color: #8BCDE0;
+  overflow: scroll;
+  min-height: 30%;
+  width: 50%;
+  margin: auto;
+  padding: 15px;
+  text-align: left; }
+  #loginCard span {
+    margin-top: 10px; }
 
 /*# sourceMappingURL=main.css.map */
