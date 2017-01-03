@@ -477,6 +477,30 @@ button {
 }
 
 
+.glyphicon-retweet {
+	background-color: $pink;
+	color: white;
+	&:hover {
+		color: white;
+	// 	background-color: $pink;
+	}
+	&:active {
+		color: white;
+		background-color: $dark;
+	}
+	&:focus {
+		color: white;
+	}
+}
+
 .engagedLoop {
-	background-color: white;
+	background-color: green;
+	&:hover {
+		color: white;
+		background-color: green;
+	}
+	&:active {
+		color: white;
+		background-color: $dark;
+	}
 }

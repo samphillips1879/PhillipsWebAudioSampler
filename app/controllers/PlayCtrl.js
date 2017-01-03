@@ -191,14 +191,15 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 	$scope.toggleLoop = (channelNumber)=>{
 		let chan = patch.channels[channelNumber];
-		// let loopSample = SampleFactory.channels[channelNumber].sampleSource.loop
 		if (!chan.loopSample) {
 			console.log("falsy at least");
 			chan.loopSample = true;
+			$(".glyphicon-retweet").eq(channelNumber).addClass("engagedLoop");
 			SampleFactory.channels[channelNumber].sampleSource.loop = true;
 		} else {
 			console.log("truthy at least");
 			chan.loopSample = false;
+			$(".glyphicon-retweet").eq(channelNumber).removeClass("engagedLoop");
 			SampleFactory.channels[channelNumber].sampleSource.loop = false;
 		}
 	};
