@@ -11,7 +11,7 @@ h2 {
   margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
-  color: #8BCDE0;
+  color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   font-family: 'Orbitron', sans-serif; }
 
@@ -213,7 +213,18 @@ sampleTitle {
   .sampleTriggerButton:active {
     background-color: black; }
 
+.loadButton {
+  background-color: white;
+  border: 2px groove #38535A;
+  border-bottom-style: ridge;
+  border-right-style: ridge; }
+  .loadButton:hover {
+    background-color: #46B8DA; }
+
 .sampleTriggerRow {
   min-height: 35px; }
+
+.navbar-header a {
+  color: white; }
 
 /*# sourceMappingURL=main.css.map */

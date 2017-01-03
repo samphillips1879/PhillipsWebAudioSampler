@@ -53,7 +53,8 @@ h2 {
 	margin: auto;
 	margin-top: 2%;
 	margin-bottom: 2%;
-	color: $light;
+	color: white;
+	// color: $light;
 	text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -372,8 +373,32 @@ button {
 		background-color: black;
 	}
 }
-
+	
+.loadButton {
+	background-color: white;
+	border: 2px groove $border;
+	border-bottom-style: ridge;
+	border-right-style: ridge;
+	&:hover {
+		background-color: $highlight;
+	}
+}
 
 .sampleTriggerRow {
 	min-height: 35px;
 }
+
+.navbar-header {
+
+
+	a {
+		color: white;
+		// opacity: 100%;
+	}
+	// text-shadow:
+ //    -1px -1px 0 #000,
+ //    1px -1px 0 #000,
+ //    -1px 1px 0 #000,
+ //    1px 1px 0 #000; 
+}
+
