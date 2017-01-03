@@ -52,6 +52,39 @@ h2 {
     1px 1px 0 #000;  
 }
 
+// #saveSample {
+// 	background-color: $;
+// }
+
+
+
+.alphaAndOmega {
+	min-height: 70px;
+	// text-shadow:
+ //    -1px -1px 0 #000,
+ //    1px -1px 0 #000,
+ //    -1px 1px 0 #000,
+ //    1px 1px 0 #000;
+ //    color: white;
+
+	
+  //   &:hover {
+		// // color: black;
+		// text-shadow:
+	 //    -1px -1px 0 grey,
+	 //    1px -1px 0 grey,
+	 //    -1px 1px 0 grey,
+	 //    1px 1px 0 grey;
+  //   }
+  //   &:active {
+		// text-shadow:
+	 //    -1px -1px 0 black,
+	 //    1px -1px 0 black,
+	 //    -1px 1px 0 black,
+	 //    1px 1px 0 black;
+  //   }
+}
+
 .search-group {
 	text-align: center;
 	margin: auto;
@@ -290,11 +323,16 @@ width: 0;
 	border: 5px groove $highlight;
 	border-bottom-style: ridge;
 	border-right-style: ridge;
+	color: $dark;
 }
 
 .cancelButton {
 	height: 3em;
 	border-radius: 25px;
+	border: 5px groove black;
+	border-bottom-style: ridge;
+	border-right-style: ridge;
+	color: $dark;
 }
 
 button {
