@@ -218,10 +218,19 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 	$(document).ready(()=>{
-		// console.log($(".playbackRateControl"));
-		$(".playbackRateControl").each((index, element)=>{
+		$(".gainControl").each((index, element)=>{
 			element.oninput = ()=>{
 				console.log("slider changed");
+				let chan = patch.channels[index];
+				chan.gainValue = element.value;
+			};
+		});
+
+
+
+		$(".playbackRateControl").each((index, element)=>{
+			element.oninput = ()=>{
+				// console.log("slider changed");
 				let chan = patch.channels[index];
 				let samp = SampleFactory.channels[index];
 				samp.sampleSource.playbackRate.value = element.value;
@@ -231,19 +240,23 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 
-		// $(".hiPassHzControl").each((index, element)=>{
-		// 	element.oninput = ()=>{
-		// 		console.log("slider changed");
-		// 		let chan = patch.channels[index];
-		// 		let samp = SampleFactory.channels[index];
+		$(".hiPassHzControl").each((index, element)=>{
+			element.oninput = ()=>{
+				// console.log("slider changed");
+				let chan = patch.channels[index];
+				chan.hiPassHz = element.value;
+			};
+		});
 
-				
-		// 		// samp.sampleSource.playbackRate.value = element.value;
 
-		// 		chan.hiPassHz = element.value;
-		// 		// chan.samplePlaybackRate = element.value;
-		// 	};
-		// });
+		$(".loPassHzControl").each((index, element)=>{
+			element.oninput = ()=>{
+				// console.log("slider changed");
+				let chan = patch.channels[index];
+				chan.loPassHz = element.value;
+			};
+		});
+
 
 
 	});
