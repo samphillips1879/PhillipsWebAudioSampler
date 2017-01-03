@@ -51,9 +51,9 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		// .active (and include the aria-pressed="true" attribute) 
 	};
 
-	let showButtonRelease = (channelNum)=>{
-		$(".glyphicon-play").eq(channelNum).removeClass("active");
-	};
+	// let showButtonRelease = (channelNum)=>{
+	// 	$(".glyphicon-play").eq(channelNum).removeClass("active");
+	// };
 
 
 

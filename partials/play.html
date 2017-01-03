@@ -12,20 +12,12 @@
 
 
 	<h2>{{greeting}}</h2>
-
-	<!-- save patch content -->
-	<!-- <div class="patchHead saveButton container col-xs-10 col-xs-offset-1"> -->
 	<div class="container">
-		
-		<!-- <div ng-show="!savingPatch"> -->
 			<button ng-show="!savingPatch" ng-click="savePatch()" class="patchHeadButton capture-btn btn-info saveButton">Save Patch</button>
-		<!-- </div> -->
 
-		<!-- <div ng-show="savingPatch" class="patchHeadButton"> -->
 			<input ng-show="savingPatch" id="patchTitleInput" class="patchHeadButton saveButton" placeholder="name this patch" type="text" ng-model="patchTitle">
 			<button ng-show="savingPatch" ng-click="confirmSavePatch()" class="patchHeadButton capture-btn btn-info saveButton">Confirm New Patch</button>
 			<button ng-show="savingPatch" ng-click="cancelSavePatch()" class="patchHeadButton capture-btn cancelButton">Cancel</button>
-
 
 			<div class="row">
 				<sampleTitle id="patchTitleHolder" class="col-xs-12">
@@ -34,46 +26,35 @@
 				</sampleTitle>
 			</div>
 
-
-		<!-- </div> -->
-
-
 	</div>
 		
-	<!-- </div> -->
-
 
 	<!-- sample controls -->
 	<div class="container col-xs-12 channelGroup">
 		<div class="col-sm-3 repeatDiv" ng-repeat="channel in patch.channels">
 			<div id="chan{{channel.channelNum}}" class="chanDiv">
 
-<!-- ************************************* -->
-			<!-- turn this div into a row that the buttons can fill -->
-				<!-- <div > -->
+
+				<div class="row">
+					<sampleTitle class="col-xs-10 col-xs-offset-1"><span>{{channel.sampleTitle}}</span></sampleTitle>
+				</div>
+
+				<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons row col-xs-12 sampleTriggerRow">
 
 
+					<!-- <div class="row"> -->
+						
 
-					<div class="row">
-						<sampleTitle class="col-xs-10 col-xs-offset-1"><span>{{channel.sampleTitle}}</span></sampleTitle>
-					</div>
+						<!-- <img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
+						<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 glyphicon glyphicon-play sampleTriggerButton"></button>
+						<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 sampleTriggerButton glyphicon glyphicon-stop"></button>
+						<!-- <loop begin button> -->
+						<!-- <loop stop button> -->
+						<!-- both these buttons will copy styling from play and stop buttons -->
+						<!-- also include a cancel loop button, that's smaller and on a different plane -->
 
-					<div ng-show="samples.channels[channel.channelNum].sampleBuffer" id="chan_{{channel.channelNum}}_buttons" class="btn-group chanButtons row col-xs-12 sampleTriggerRow">
-
-
-						<!-- <div class="row"> -->
-							
-
-							<!-- <img ng-src="{{channel.img}}" class="sampleTrigger" ng-click="playSample(channel.channelNum)"> -->
-							<button ng-click="playSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 glyphicon glyphicon-play sampleTriggerButton"><!-- <span class="triggerIcon glyphicon glyphicon-play"></span> --> <!-- {{channel.sampleTitle}} --></button>
-							<button ng-click="stopSample(channel.channelNum)" type="button" class="btn btn-info col-xs-3 sampleTriggerButton glyphicon glyphicon-stop"><!-- <span class="glyphicon glyphicon-stop"></span> --></button>
-							<!-- <loop begin button> -->
-							<!-- <loop stop button> -->
-							<!-- both these buttons will copy styling from play and stop buttons -->
-							<!-- also include a cancel loop button, that's smaller and on a different plane -->
-
-							
-						<!-- </div> -->
+						
+					<!-- </div> -->
 
 
 
@@ -84,19 +65,18 @@
 
 
 
-					</div>
+				</div>
 
 
 
-					<div class="row" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
-						<a href="#/samples/browse"><button class="btn loadButton btn-default chanButtons col-sm-7 col-sm-offset-1" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
-							Load New
-						</button></a>
-					</div>
+				<div class="row" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+					<a href="#/samples/browse"><button class="btn loadButton btn-default chanButtons col-sm-7 col-sm-offset-1" ng-show="!samples.channels[channel.channelNum].sampleBuffer">
+						Load New
+					</button></a>
+				</div>
 
 
 
-				<!-- </div> -->
 
 
 

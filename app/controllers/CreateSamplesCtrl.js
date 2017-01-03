@@ -100,25 +100,28 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	$scope.saveSample = ()=>{
 		console.log("saveSample triggered");
-		let user = AuthFactory.getUser();
-		console.log("user for catalogCard", user);
-		let title = $scope.sampleTitle;
-		let isPublic = true;
-		let img = $scope.sampleImage;
-		let catalogCard = {
-			user, title, isPublic, img
-		};
-
-		Database.postSampleToCatalog(catalogCard)
-		//caution here, catalogId might not actually be the object key. It might be a returned object with a name attribute that is equal to what I'm looking for. 
-		.then((object)=>{
-			// console.log("object", object);
-			console.log("object.name: ", object.name);
-			rec.exportWAV((blob)=>{
-				Database.postNewSampleWav(blob, object.name);
+		if ($scope.sampleTitle) {
+			let user = AuthFactory.getUser();
+			console.log("user for catalogCard", user);
+			let title = $scope.sampleTitle;
+			let isPublic = true;
+			let img = $scope.sampleImage;
+			let catalogCard = {
+				user, title, isPublic, img
+			};
+			Database.postSampleToCatalog(catalogCard)
+			.then((object)=>{
+				// console.log("object", object);
+				console.log("object.name: ", object.name);
+				rec.exportWAV((blob)=>{
+					Database.postNewSampleWav(blob, object.name);
+				});
+				// Database.postNewSampleWav()
 			});
-			// Database.postNewSampleWav()
-		});
+		} else {
+			window.alert("please input a title for this sample");
+		}
+
 	};	
 });
 

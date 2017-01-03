@@ -14,7 +14,7 @@ app.factory("PatchFactory", ()=>{
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
-				loopSample: true,
+				loopSample: false,
 				channelNum: 0,
 				sourceOsc: null,
 				gain: null,
