@@ -25,7 +25,8 @@ h2 {
 .choiceButton {
   background-color: #46B8DA;
   color: black;
-  overflow: scroll; }
+  overflow: scroll;
+  min-height: 60px; }
 
 .browseResults {
   margin: 5%;

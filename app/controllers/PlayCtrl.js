@@ -121,21 +121,21 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 
 
 
-		console.log("patch", patch);
-		console.log("patch.channels", patch.channels);
-		console.log("channelNumber", channelNumber);
-		console.log("patch.channels[channelNumber]", patch.channels[channelNumber]);
+		// console.log("patch", patch);
+		// console.log("patch.channels", patch.channels);
+		// console.log("channelNumber", channelNumber);
+		// console.log("patch.channels[channelNumber]", patch.channels[channelNumber]);
 
 
 
 
 		loop = patch.channels[channelNumber].loopSample;
-		console.log("loop", loop);
+		// console.log("loop", loop);
 		
 
 
 
-		console.log(`playing sample at chan ${channelNumber}`);
+		// console.log(`playing sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 	 	if(chan.sampleSource){
 	 		chan.sampleSource.stop();
@@ -151,12 +151,12 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	 	// 	console.log("sample doesn't want to loop");
 	 	// }
 	 	// chan.sampleSource.playbackRate.value = 2;
-	 	console.log("PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate", PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate);
+	 	// console.log("PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate", PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate);
 
 	 	let startingPlaybackRate = PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate;
 
 	 	// console.log("PatchFactory", PatchFactory.currentPatch.channels[channelNumber]);
-	 	console.log("startingPlaybackRate", startingPlaybackRate);
+	 	// console.log("startingPlaybackRate", startingPlaybackRate);
 
 
 
@@ -194,14 +194,14 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		let chan = patch.channels[channelNumber];
 		let samp = SampleFactory.channels[channelNumber];
 		if (!chan.loopSample) {
-			console.log("falsy at least");
+			// console.log("falsy at least");
 			chan.loopSample = true;
 			$(".glyphicon-retweet").eq(channelNumber).addClass("engagedLoop");
 			if (samp.sampleSource) {
 				samp.sampleSource.loop = true;
 			}
 		} else {
-			console.log("truthy at least");
+			// console.log("truthy at least");
 			chan.loopSample = false;
 			$(".glyphicon-retweet").eq(channelNumber).removeClass("engagedLoop");
 			if (samp.sampleSource) {
