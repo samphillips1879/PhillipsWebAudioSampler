@@ -264,4 +264,17 @@ sampleTitle {
 .patchHeadButton {
   margin: 7px; }
 
+#loginCard {
+  margin: 5%;
+  border: 3px solid #38535A;
+  background-color: #8BCDE0;
+  overflow: scroll;
+  min-height: 30%;
+  width: 50%;
+  margin: auto;
+  padding: 15px;
+  text-align: left; }
+  #loginCard span {
+    margin-top: 10px; }
+
 /*# sourceMappingURL=main.css.map */

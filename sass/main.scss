@@ -459,3 +459,18 @@ button {
 	// vertical-align: middle;
 
 }
+
+#loginCard {
+	margin: 5%;
+	border: 3px solid $border;
+	background-color: $light;
+	overflow: scroll;
+	min-height: 30%;
+	width: 50%;
+	margin: auto;
+	padding: 15px;
+	text-align: left;
+	span {
+		margin-top: 10px;
+	}
+}
