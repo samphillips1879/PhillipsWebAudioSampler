@@ -366,7 +366,12 @@ button {
 	// overflow: auto;
 }
 
-
+.sampleTriggerButton {
+	background-color: $middle;
+	&:active {
+		background-color: black;
+	}
+}
 
 
 .sampleTriggerRow {

@@ -208,6 +208,11 @@ sampleTitle {
   .cancelButton:hover {
     background-color: #B04A68; }
 
+.sampleTriggerButton {
+  background-color: #368DA7; }
+  .sampleTriggerButton:active {
+    background-color: black; }
+
 .sampleTriggerRow {
   min-height: 35px; }
 
