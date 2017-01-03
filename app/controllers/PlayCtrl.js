@@ -192,7 +192,46 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 			}
 		}
 	};
+
+
+
+	$(document).ready(()=>{
+		// console.log($(".playbackRateControl"));
+		$(".playbackRateControl").each((index, element)=>{
+			element.oninput = ()=>{
+				console.log("slider changed");
+				let chan = patch.channels[index];
+				let samp = SampleFactory.channels[index];
+				samp.sampleSource.playbackRate.value = element.value;
+			};
+		});
+	});
+
+
+	// $(".playback-rate-control").on("input", function(e){
+	// 	console.log("e", e);
+	// });
+
+
+	// playbackControl.oninput = function() {
+	//   source.playbackRate.value = playbackControl.value;
+	//   playbackValue.innerHTML = playbackControl.value;
+	// }
+
+
+
+
+
+
+
+
+
+
 });
+
+
+
+
 
 
 
