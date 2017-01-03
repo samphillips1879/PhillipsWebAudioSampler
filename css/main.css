@@ -5,7 +5,9 @@ h2 {
   text-align: center;
   margin: auto;
   margin-top: 2%;
-  margin-bottom: 2%; }
+  margin-bottom: 2%;
+  color: #8BCDE0;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
 .search-group {
   text-align: center;
