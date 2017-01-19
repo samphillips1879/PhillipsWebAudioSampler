@@ -8,7 +8,6 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	$scope.savingPatch = false;
 	$scope.patchTitle = "";
 
-
 	$scope.savePatch = ()=>{
 		$scope.savingPatch = true;
 	};
@@ -44,6 +43,7 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	};
 
 	// Binding number keys to sample triggers... this can be dried up
+	//dry up using e.key+1
 	$(document).keydown((e)=>{
 		let keyPressed = e.keyCode;
 		if (keyPressed > 47 && keyPressed < 56) {
@@ -71,76 +71,40 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		}
 	});
 	
+	// removes "pressed" button appearance after a bound number key is released
 	$(document).keyup((e)=>{
-		// console.log("key pressed", e.key);
 		let keyPressed = e.keyCode;
 		if (keyPressed > 47 && keyPressed < 56) {
 			$(".glyphicon-play").eq(e.key).removeClass("active");
 		}
 	});
 
-
-
-
-
 	//patch initialization
-
 	$scope.patch = PatchFactory.currentPatch;
 	$scope.samples = SampleFactory;
-
-
 	let patch = $scope.patch; 
 	let samples = $scope.samples;
 //samples might not be getting used
 
-
-	//connecting paths
+	//connecting channel paths
 	patch.channels.forEach((channel, channelNumber)=>{
-
-
-		//create those nodes, homeskillet
+		//creating audio nodes
 		channel.hiPassFilter = AUD_CTX.createBiquadFilter();
 		channel.hiPassFilter.type = 'highpass';
-		// channel.hiPassFilter.frequency.value = 0;
 		channel.hiPassFilter.frequency.value = channel.hiPassHz;
-
 		channel.loPassFilter = AUD_CTX.createBiquadFilter();
 		channel.loPassFilter.type = 'lowpass';
-		// channel.loPassFilter.frequency.value = 22000;
 		channel.loPassFilter.frequency.value = channel.loPassHz;
-
 		channel.gain = AUD_CTX.createGain();
 		channel.gain.gain.value = channel.gainValue;
-
-
-
-		// connecting them paths
-
+		//connecting audio pathways
 		channel.hiPassFilter.connect(channel.loPassFilter);
 		channel.loPassFilter.connect(channel.gain);
 		channel.gain.connect(AUD_CTX.destination);
 	});
 
 	$scope.playSample = (channelNumber)=>{
-
-
-
-
-		// console.log("patch", patch);
-		// console.log("patch.channels", patch.channels);
-		// console.log("channelNumber", channelNumber);
-		// console.log("patch.channels[channelNumber]", patch.channels[channelNumber]);
-
-
-
-
 		loop = patch.channels[channelNumber].loopSample;
-		// console.log("loop", loop);
-		
-
-
-
-		// console.log(`playing sample at chan ${channelNumber}`);
 		chan = SampleFactory.channels[channelNumber];
 	 	if(chan.sampleSource){
 	 		chan.sampleSource.stop();
@@ -148,29 +112,12 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 	 	}
 	 	chan.sampleSource = AUD_CTX.createBufferSource();
 	 	chan.sampleSource.buffer = chan.sampleBuffer;
-	 	// if (patch.channels[channelNumber].loopSample) {
-	 	// 	console.log("sample wants to loop");
-	 	// 	chan.sampleSource.loop = true;
-	 	// 	console.log("chan.sampleSource.loop", chan.sampleSource.loop);
-	 	// } else {
-	 	// 	console.log("sample doesn't want to loop");
-	 	// }
-	 	// chan.sampleSource.playbackRate.value = 2;
-	 	// console.log("PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate", PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate);
 
 	 	let startingPlaybackRate = PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate;
-
-	 	// console.log("PatchFactory", PatchFactory.currentPatch.channels[channelNumber]);
-	 	// console.log("startingPlaybackRate", startingPlaybackRate);
-
-
 
 	 	if (startingPlaybackRate) {
 		 	chan.sampleSource.playbackRate.value = startingPlaybackRate;
 	 	}
-	 	// chan.sampleSource.playbackRate.value = PatchFactory.currentPatch.channels[channelNumber].samplePlaybackRate;
-
-
 
 	 	chan.sampleSource.connect(PatchFactory.currentPatch.channels[channelNumber].hiPassFilter);
 	 	// chan.sampleSource.loop = true;
@@ -191,22 +138,19 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		chan.sampleSource = null;
 	};
 
-
-
-
-//currently assumes all patches you are bringing in do not have any looped samples. Will still work if the sample DOES, however the INITIAL colorization of the buttons will be reversed
+	//currently assumes all patches you are bringing in do not have any looped samples. Will still work if the sample DOES, however the INITIAL colorization of the buttons will be reversed
 	$scope.toggleLoop = (channelNumber)=>{
 		let chan = patch.channels[channelNumber];
 		let samp = SampleFactory.channels[channelNumber];
 		if (!chan.loopSample) {
-			// console.log("falsy at least");
+			// updates the channel's loop setting in the patch factory
 			chan.loopSample = true;
 			$(".glyphicon-retweet").eq(channelNumber).addClass("engagedLoop");
+			// if a the channel is currently playing a sample, toggles that sample's loop setting
 			if (samp.sampleSource) {
 				samp.sampleSource.loop = true;
 			}
 		} else {
-			// console.log("truthy at least");
 			chan.loopSample = false;
 			$(".glyphicon-retweet").eq(channelNumber).removeClass("engagedLoop");
 			if (samp.sampleSource) {
@@ -215,22 +159,17 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 		}
 	};
 
-
-
+	// binds each channel's effects sliders to their relative effects nodes
 	$(document).ready(()=>{
 		$(".gainControl").each((index, element)=>{
 			element.oninput = ()=>{
-				console.log("slider changed");
 				let chan = patch.channels[index];
 				chan.gainValue = element.value;
 			};
 		});
 
-
-
 		$(".playbackRateControl").each((index, element)=>{
 			element.oninput = ()=>{
-				// console.log("slider changed");
 				let chan = patch.channels[index];
 				let samp = SampleFactory.channels[index];
 				samp.sampleSource.playbackRate.value = element.value;
@@ -238,16 +177,12 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 			};
 		});
 
-
-
 		$(".hiPassHzControl").each((index, element)=>{
 			element.oninput = ()=>{
-				// console.log("slider changed");
 				let chan = patch.channels[index];
 				chan.hiPassHz = element.value;
 			};
 		});
-
 
 		$(".loPassHzControl").each((index, element)=>{
 			element.oninput = ()=>{
@@ -256,56 +191,5 @@ app.controller("PlayCtrl", function($scope, AuthFactory, PatchFactory, SampleFac
 				chan.loPassHz = element.value;
 			};
 		});
-
-
-
 	});
-
-
-	// $(".playback-rate-control").on("input", function(e){
-	// 	console.log("e", e);
-	// });
-
-
-	// playbackControl.oninput = function() {
-	//   source.playbackRate.value = playbackControl.value;
-	//   playbackValue.innerHTML = playbackControl.value;
-	// }
-
-
-
-
-
-
-
-
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

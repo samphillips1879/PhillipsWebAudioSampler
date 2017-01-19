@@ -3,7 +3,6 @@
 //establishing angular app
 let app = angular.module("WebSamplerApp", ["ngRoute", "ngSanitize"]);
 
-
 let isAuth = (AuthFactory)=> new Promise((resolve,reject)=>{
     AuthFactory.isAuthenticated()
     .then((userExists)=>{
@@ -15,39 +14,6 @@ let isAuth = (AuthFactory)=> new Promise((resolve,reject)=>{
     });
 });
 
-
-//non-resolve configuration
-// app.config(($routeProvider)=>{
-//     $routeProvider
-//     .when('/login', {
-//         templateUrl: 'partials/login.html',
-//         controller: 'LoginCtrl'
-//     })
-//     .when('/logout', {
-//     	templateUrl: 'partials/logout.html',
-//     	controller: 'LogoutCtrl'
-//     })
-//     .when('/play', {
-//     	templateUrl: 'partials/play.html',
-//     	controller: 'PlayCtrl'
-//     })
-//     .when('/samples/create', {
-//     	templateUrl: 'partials/createSamples.html',
-//     	controller: 'CreateSamplesCtrl'
-//     })
-//     .when('/samples/browse', {
-//     	templateUrl: 'partials/assignSamples.html',
-//     	controller: 'AssignSamplesCtrl'
-//     })
-//     .when('/patches', {
-//     	templateUrl: 'partials/patches.html',
-//     	controller: 'PatchesCtrl'
-//     })
-//     .otherwise('/login');
-// });
-
-
-// resolve configuration. Disabled for airplane 
 app.config(($routeProvider)=>{
     $routeProvider
     .when('/login', {
@@ -81,9 +47,6 @@ app.config(($routeProvider)=>{
     })
     .otherwise('/login');
 });
-
-
-
 
 app.run(($location, FBCreds)=>{
     let authConfig = {
