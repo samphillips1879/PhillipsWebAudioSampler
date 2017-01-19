@@ -1,100 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Phillips Web Audio Sampler</title>
+	<title>Life Audio Sampler</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-
 	<div ng-app="WebSamplerApp" class="screenfiller">
-		<!-- <div ng-include="'partials/navbar.html'"></div> -->
-
-
-
-
-
-
-
 		<div class="row">
 		  <div class="col-xs-10 col-xs-offset-1 main-container">
 		    <div class="col-xs-12 container" id="viewHolder" ng-view></div>
 		  </div>
 		</div>
-
-
-
-
-
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<!-- SCRIPTS -->
 
-		<!-- externally produced modules/libraries -->
-			<script src="dist/jquery.min.js"></script>
-			<script src="dist/js/bootstrap.min.js"></script>
+	<!-- externally produced modules/libraries -->
+		<script src="dist/jquery.min.js"></script>
+		<script src="dist/js/bootstrap.min.js"></script>
 
-			<!-- angular-related -->
-				<script src="dist/angular.min.js"></script>
-				<script src="lib/node_modules/angular-route/angular-route.min.js"></script>
-				<script src="lib/node_modules/angular-sanitize/angular-sanitize.js"></script>
+		<!-- angular-related -->
+		<script src="dist/angular.min.js"></script>
+		<script src="lib/node_modules/angular-route/angular-route.min.js"></script>
+		<script src="lib/node_modules/angular-sanitize/angular-sanitize.js"></script>
 
-			<!-- firebase-related -->
-				<script src="lib/node_modules/firebase/firebase.js"></script>
-			
-			<!-- audio related -->
-			<script src="lib/node_modules/recorderjs/recorder.js"></script>
-			<script src="lib/node_modules/recorderjs/recorderWorker.js"></script>
+		<!-- firebase-related -->
+		<script src="lib/node_modules/firebase/firebase.js"></script>
 
-			<!-- UI related -->
+		<!-- audio related -->
+		<script src="lib/node_modules/recorderjs/recorder.js"></script>
+		<script src="lib/node_modules/recorderjs/recorderWorker.js"></script>
 
-		<!-- custom scripts -->
-			<script type="text/javascript" src="app/app.js"></script>
+	<!-- custom scripts -->
+		<script type="text/javascript" src="app/app.js"></script>
 
 
 		<!-- controllers -->
-			<script src="app/controllers/NavCtrl.js"></script>
-			<script src="app/controllers/LoginCtrl.js"></script>
-			<script src="app/controllers/LogoutCtrl.js"></script>
-			<script src="app/controllers/PlayCtrl.js"></script>
-			<script src="app/controllers/CreateSamplesCtrl.js"></script>
-			<script src="app/controllers/AssignSamplesCtrl.js"></script>
-			<script src="app/controllers/PatchesCtrl.js"></script>
+		<script src="app/controllers/NavCtrl.js"></script>
+		<script src="app/controllers/LoginCtrl.js"></script>
+		<script src="app/controllers/LogoutCtrl.js"></script>
+		<script src="app/controllers/PlayCtrl.js"></script>
+		<script src="app/controllers/CreateSamplesCtrl.js"></script>
+		<script src="app/controllers/AssignSamplesCtrl.js"></script>
+		<script src="app/controllers/PatchesCtrl.js"></script>
 
 
 		<!-- providers -->
 
-			<!-- factories -->
-				<script src="app/factories/AuthFactory.js"></script>
-				<script src="app/factories/DatabaseFactory.js"></script>
-				<script src="app/factories/PatchFactory.js"></script>
-				<script src="app/factories/SampleFactory.js"></script>
+		<!-- factories -->
+		<script src="app/factories/AuthFactory.js"></script>
+		<script src="app/factories/DatabaseFactory.js"></script>
+		<script src="app/factories/PatchFactory.js"></script>
+		<script src="app/factories/SampleFactory.js"></script>
 
-			<!-- values -->
-				<script src="app/values/FBCreds.js"></script>
+		<!-- values -->
+		<script src="app/values/FBCreds.js"></script>
 
-				<!-- patch-details -->
-					<script src="app/values/PatchSamples.js"></script>
-
-
+		<!-- patch-details -->
+		<script src="app/values/PatchSamples.js"></script>
 </body>
 </html>
