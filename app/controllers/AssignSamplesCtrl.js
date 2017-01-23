@@ -13,12 +13,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 	imageToBeAssigned = null,
 	authorToBeAssigned = null,
 	wavNameToBeAssigned = null;
-	// $scope.sampleTitleQuery = "";
-	// $scope.sampleLoaded = false;
-	// $scope.sampleBeltMessage = "Please Load a Sample";
-	// $scope.currentSampleTitle = "";
-
-
 
 	$scope.getSampleCards = (limitTo)=>{
 		if (limitTo === "public") {
@@ -77,7 +71,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		sampleSourceNode.connect(AUD_CTX.destination);
 	    sampleSourceNode.start(0);
 	};
-	// $scope.channelSelect = "Load to Channel: ";
 
 	$scope.assignSample = ()=>{
 		if ($scope.channelSelect !== "Load to Channel: ") {

@@ -18,12 +18,6 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 	newBuffer = null,
 	arrayBuffer = null;
 
-	// $scope.sampleTitle = "";
-	// $scope.sampleImage = "";
-	// $scope.sampleCaptured = false;
-	// $scope.captureStatus = "please capture a sample";
-	// $scope.capturing = false;
-
 	//video file submission handler
 	$("#userFileInput").change(function() {
 	    processVideoFile(this.files[0]);
