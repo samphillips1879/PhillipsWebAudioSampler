@@ -54,38 +54,37 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     };
 
      DatabaseFactory.uploadVideoToStorageBucket = (videoFile, title)=>{
-        console.log("trying to upload video to storage bucket");
+        // console.log("trying to upload video to storage bucket");
         //some slightly poor form here, I know, as dom manipulation should be separate from the factory. However, it works for now, and I intend to clean it up/modularize it appropriately later.
         let user = AuthFactory.getUser();
         // console.log("videoFile", videoFile);
         var storage = firebase.storage();
         // saves video to firebase storage userVideos folder with a name equivalent to the current user
         var storageRef = storage.ref(`userVideos/${user}`);
-        console.log("storageRef", storageRef);
+        // console.log("storageRef", storageRef);
         storageRef.put(videoFile)
         .then((thing)=>{
             //gets a url to the video, hosted in app's storage bucket, and sets it as the source for the userVideo in the dom
             storageRef.getDownloadURL().then(function(url) {
                 $("#userVideo")[0].src = url;
-                console.log("set video src equal to", url);
             }).catch(function(error) {
               // Handle any errors
             });
         });
     };
-
-    DatabaseFactory.downloadUserVideo = (videoUrl)=>{
-        console.log("trying to download", videoUrl);
-        return new Promise((resolve,reject)=>{
-            $.ajax({
-                url: `${videoUrl}`
-            }).done((video)=>{
-                console.log("video", video);
-            }).fail((error)=>{
-                console.log("error", error);
-            });
-        });
-    };
+//can probably be removed
+    // DatabaseFactory.downloadUserVideo = (videoUrl)=>{
+    //     console.log("trying to download", videoUrl);
+    //     return new Promise((resolve,reject)=>{
+    //         $.ajax({
+    //             url: `${videoUrl}`
+    //         }).done((video)=>{
+    //             // console.log("video", video);
+    //         }).fail((error)=>{
+    //             // console.log("error", error);
+    //         });
+    //     });
+    // };
 
     DatabaseFactory.postSampleToCatalog = (catalogCard)=>{
         return new Promise((resolve,reject)=>{
@@ -122,7 +121,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     };
 
     DatabaseFactory.getUserSampleCatalogCards = (user)=>{
-            console.log("factory retrieving sample catalog cards for user: ", user);  
+            // console.log("factory retrieving sample catalog cards for user: ", user);  
             return new Promise((resolve,reject)=>{
                 $http.get(`${FBCreds.URL}/sampleCatalog.json?orderBy="user"&equalTo="${user}"`)
                 .success((userSampleCards)=>{
@@ -133,7 +132,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                             return [value];
                         });
                     });
-                    console.log("got user's sample catalog cards: ", array);
+                    // console.log("got user's sample catalog cards: ", array);
                     if (user !== "anonymous") {
                         resolve(array);
                     } else {
@@ -149,14 +148,14 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 
 
     DatabaseFactory.postNewSampleWav = (newSample, bufferTitle)=>{
-        console.log("posting new sample");
+        // console.log("posting new sample");
         let user = AuthFactory.getUser();
         var storage = firebase.storage();
         var storageRef = storage.ref(`audioBuffers/${user}/${bufferTitle}`);
-        console.log("storageRef", storageRef);
+        // console.log("storageRef", storageRef);
         storageRef.put(newSample)
         .then((object)=>{
-            console.log(".wav saved to bucket", object);
+            // console.log(".wav saved to bucket", object);
         });
     };
 
@@ -167,7 +166,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
     };
 
     DatabaseFactory.downloadWav = (wavURL)=>{
-        console.log("trying to download wav from: ", wavURL);
+        // console.log("trying to download wav from: ", wavURL);
         return new Promise((resolve,reject)=>{
             $http({
                 url: `${wavURL}`,
@@ -175,7 +174,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                 responseType: "blob"
             })
             .success((wavBlob)=>{
-                console.log("got wav here in DatabaseFactory", wavBlob);
+                // console.log("got wav here in DatabaseFactory", wavBlob);
                 resolve(wavBlob);
             })
             .error((error)=>{
@@ -221,7 +220,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 
 
     DatabaseFactory.postNewPatch = (patch)=>{
-        console.log("got a patch: ", patch);
+        // console.log("got a patch: ", patch);
         return new Promise((resolve,reject)=>{
             $http.post(`${FBCreds.URL}/patches.json`, angular.toJson(patch))
             .success((object)=>{
@@ -237,11 +236,11 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 
 
     DatabaseFactory.getPublicPatches = ()=>{
-        console.log("factory retrieving all public patches");  
+        // console.log("factory retrieving all public patches");  
         return new Promise((resolve,reject)=>{
             $http.get(`${FBCreds.URL}/patches.json?orderBy="isPublic"&equalTo=true`)
             .success((publicPatches)=>{
-                console.log("publicPatches", publicPatches);
+                // console.log("publicPatches", publicPatches);
                 let array = [];
                 Object.keys(publicPatches).forEach((key)=>{
                     publicPatches[key].patchID = key;
@@ -249,7 +248,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                         return [value];
                     });
                 });
-                console.log("got public patches: ", array);
+                // console.log("got public patches: ", array);
                 resolve(array);
             })
             .error((error)=>{
@@ -262,11 +261,11 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
 
     DatabaseFactory.getUserPatches = (user)=>{
 
-            console.log("factory retrieving all public patches");  
+            // console.log("factory retrieving all public patches");  
             return new Promise((resolve,reject)=>{
                 $http.get(`${FBCreds.URL}/patches.json?orderBy="author"&equalTo="${user}"`)
                 .success((userPatches)=>{
-                    console.log("userPatches", userPatches);
+                    // console.log("userPatches", userPatches);
                     let array = [];
                     Object.keys(userPatches).forEach((key)=>{
                         userPatches[key].patchID = key;
@@ -274,7 +273,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                             return [value];
                         });
                     });
-                    console.log("got user patches: ", array);
+                    // console.log("got user patches: ", array);
                     if (user !== "anonymous") {
                         resolve(array);
                     } else {
