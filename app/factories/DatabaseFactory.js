@@ -1,21 +1,11 @@
 "use strict";
 
 app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
-    let DatabaseFactory = {};
-    let fbStorage = firebase.storage();
-    let blob = null;
-    let wavURL = null;
-
-
-
-
-    let noResults = [];
-
-
-
-
-
-
+    let DatabaseFactory = {},
+        fbStorage = firebase.storage(),
+        blob = null,
+        wavURL = null,
+        noResults = [];
 
     DatabaseFactory.browseUserSamples = ()=>{
     	let samples = [];
@@ -53,7 +43,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-     DatabaseFactory.uploadVideoToStorageBucket = (videoFile, title)=>{
+    DatabaseFactory.uploadVideoToStorageBucket = (videoFile, title)=>{
         // console.log("trying to upload video to storage bucket");
         //some slightly poor form here, I know, as dom manipulation should be separate from the factory. However, it works for now, and I intend to clean it up/modularize it appropriately later.
         let user = AuthFactory.getUser();
@@ -145,8 +135,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             });
     };
 
-
-
     DatabaseFactory.postNewSampleWav = (newSample, bufferTitle)=>{
         // console.log("posting new sample");
         let user = AuthFactory.getUser();
@@ -214,11 +202,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-
-
-
-
-
     DatabaseFactory.postNewPatch = (patch)=>{
         // console.log("got a patch: ", patch);
         return new Promise((resolve,reject)=>{
@@ -231,9 +214,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
             });
         });
     };
-
-
-
 
     DatabaseFactory.getPublicPatches = ()=>{
         // console.log("factory retrieving all public patches");  
@@ -257,10 +237,7 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
         });
     };
 
-
-
     DatabaseFactory.getUserPatches = (user)=>{
-
             // console.log("factory retrieving all public patches");  
             return new Promise((resolve,reject)=>{
                 $http.get(`${FBCreds.URL}/patches.json?orderBy="author"&equalTo="${user}"`)
@@ -284,40 +261,6 @@ app.factory("Database", ($http, $routeParams, FBCreds, AuthFactory)=>{
                     reject(error);
                 });
             });
-        
-
-
-
-
-
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return DatabaseFactory;
 });

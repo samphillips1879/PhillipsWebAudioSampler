@@ -2,12 +2,10 @@
 
 app.factory("AuthFactory", ()=>{
 
-    let currentUser = "anonymous";
-    let AuthFactory = {};
-
+    let currentUser = "anonymous",
+        AuthFactory = {};
 
     AuthFactory.registered = false;
-
 
     AuthFactory.createUser = (userObj)=>{
         console.log("trying to create user");
