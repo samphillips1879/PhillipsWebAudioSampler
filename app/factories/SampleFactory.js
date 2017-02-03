@@ -53,7 +53,6 @@ app.factory("SampleFactory", ()=>{
 				channelNum: 7
 			}
 		];
-	
 
 	return SampleFactory;
 });

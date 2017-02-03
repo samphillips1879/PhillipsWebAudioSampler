@@ -1,20 +1,18 @@
 "use strict";
 app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, AuthFactory, SampleFactory){
 	$scope.greeting = "Sample Selection";
+	$scope.channelSelect = "Load to Channel: ";
+	$scope.sampleTitleQuery = "";
+	$scope.sampleLoaded = false;
+	$scope.sampleBeltMessage = "Please Load a Sample";
+	$scope.currentSampleTitle = "";
+
 	let arrayBuffer = null,
 	bufferToBeAssigned = null,
 	titleToBeAssigned = null,
 	imageToBeAssigned = null,
 	authorToBeAssigned = null,
 	wavNameToBeAssigned = null;
-	$scope.sampleTitleQuery = "";
-	$scope.sampleLoaded = false;
-	$scope.sampleBeltMessage = "Please Load a Sample";
-	$scope.currentSampleTitle = "";
-
-
-//sample retrieval logic
-//****************************************************
 
 	$scope.getSampleCards = (limitTo)=>{
 		if (limitTo === "public") {
@@ -42,10 +40,6 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		authorToBeAssigned = author;
 		wavNameToBeAssigned = wavName;
 		$scope.currentSampleTitle = `"${title}"`;
-		console.log("titleToBeAssigned", titleToBeAssigned);
-		console.log("imageToBeAssigned", imageToBeAssigned);
-		console.log("wavNameToBeAssigned", wavNameToBeAssigned);
-		console.log("authorToBeAssigned", authorToBeAssigned);
 	};
 
 	$scope.getSample = (user, wavName)=>{
@@ -58,14 +52,12 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 				console.log("got wav here in AssignSamplesCtrl", wav);
 				let reader = new FileReader();
 				reader.onload = (e)=>{
-					// console.log("e.target.result", e.target.result);
 					arrayBuffer = e.target.result;
 					AUD_CTX.decodeAudioData(arrayBuffer).then((decodedData)=> {
 						bufferToBeAssigned = decodedData;
 						console.log("blob decoded");
 						$scope.sampleLoaded = true;
 						$scope.$apply();
-						// console.log("tried to set ", );
 					});
 				};
 				reader.readAsArrayBuffer(wav);
@@ -73,25 +65,12 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 		});
 	};
 
-
 	$scope.playSample = ()=>{
 		let sampleSourceNode = AUD_CTX.createBufferSource();
 		sampleSourceNode.buffer = bufferToBeAssigned;
 		sampleSourceNode.connect(AUD_CTX.destination);
 	    sampleSourceNode.start(0);
 	};
-//****************************************************
-
-//sample assignment logic
-//****************************************************
-
-
-
-
-
-// SampleFactory playback version
-	$scope.channelSelect = "Load to Channel: ";
-	// $scope.channelSelect = null;
 
 	$scope.assignSample = ()=>{
 		if ($scope.channelSelect !== "Load to Channel: ") {
@@ -103,48 +82,8 @@ app.controller('AssignSamplesCtrl', function($scope, Database, PatchFactory, Aut
 			let patchChannel = PatchFactory.currentPatch.channels[$scope.channelSelect];
 			patchChannel.sampleWavName = wavNameToBeAssigned;
 			patchChannel.sampleAuthor = authorToBeAssigned;
-			console.log("titleToBeAssigned", titleToBeAssigned);
+			// console.log("titleToBeAssigned", titleToBeAssigned);
 			patchChannel.sampleTitle = titleToBeAssigned;
-
-			
-
 		}
 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// currentPatch playback version
-	// $scope.channelSelect = null;
-
-	// $scope.assignSample = ()=>{
-	// 	if ($scope.channelSelect) {
-	// 		let chan = PatchFactory.currentPatch.channels[$scope.channelSelect];
-			
-	// 		chan.sampleBuffer = bufferToBeAssigned;
-	// 		chan.sampleTitle = titleToBeAssigned;
-
-	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].sampleBuffer = bufferToBeAssigned;
-	// 		// PatchFactory.currentPatch.channels[$scope.channelSelect].img = 
-
-
-
-	// 	}
-	// 	console.log(`PatchFactory.currentPatch.channels[${$scope.channelSelect}]`, PatchFactory.currentPatch.channels[$scope.channelSelect]);
-	// 	console.log("PatchFactory.currentPatch", PatchFactory.currentPatch);
-	// };
-//****************************************************
-
 });

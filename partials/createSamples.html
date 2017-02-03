@@ -1,18 +1,8 @@
 <div ng-include="'partials/navbar.html'"></div>
-
-
-
-
 <div class="viewWrap">
-
 	<h2>{{greeting}}</h2>
 	<div id="creationInputs">
-
-
-
-
 		<div class="search-group container-fluid">
-			<!-- <h5><i class="instructions">Upload the video you wish to sample</i></h5> -->
 			<div class="row saveButton">
 				<h5 class="instructions col-xs-12">Upload the video you wish to sample</h5>
 			</div>	
@@ -21,97 +11,34 @@
 			</div>
 		</div>
 
-
 		<div class="container row col-sm-12">
-			<!-- <div class="col-sm-4" id="userVideoHolder"> -->
 				<video class="col-xs-8 col-xs-offset-2" crossOrigin="anonymous" id="userVideo" controls="controls"></video>
-			<!-- </div> -->
 		</div>
-
-
-
-
 
 		<!-- card for previewing, naming, and saving a captured sample -->
 		<div id="creationBelt" class="container col-xs-12">
-
-
-
-
 			<div class="container row col-sm-12">
-				
-
 				<div class="container col-sm-2">
-					
-<!-- <button ng-click="savePatch()" class="capture-btn btn-info saveButton">Save Patch</button> -->
 					<button ng-show="!capturing" id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="alphaAndOmega capture-btn btn-info saveButton">Begin Sample Capture</button>
-<!-- <button ng-click="savePatch()" class="capture-btn btn-info saveButton">Save Patch</button> -->
+
 					<button ng-show="capturing" ng-click="endSampleCapture()" class="cancelButton alphaAndOmega capture-btn saveButton">End Sample Capture</button>
-
-<!-- <button ng-click="savePatch()" class="capture-btn btn-info saveButton">Save Patch</button> -->
-
-					<!-- <button ng-show="!capturing" id="sampleCaptureBtn" ng-click="beginSampleCapture()" class="capture-btn alphaAndOmega btn-success">Begin Sample Capture</button>
-					<button ng-show="capturing" ng-click="endSampleCapture()" class="capture-btn alphaAndOmega btn-danger">End Sample Capture</button>
-					 -->
 				</div>
-
-
-
 
 				<div ng-show="sampleCaptured" class="container col-sm-6 col-sm-offset-4">
 					<div class="row">
 						<input type="text" id="sampleTitleInput" ng-model="sampleTitle" placeholder="Input Sample Title" class="saveButton col-xs-12">
 					</div>
+
 					<div class="row">
 						<button ng-click="previewSample()" class="saveButton beltButton col-xs-6">preview sample</button>
 						<button id="saveSample" ng-click="saveSample()" class="beltButton saveButton col-sm-6">save sample</button>
 					</div>
 				</div>
 
-
 				<div ng-show="!sampleCaptured" class="container col-sm-10">
 					<h4 class="captureStatus">{{captureStatus}}</h4>
 				</div>
-
-
-
-				
 			</div>
-
-
-
-
-
-
-
-
 		</div>
-
-
-
-
-
-		<!-- <input type="text" size="100" id="sampleImageInput" ng-model="sampleImage" placeholder="input the url for an image you would like to represent this sample"> -->
-
-
-	<!-- 
-
-		<button ng-click="saveSampleWav()" class="btn-default">Click here to save your new sample</button> -->
-
-
-
-
-
-
 	</div>
-
-
-
-
 </div>
-
-
-
-
-
-

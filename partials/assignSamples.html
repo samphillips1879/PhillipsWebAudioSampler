@@ -1,157 +1,48 @@
 <div ng-include="'partials/navbar.html'"></div>
-
-
-
-
-
-
 <div class="viewWrap">
-
-
-
-
-
 	<h2>{{greeting}}</h2>
-
-
-
-
 	<div class="search-group container-fluid">
 		<div class="row">
 			<button class="col-xs-6 beltButton saveButton" ng-click="getSampleCards('public')">Public Samples</button>
 			<button class="col-xs-6 beltButton saveButton" ng-click="getSampleCards('user')">Your Samples</button>
 		</div>
+
 		<div class="row">
 			<input type="text" class="col-xs-12 saveButton" id="sampleTitleSearchInput" placeholder="filter results" ng-model="sampleTitleQuery">
 		</div>
 
-
-
-
-
 		<div class="row sampleBelt">
-
 			<div ng-show="sampleLoaded" class="col-xs-12 container">
-
 				<div class="row">
-					
 					<button class="beltButton col-sm-4" ng-click="playSample()">Preview Sample: {{currentSampleTitle}}</button>
 					<!-- <span>Assign to channel: </span> --><select class="beltSelect col-sm-4" ng-model="channelSelect">
 						<option selected="selected">Load to Channel: </option>
-						<option class="channelAssignSelect" value="0">channel 0</option>
-						<option class="channelAssignSelect" value="1">channel 1</option>
-						<option class="channelAssignSelect" value="2">channel 2</option>
-						<option class="channelAssignSelect" value="3">channel 3</option>
-						<option class="channelAssignSelect" value="4">channel 4</option>
-						<option class="channelAssignSelect" value="5">channel 5</option>
-						<option class="channelAssignSelect" value="6">channel 6</option>
-						<option class="channelAssignSelect" value="7">channel 7</option>
+						<option class="channelAssignSelect" value="0">channel 1</option>
+						<option class="channelAssignSelect" value="1">channel 2</option>
+						<option class="channelAssignSelect" value="2">channel 3</option>
+						<option class="channelAssignSelect" value="3">channel 4</option>
+						<option class="channelAssignSelect" value="4">channel 5</option>
+						<option class="channelAssignSelect" value="5">channel 6</option>
+						<option class="channelAssignSelect" value="6">channel 7</option>
+						<option class="channelAssignSelect" value="7">channel 8</option>
 					</select>
 					<button class="beltButton col-sm-4" ng-click="assignSample()">Assign to Patch</button>
-
-
 				</div>
-
-
-
 			</div>
-
 
 			<div ng-show="!sampleLoaded">
 				<h4 class="sampleBeltMessage">{{sampleBeltMessage}}</h4>	
 			</div>
-
-
-
 		</div>
-
 	</div>
 
-
-
-<!-- 
-	<div ng-show="sampleLoaded">
-
-		<button ng-click="playSample()">click to play your sample</button>
-
-
-
-
-		<span>Assign sample to channel: </span><select ng-model="channelSelect">
-			<option class="channelAssignSelect" value="0">channel 0</option>
-			<option class="channelAssignSelect" value="1">channel 1</option>
-			<option class="channelAssignSelect" value="2">channel 2</option>
-			<option class="channelAssignSelect" value="3">channel 3</option>
-			<option class="channelAssignSelect" value="4">channel 4</option>
-			<option class="channelAssignSelect" value="5">channel 5</option>
-			<option class="channelAssignSelect" value="6">channel 6</option>
-			<option class="channelAssignSelect" value="7">channel 7</option>
-		</select>
-
-		<button ng-click="assignSample()">click to assign your sample to a channel in your current patch</button>
-
-		
-	</div> -->
-
-
-
-
 	<div class="browseResults container">
-		
-		
-
-
 		<div ng-repeat="card in catalog | filter: sampleTitleQuery" class="col-xs-4 sampleCatalogCard container">
 		  <div class="panel panel-default">
 		    <div class="panel-body">
-		      <!-- <div class="col-xs-1"><input type="checkbox" name=""/></div> -->
-			    <!-- <div class="col-xs-4 sampleCatalogCard container"> -->
-			    	<!-- <h4 class="col-xs-12">{{card.title}}</h4> -->
-
-
-
-
-				    <div class="col-xs-12 margCard" ng-click="getSample(card.user, card.wavName); fillAssignmentVariables(card.title, card.img, card.user, card.wavName)"><button class="btn btn-info choiceButton col-xs-12">{{card.title}}</button></div>
-
-			    <!-- </div> -->
-		      
+			    <div class="col-xs-12 margCard" ng-click="getSample(card.user, card.wavName); fillAssignmentVariables(card.title, card.img, card.user, card.wavName)"><button class="btn btn-info choiceButton col-xs-12">{{card.title}}</button></div>
 		    </div>
 		  </div>
 		</div>
-
-
-
-
-
-		
 	</div>
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

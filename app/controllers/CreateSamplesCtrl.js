@@ -1,41 +1,35 @@
 "use strict";
 app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory){
 	$scope.greeting = "Sample Creation";
-
-	//variable declarations
-	let conSampleRate = AUD_CTX.sampleRate;
-	let the_url;
-	// let videoEl = $('#userVideo')[0];
-	let source = null;
-	let sourceAnalyser = null;
-	let sample = null;
-	let samplesArray = [];
-	var rec = null;
-	var newSource = null;
-	var newBuffer = null;
-	let arrayBuffer = null;
-
 	$scope.sampleTitle = "";
 	$scope.sampleImage = "";
 	$scope.sampleCaptured = false;
 	$scope.captureStatus = "please capture a sample";
 	$scope.capturing = false;
 
+	let conSampleRate = AUD_CTX.sampleRate,
+	the_url,
+	source = null,
+	sourceAnalyser = null,
+	sample = null,
+	samplesArray = [],
+	rec = null,
+	newSource = null,
+	newBuffer = null,
+	arrayBuffer = null;
+
 	//video file submission handler
 	$("#userFileInput").change(function() {
-	    // console.log("this.files", this.files);
 	    processVideoFile(this.files[0]);
 	});
 
 	// render the video in view
 	function processVideoFile(file) {
-		// console.log("processVideoFile running");
 		Database.uploadVideoToStorageBucket(file, "Title input manually through code");
 	}
 
 	//setup web audio path once video loaded
 	$('video').on('loadeddata', function (e) {
-	    // console.log("video loaded");
 	    setupForSampleCapture();
 	});
 
@@ -46,12 +40,9 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 
 	//create web audio path
 	let setupForSampleCapture = ()=>{
-		// console.log("setupForSampleCapture triggered");
 		source = AUD_CTX.createMediaElementSource($('#userVideo')[0]);
-		// console.log("source", source);
 		source.connect(AUD_CTX.destination);
 		rec = new Recorder(source);
-		// console.log("source established, path initialized: source -> destination");
 	};
 
 	//start recording sample
@@ -95,11 +86,10 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 	    newSource.start(0);
 	};
 
+	// creates a catalog card, representing the sample, which is stored to firebase database, then uses the unique key returned by firebase as the name of the audio file which is saved to the firebase/google cloud storage bucket
 	$scope.saveSample = ()=>{
-		// console.log("saveSample triggered");
 		if ($scope.sampleTitle) {
 			let user = AuthFactory.getUser();
-			// console.log("user for catalogCard", user);
 			let title = $scope.sampleTitle;
 			let isPublic = true;
 			let img = $scope.sampleImage;
@@ -107,15 +97,13 @@ app.controller("CreateSamplesCtrl", function($scope, $sce, Database, AuthFactory
 				user, title, isPublic, img
 			};
 			Database.postSampleToCatalog(catalogCard)
-			.then((object)=>{
-				// console.log("object.name: ", object.name);
+			.then((firebaseReturn)=>{
 				rec.exportWAV((blob)=>{
-					Database.postNewSampleWav(blob, object.name);
+					Database.postNewSampleWav(blob, firebaseReturn.name);
 				});
 			});
 		} else {
 			window.alert("please input a title for this sample");
 		}
-
 	};	
 });

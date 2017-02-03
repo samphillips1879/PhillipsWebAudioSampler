@@ -2,15 +2,12 @@
 
 app.factory("PatchFactory", ()=>{
 	let PatchFactory = {};
-	//this following chunk will be replaced with a call to firebase, setting currentPatch as the database-wide default patch
 	PatchFactory.currentPatch = {
 		isPublic: true,
 		title: "Default Patch",
 		author: null,
 		channels: [
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -26,8 +23,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -43,8 +38,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -60,8 +53,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -77,8 +68,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -94,8 +83,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -111,8 +98,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
@@ -128,8 +113,6 @@ app.factory("PatchFactory", ()=>{
 				loPassHz: 20000
 			},
 			{
-				// sampleSource: null,
-				// sampleBuffer: null,
 				sampleTitle: null,
 				sampleWavName: null,
 				sampleAuthor: null,
