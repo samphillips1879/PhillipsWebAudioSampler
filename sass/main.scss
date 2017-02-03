@@ -58,6 +58,8 @@ h2 {
 	height: 70%;
 	width: 80%;
 	margin: auto;
+    margin-bottom: 5rem;
+    margin-top: 2rem;
 	top: 5px;
 }
 
@@ -96,6 +98,7 @@ input[type=file] {
 	padding-left: 5%;
 	padding-right: 5%;
 	overflow: scroll;
+    margin-top: 3px;
 }
 
 #patchTitleHolder {
@@ -239,6 +242,7 @@ sampleTitle {
 	margin-top: 5px;
 	border: 1px solid $border;
 	padding: 0;
+    margin-bottom: 5rem;
 }
 
 .chanButtons {
