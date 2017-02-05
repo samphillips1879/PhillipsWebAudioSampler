@@ -228,7 +228,8 @@ sampleTitle {
   border-right-style: ridge;
   color: #1D4C5A;
   padding-left: 5px;
-  padding-right: 5px; }
+  padding-right: 5px;
+  outline: none; }
 
 .cancelButton {
   height: 3em;
@@ -237,6 +238,7 @@ sampleTitle {
   border-bottom-style: ridge;
   border-right-style: ridge;
   background-color: #E05E85;
+  outline: none;
   color: white; }
   .cancelButton:hover {
     background-color: #B04A68; }
