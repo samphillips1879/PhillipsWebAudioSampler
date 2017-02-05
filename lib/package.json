@@ -29,5 +29,10 @@
     "matchdep": "^1.0.1",
     "recorderjs": "^1.0.1",
     "workerify": "^0.3.0"
+  },
+  "dependencies": {
+    "angular-animate": "^1.5.11",
+    "angular-aria": "^1.5.11",
+    "angular-material": "^1.1.3"
   }
 }
